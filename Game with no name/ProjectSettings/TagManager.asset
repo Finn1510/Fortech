@@ -6,6 +6,8 @@ TagManager:
   tags:
   - obstacle
   - firepoint
+  - weapon
+  - holdpoint
   layers:
   - Default
   - TransparentFX
