@@ -12,6 +12,6 @@ EditorBuildSettings:
     path: Assets/Scenes/TEST SCENE.unity
     guid: fd2830a933834664b9d23e6201ca1f15
   - enabled: 1
-    path: Assets/Scenes/bright scene.unity
+    path: assets/Scenes/bright scene.unity
     guid: 921140014c9a60b49afcec1ae0f4d301
   m_configObjects: {}
