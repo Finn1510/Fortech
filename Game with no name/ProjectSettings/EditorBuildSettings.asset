@@ -12,12 +12,15 @@ EditorBuildSettings:
     path: 
     guid: 00000000000000000000000000000000
   - enabled: 0
-    path: Assets/Scenes/bright scene.unity
-    guid: 921140014c9a60b49afcec1ae0f4d301
-  - enabled: 1
+    path: 
+    guid: 00000000000000000000000000000000
+  - enabled: 0
     path: Assets/Scenes/title screen.unity
     guid: 2eed5ff64399c1740a268fa858525d92
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/backup.unity
     guid: a8fdb479cd7d4124fad0ad343c16591c
+  - enabled: 1
+    path: Assets/Scenes/network.unity
+    guid: c8c17356c5ce9654e9389f6fe46c181f
   m_configObjects: {}
