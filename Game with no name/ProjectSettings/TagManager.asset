@@ -8,6 +8,8 @@ TagManager:
   - firepoint
   - weapon
   - holdpoint
+  - CORE
+  - Enemy
   layers:
   - Default
   - TransparentFX

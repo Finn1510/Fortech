@@ -1928,12 +1928,20 @@ MonoBehaviour:
         serializedVersion: 2
         x: 476
         y: 114
-        width: 112
-        height: 16
+        width: 125.2
+        height: 32
       isBreakpoint: 0
       isSequence: 0
       hideUnused: 0
-      transitions: []
+      transitions:
+      - fsmEvent:
+          name: disable collider
+          isSystemEvent: 0
+          isGlobal: 0
+        toState: disable rigidbody +collider
+        linkStyle: 0
+        linkConstraint: 0
+        colorIndex: 0
       actionData:
         actionNames:
         - HutongGames.PlayMaker.Actions.EnableFSM
@@ -2229,7 +2237,114 @@ MonoBehaviour:
         - everyFrame
         paramDataPos: 00000000000000000000000000000000
         paramByteDataSize: 00000000000000000000000001000000
+    - name: disable rigidbody +collider
+      description: 
+      colorIndex: 0
+      position:
+        serializedVersion: 2
+        x: 543
+        y: 203
+        width: 199.6
+        height: 16
+      isBreakpoint: 0
+      isSequence: 0
+      hideUnused: 0
+      transitions: []
+      actionData:
+        actionNames:
+        - HutongGames.PlayMaker.Actions.DestroyComponent
+        - HutongGames.PlayMaker.Actions.EnableBehaviour
+        customNames:
+        - 
+        - 
+        actionEnabled: 0101
+        actionIsOpen: 0101
+        actionStartIndex: 0000000002000000
+        actionHashCodes: 9bd6f8013a4cad05
+        unityObjectParams:
+        - {fileID: 0}
+        fsmGameObjectParams: []
+        fsmOwnerDefaultParams:
+        - ownerOption: 0
+          gameObject:
+            useVariable: 0
+            name: 
+            tooltip: 
+            showInInspector: 0
+            networkSync: 0
+            value: {fileID: 0}
+        - ownerOption: 0
+          gameObject:
+            useVariable: 0
+            name: 
+            tooltip: 
+            showInInspector: 0
+            networkSync: 0
+            value: {fileID: 0}
+        animationCurveParams: []
+        functionCallParams: []
+        fsmTemplateControlParams: []
+        fsmEventTargetParams: []
+        fsmPropertyParams: []
+        layoutOptionParams: []
+        fsmStringParams:
+        - useVariable: 0
+          name: 
+          tooltip: 
+          showInInspector: 0
+          networkSync: 0
+          value: UnityEngine.Rigidbody2D
+        - useVariable: 0
+          name: 
+          tooltip: 
+          showInInspector: 0
+          networkSync: 0
+          value: BoxCollider2D
+        fsmObjectParams: []
+        fsmVarParams: []
+        fsmArrayParams: []
+        fsmEnumParams: []
+        fsmFloatParams: []
+        fsmIntParams: []
+        fsmBoolParams:
+        - useVariable: 0
+          name: 
+          tooltip: 
+          showInInspector: 0
+          networkSync: 0
+          value: 0
+        - useVariable: 0
+          name: 
+          tooltip: 
+          showInInspector: 0
+          networkSync: 0
+          value: 0
+        fsmVector2Params: []
+        fsmVector3Params: []
+        fsmColorParams: []
+        fsmRectParams: []
+        fsmQuaternionParams: []
+        stringParams: []
+        byteData: 
+        arrayParamSizes: 
+        arrayParamTypes: []
+        customTypeSizes: 
+        customTypeNames: []
+        paramDataType: 14000000120000001400000012000000050000001100000011000000
+        paramName:
+        - gameObject
+        - component
+        - gameObject
+        - behaviour
+        - component
+        - enable
+        - resetOnExit
+        paramDataPos: 00000000000000000100000001000000000000000000000001000000
+        paramByteDataSize: 00000000000000000000000000000000000000000000000000000000
     events:
+    - name: disable collider
+      isSystemEvent: 0
+      isGlobal: 0
     - name: droped
       isSystemEvent: 0
       isGlobal: 1
@@ -2412,7 +2527,12 @@ MonoBehaviour:
     - {fileID: 3858147402227335871}
     - {fileID: 5065429989689982127}
     - {fileID: 4121502884291084162}
-    _Values: 12af0b80cee8f73f30438456f871117c533c29f1a030857debd7f8acfeda212023fbde69d865a6392faf423ccd769079b97cb5d3f4ab711e2b8d95f7ef4b4054de9bcc026c585b1397f0205073c14b61978d9a85700aeb319202c0b53050b67af0975e32aa8d0c61e05e951b333d6d6843348e7ce5c6c52caf9a706a97a6e2195964bff5e082f40980c79b315ff89a2f91d7089b20cd9f495c8a82101da2ca7abe508a67029db73b2998fd1d2a94cc57359ffa6eae7e3a27fcf767aa001c14219215f0b08202322d8f437288cf821e0e57dadb7ea75bcb40ea9d9c05fa9ec40c7c2373ea5ce32a372ed8020d0e3d087927a7fe25086d36121ece381a99d3cd0f8099fb0c0af69573afa3ab7f5ed94f546bdcd25d6315ea0e139f337255ef62015aed7157c6eb7c31128a7665c1b7b4457fe4aebd006fac6a5212e056d5f83760fb53da8f9807727f60a14bd89f854c355479f2399e1f01154106a8d9ccd3060a3e29a0ea6ebc2279572e5c5f23d3cb28a0e9fca3f9023e2452c5d09fb04c4b729a4116c82537a468a9876e32849ec66dc57fc71c299cef4068c499a9ec83c85c
+    - {fileID: 8527180281522540636, guid: b2e10ebaae0e97f4da9111cd761bfae5, type: 3}
+    - {fileID: 6847842363022359512, guid: 60c4a143d78be6849be9616008fe396a, type: 3}
+    - {fileID: 7997755100480159836, guid: 60c4a143d78be6849be9616008fe396a, type: 3}
+    - {fileID: 499963477684922368, guid: 60c4a143d78be6849be9616008fe396a, type: 3}
+    - {fileID: 623585066622876410, guid: 60c4a143d78be6849be9616008fe396a, type: 3}
+    _Values: 12af0b80cee8f73f30438456f871117c533c29f1a030857debd7f8acfeda212023fbde69d865a6392faf423ccd769079b97cb5d3f4ab711e2b8d95f7ef4b4054de9bcc026c585b1397f0205073c14b61978d9a85700aeb319202c0b53050b67af0975e32aa8d0c61e05e951b333d6d6843348e7ce5c6c52caf9a706a97a6e2195964bff5e082f40980c79b315ff89a2f91d7089b20cd9f495c8a82101da2ca7abe508a67029db73b2998fd1d2a94cc57359ffa6eae7e3a27fcf767aa001c14219215f0b08202322d8f437288cf821e0e57dadb7ea75bcb40ea9d9c05fa9ec40c7c2373ea5ce32a372ed8020d0e3d087927a7fe25086d36121ece381a99d3cd0f8099fb0c0af69573afa3ab7f5ed94f546bdcd25d6315ea0e139f337255ef62015aed7157c6eb7c31128a7665c1b7b4457fe4aebd006fac6a5212e056d5f83760fb53da8f9807727f60a14bd89f854c355479f2399e1f01154106a8d9ccd3060a3e29a0ea6ebc2279572e5c5f23d3cb28a0e9fca3f9023e2452c5d09fb04c4b729a4116c82537a468a9876e32849ec66dc57fc71c299cef4068c499a9ec83c85c5b036079661d4a4545154bfa4869fa7443fb0c4d8778411e032e74bf830de14ada5f396bf90be117
 --- !u!114 &4121502884291084162
 MonoBehaviour:
   m_ObjectHideFlags: 0
