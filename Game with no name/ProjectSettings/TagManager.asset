@@ -10,6 +10,8 @@ TagManager:
   - holdpoint
   - CORE
   - Enemy
+  - in use weapon
+  - inventory
   layers:
   - Default
   - TransparentFX

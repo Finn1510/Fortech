@@ -900,7 +900,7 @@ MonoBehaviour:
       isGlobal: 0
     - name: picked up
       isSystemEvent: 0
-      isGlobal: 1
+      isGlobal: 0
     - name: weapon in hand
       isSystemEvent: 0
       isGlobal: 0
@@ -2170,7 +2170,7 @@ MonoBehaviour:
         - 
         - 
         actionEnabled: 010101010101010101
-        actionIsOpen: 000100000000010101
+        actionIsOpen: 000000000000000000
         actionStartIndex: 00000000050000000a0000000e0000001000000014000000170000001900000021000000
         actionHashCodes: bf83c9005b66cf00ea32a105fc838600184b5704c4b05004978a9b03f6e5be032a6e8a00
         unityObjectParams: []
@@ -2200,8 +2200,8 @@ MonoBehaviour:
           showInInspector: 0
           networkSync: 0
           value: {fileID: 0}
-        - useVariable: 0
-          name: 
+        - useVariable: 1
+          name: canvas
           tooltip: 
           showInInspector: 0
           networkSync: 0
@@ -2696,14 +2696,22 @@ MonoBehaviour:
       actionData:
         actionNames:
         - HutongGames.PlayMaker.Pun2.Actions.PhotonViewGetIsMine
+        - HutongGames.PlayMaker.Actions.FindGameObject
         customNames:
         - 
-        actionEnabled: 01
-        actionIsOpen: 01
-        actionStartIndex: 00000000
-        actionHashCodes: facdf105
+        - 
+        actionEnabled: 0101
+        actionIsOpen: 0001
+        actionStartIndex: 0000000009000000
+        actionHashCodes: facdf105786b3902
         unityObjectParams: []
-        fsmGameObjectParams: []
+        fsmGameObjectParams:
+        - useVariable: 1
+          name: canvas
+          tooltip: 
+          showInInspector: 0
+          networkSync: 0
+          value: {fileID: 0}
         fsmOwnerDefaultParams:
         - ownerOption: 0
           gameObject:
@@ -2719,7 +2727,19 @@ MonoBehaviour:
         fsmEventTargetParams: []
         fsmPropertyParams: []
         layoutOptionParams: []
-        fsmStringParams: []
+        fsmStringParams:
+        - useVariable: 0
+          name: 
+          tooltip: 
+          showInInspector: 0
+          networkSync: 0
+          value: 
+        - useVariable: 0
+          name: 
+          tooltip: 
+          showInInspector: 0
+          networkSync: 0
+          value: inventory
         fsmObjectParams: []
         fsmVarParams: []
         fsmArrayParams: []
@@ -2760,7 +2780,7 @@ MonoBehaviour:
         customTypeSizes: 01000000
         customTypeNames:
         - HutongGames.PlayMaker.Pun2.Actions.PunActionHeader
-        paramDataType: 140000001100000011000000110000001700000017000000170000002800000001000000
+        paramDataType: 140000001100000011000000110000001700000017000000170000002800000001000000120000001200000013000000
         paramName:
         - gameObject
         - searchInParent
@@ -2771,8 +2791,11 @@ MonoBehaviour:
         - failure
         - header
         - NetworkOperationPending
-        paramDataPos: 000000000000000001000000020000000000000001000000020000000000000000000000
-        paramByteDataSize: 000000000000000000000000000000000000000000000000000000000000000001000000
+        - objectName
+        - withTag
+        - store
+        paramDataPos: 000000000000000001000000020000000000000001000000020000000000000000000000000000000100000000000000
+        paramByteDataSize: 000000000000000000000000000000000000000000000000000000000000000001000000000000000000000000000000
     events:
     - name: FINISHED
       isSystemEvent: 1
@@ -2901,7 +2924,7 @@ MonoBehaviour:
     locked: 0
     manualUpdate: 0
     keepDelayedEventsOnStateExit: 0
-    preprocessed: 1
+    preprocessed: 0
     ExposedEvents: []
     RestartOnEnable: 1
     EnableDebugFlow: 0
@@ -3012,7 +3035,7 @@ MonoBehaviour:
           value: 
         fsmObjectParams: []
         fsmVarParams:
-        - variableName: Inventory
+        - variableName: 
           objectType: UnityEngine.GameObject
           useVariable: 1
           type: 13
@@ -3024,7 +3047,7 @@ MonoBehaviour:
           objectReference: {fileID: 0}
           arrayValue:
             useVariable: 1
-            name: Inventory
+            name: 
             tooltip: 
             showInInspector: 0
             networkSync: 0
@@ -3192,7 +3215,7 @@ MonoBehaviour:
           value: 
         fsmObjectParams: []
         fsmVarParams:
-        - variableName: Inventory
+        - variableName: 
           objectType: UnityEngine.GameObject
           useVariable: 1
           type: 13
@@ -3204,7 +3227,7 @@ MonoBehaviour:
           objectReference: {fileID: 0}
           arrayValue:
             useVariable: 1
-            name: Inventory
+            name: 
             tooltip: 
             showInInspector: 0
             networkSync: 0
@@ -3796,7 +3819,7 @@ MonoBehaviour:
     locked: 0
     manualUpdate: 0
     keepDelayedEventsOnStateExit: 0
-    preprocessed: 1
+    preprocessed: 0
     ExposedEvents: []
     RestartOnEnable: 1
     EnableDebugFlow: 0

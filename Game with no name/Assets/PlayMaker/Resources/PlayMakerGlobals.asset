@@ -15,12 +15,6 @@ MonoBehaviour:
   variables:
     floatVariables:
     - useVariable: 1
-      name: global light intensity
-      tooltip: 
-      showInInspector: 0
-      networkSync: 0
-      value: 0
-    - useVariable: 1
       name: mouse x
       tooltip: 
       showInInspector: 0
@@ -34,18 +28,6 @@ MonoBehaviour:
       value: 0
     intVariables: []
     boolVariables:
-    - useVariable: 1
-      name: < less key
-      tooltip: 
-      showInInspector: 0
-      networkSync: 0
-      value: 0
-    - useVariable: 1
-      name: DEBUG mode
-      tooltip: 
-      showInInspector: 0
-      networkSync: 0
-      value: 0
     - useVariable: 1
       name: I button
       tooltip: 
@@ -91,10 +73,8 @@ MonoBehaviour:
     enumVariables: []
     categories:
     - 
-    variableCategoryIDs: 000000000000000000000000000000000000000000000000000000000000000000000000
+    variableCategoryIDs: 000000000000000000000000000000000000000000000000
   events:
-  - picked up
-  - droped
   - PHOTON / CLIENT STATE / AUTHENTICATED
   - PHOTON / CLIENT STATE / AUTHENTICATING
   - PHOTON / CLIENT STATE / CONNECTED TO GAMESERVER
@@ -138,4 +118,3 @@ MonoBehaviour:
   - PHOTON / ON REGION LIST RECEIVED
   - PHOTON / ON WEBRPC RESPONSE
   - PHOTON / ON PHOTON INSTANTIATE
-  - disapeer
