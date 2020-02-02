@@ -918,9 +918,9 @@ MonoBehaviour:
     dataVersion: 2
     usedInTemplate: {fileID: 0}
     name: "t\xF6te"
-    startState: State 2
+    startState: wait for collision
     states:
-    - name: State 2
+    - name: wait for collision
       description: 
       colorIndex: 0
       position:
@@ -1034,9 +1034,9 @@ MonoBehaviour:
         - HutongGames.PlayMaker.Actions.GetPosition
         - HutongGames.PlayMaker.Actions.CreateObject
         - HutongGames.PlayMaker.Actions.CreateObject
-        - HutongGames.PlayMaker.Actions.GetFsmInt
-        - HutongGames.PlayMaker.Actions.IntOperator
-        - HutongGames.PlayMaker.Actions.SetFsmInt
+        - HutongGames.PlayMaker.Actions.GetFsmFloat
+        - HutongGames.PlayMaker.Actions.FloatOperator
+        - HutongGames.PlayMaker.Actions.SetFsmFloat
         customNames:
         - 
         - 
@@ -1047,7 +1047,7 @@ MonoBehaviour:
         actionEnabled: 010101010101
         actionIsOpen: 000000000000
         actionStartIndex: 00000000070000000c00000011000000160000001b000000
-        actionHashCodes: 5552ad05bf83c900bf83c900081bbf0514180903081bbf05
+        actionHashCodes: 5552ad05bf83c900bf83c900876045020cdb040587604502
         unityObjectParams: []
         fsmGameObjectParams:
         - useVariable: 0
@@ -1167,15 +1167,14 @@ MonoBehaviour:
           showInInspector: 0
           networkSync: 0
           value: 0
-        fsmIntParams:
         - useVariable: 1
-          name: enemy health
+          name: recieved health
           tooltip: 
           showInInspector: 0
           networkSync: 0
           value: 0
         - useVariable: 1
-          name: enemy health
+          name: recieved health
           tooltip: 
           showInInspector: 0
           networkSync: 0
@@ -1185,7 +1184,7 @@ MonoBehaviour:
           tooltip: 
           showInInspector: 0
           networkSync: 0
-          value: 2
+          value: 5
         - useVariable: 1
           name: subtracted health
           tooltip: 
@@ -1198,6 +1197,7 @@ MonoBehaviour:
           showInInspector: 0
           networkSync: 0
           value: 0
+        fsmIntParams: []
         fsmBoolParams: []
         fsmVector2Params: []
         fsmVector3Params:
@@ -1240,7 +1240,7 @@ MonoBehaviour:
         arrayParamTypes: []
         customTypeSizes: 
         customTypeNames: []
-        paramDataType: 140000001c0000000f0000000f0000000f000000070000000100000013000000130000001c0000001c0000001300000013000000130000001c0000001c00000013000000140000001200000012000000100000000100000010000000100000000700000010000000010000001400000012000000120000001000000001000000
+        paramDataType: 140000001c0000000f0000000f0000000f000000070000000100000013000000130000001c0000001c0000001300000013000000130000001c0000001c000000130000001400000012000000120000000f000000010000000f0000000f000000070000000f000000010000001400000012000000120000000f00000001000000
         paramName:
         - gameObject
         - vector
@@ -1264,8 +1264,8 @@ MonoBehaviour:
         - variableName
         - storeValue
         - everyFrame
-        - integer1
-        - integer2
+        - float1
+        - float2
         - operation
         - storeResult
         - everyFrame
@@ -1274,7 +1274,7 @@ MonoBehaviour:
         - variableName
         - setValue
         - everyFrame
-        paramDataPos: 00000000000000000000000001000000020000000000000004000000000000000100000001000000020000000200000003000000040000000300000004000000050000000100000000000000010000000000000005000000010000000200000006000000030000000a000000020000000200000003000000040000000b000000
+        paramDataPos: 00000000000000000000000001000000020000000000000004000000000000000100000001000000020000000200000003000000040000000300000004000000050000000100000000000000010000000300000005000000040000000500000006000000060000000a000000020000000200000003000000070000000b000000
         paramByteDataSize: 0000000000000000000000000000000000000000040000000100000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000100000000000000000000000400000000000000010000000000000000000000000000000000000001000000
     - name: destroy self
       description: 
@@ -1340,16 +1340,15 @@ MonoBehaviour:
     events: []
     globalTransitions: []
     variables:
-      floatVariables: []
-      intVariables:
+      floatVariables:
       - useVariable: 1
         name: damage
         tooltip: 
         showInInspector: 0
         networkSync: 0
-        value: 2
+        value: 5
       - useVariable: 1
-        name: enemy health
+        name: recieved health
         tooltip: 
         showInInspector: 0
         networkSync: 0
@@ -1360,6 +1359,7 @@ MonoBehaviour:
         showInInspector: 0
         networkSync: 0
         value: 0
+      intVariables: []
       boolVariables:
       - useVariable: 1
         name: Is Mine

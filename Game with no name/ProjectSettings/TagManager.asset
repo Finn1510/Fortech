@@ -12,6 +12,7 @@ TagManager:
   - Enemy
   - in use weapon
   - inventory
+  - ALTAR
   layers:
   - Default
   - TransparentFX
