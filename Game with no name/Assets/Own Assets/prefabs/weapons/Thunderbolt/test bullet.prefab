@@ -1346,7 +1346,7 @@ MonoBehaviour:
         tooltip: 
         showInInspector: 0
         networkSync: 0
-        value: 5
+        value: 10
       - useVariable: 1
         name: recieved health
         tooltip: 
