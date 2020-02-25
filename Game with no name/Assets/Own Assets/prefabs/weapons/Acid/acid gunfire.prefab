@@ -11,9 +11,9 @@ GameObject:
   - component: {fileID: 2963518726182949534}
   - component: {fileID: 7354016917327058010}
   - component: {fileID: 6933099528779477363}
-  - component: {fileID: 4135885737944295708}
+  - component: {fileID: 6592781556297735134}
   m_Layer: 0
-  m_Name: gun impact
+  m_Name: acid gunfire
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -223,7 +223,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 0
       minColor: {r: 1, g: 1, b: 1, a: 1}
-      maxColor: {r: 0.74853325, g: 0, b: 1, a: 1}
+      maxColor: {r: 0, g: 1, b: 0.038576365, a: 1}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
@@ -285,7 +285,7 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0.1
+      scalar: 0.15
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -976,7 +976,7 @@ ParticleSystem:
       countCurve:
         serializedVersion: 2
         minMaxState: 0
-        scalar: 1
+        scalar: 2
         minScalar: 30
         maxCurve:
           serializedVersion: 2
@@ -4848,7 +4848,7 @@ ParticleSystemRenderer:
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
   m_MaskInteraction: 0
---- !u!114 &4135885737944295708
+--- !u!114 &6592781556297735134
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -4871,7 +4871,7 @@ MonoBehaviour:
       colorIndex: 0
       position:
         serializedVersion: 2
-        x: 66
+        x: 50
         y: 100
         width: 100
         height: 32
@@ -4943,8 +4943,8 @@ MonoBehaviour:
       colorIndex: 0
       position:
         serializedVersion: 2
-        x: 61
-        y: 161
+        x: 101
+        y: 173
         width: 108
         height: 16
       isBreakpoint: 0
