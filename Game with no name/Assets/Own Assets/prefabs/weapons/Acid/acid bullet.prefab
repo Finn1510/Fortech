@@ -1126,7 +1126,7 @@ MonoBehaviour:
           tooltip: 
           showInInspector: 0
           networkSync: 0
-          value: {fileID: 2013205511087582211, guid: 08efad3705f56264d8257f5b7f9db935,
+          value: {fileID: 2013205511087582211, guid: e7d85c90d085d334ea5c99c2ed9a8534,
             type: 3}
         - useVariable: 0
           name: 
@@ -1255,7 +1255,7 @@ MonoBehaviour:
           tooltip: 
           showInInspector: 0
           networkSync: 0
-          value: 5
+          value: 10
         - useVariable: 1
           name: subtracted health
           tooltip: 
