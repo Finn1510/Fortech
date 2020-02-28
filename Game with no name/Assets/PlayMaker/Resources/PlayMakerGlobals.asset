@@ -15,6 +15,12 @@ MonoBehaviour:
   variables:
     floatVariables:
     - useVariable: 1
+      name: lvl load percantage
+      tooltip: 
+      showInInspector: 0
+      networkSync: 0
+      value: 0
+    - useVariable: 1
       name: mouse x
       tooltip: 
       showInInspector: 0
@@ -48,12 +54,6 @@ MonoBehaviour:
       value: 0
     stringVariables:
     - useVariable: 1
-      name: our savefile
-      tooltip: 
-      showInInspector: 0
-      networkSync: 0
-      value: 
-    - useVariable: 1
       name: world savefile
       tooltip: 
       showInInspector: 0
@@ -64,13 +64,7 @@ MonoBehaviour:
     colorVariables: []
     rectVariables: []
     quaternionVariables: []
-    gameObjectVariables:
-    - useVariable: 1
-      name: player on scene
-      tooltip: 
-      showInInspector: 0
-      networkSync: 0
-      value: {fileID: 0}
+    gameObjectVariables: []
     objectVariables: []
     materialVariables: []
     textureVariables: []
@@ -104,7 +98,7 @@ MonoBehaviour:
     enumVariables: []
     categories:
     - 
-    variableCategoryIDs: 00000000000000000000000000000000000000000000000000000000000000000000000000000000
+    variableCategoryIDs: 000000000000000000000000000000000000000000000000000000000000000000000000
   events:
   - PHOTON / CLIENT STATE / AUTHENTICATED
   - PHOTON / CLIENT STATE / AUTHENTICATING
@@ -150,3 +144,4 @@ MonoBehaviour:
   - PHOTON / ON WEBRPC RESPONSE
   - PHOTON / ON PHOTON INSTANTIATE
   - updatedropdown
+  - allowed to load
