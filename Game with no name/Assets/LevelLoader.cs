@@ -13,8 +13,12 @@ public class LevelLoader : MonoBehaviour
     public int LevelIndex = 1;
     ES3Settings savesettings;
     public string oursaveFile;
+    ES3AutoSaveMgr autoSaveMgr;
 
-
+    private void Start()
+    {
+        autoSaveMgr = GameObject.Find("Easy Save 3 Manager").GetComponent<ES3AutoSaveMgr>();
+    }
 
     public void LoadGame()
     {
@@ -32,14 +36,16 @@ public class LevelLoader : MonoBehaviour
         if (ES3.FileExists(oursaveFile))
         {
             Debug.Log("Our save file already exists");
-            //savesettings.path = oursaveFile;
+
+            autoSaveMgr.settings.path = oursaveFile;
         }
         else
         {
             File.WriteAllText(ourSaveFilePath, "{}");
             Debug.Log("Created our save File");
 
-            //savesettings.path = oursaveFile;
+            autoSaveMgr.settings.path = oursaveFile;
+    
         }
         yield return new WaitForSeconds(transitionTime);
         SceneManager.LoadScene(1);
