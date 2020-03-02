@@ -1134,7 +1134,7 @@ MonoBehaviour:
         - 
         - 
         actionEnabled: 01010101010101
-        actionIsOpen: 00000000000000
+        actionIsOpen: 00000000000001
         actionStartIndex: 00000000050000000c00000014000000190000001e00000025000000
         actionHashCodes: b2cf10005552ad056ab44904bf83c900bf83c9000ffa6d029cdc3905
         unityObjectParams: []
@@ -1232,7 +1232,7 @@ MonoBehaviour:
           showInInspector: 0
           networkSync: 0
           typeName: UnityEngine.AudioClip
-          value: {fileID: 8300000, guid: b03c2c91110413747a960df00e1da34d, type: 3}
+          value: {fileID: 8300000, guid: f597b52c0df23ea4a86e3d4ff35b52c4, type: 3}
         fsmVarParams: []
         fsmArrayParams: []
         fsmEnumParams: []
@@ -1709,7 +1709,7 @@ MonoBehaviour:
     locked: 0
     manualUpdate: 0
     keepDelayedEventsOnStateExit: 0
-    preprocessed: 1
+    preprocessed: 0
     ExposedEvents: []
     RestartOnEnable: 1
     EnableDebugFlow: 0
@@ -1735,7 +1735,7 @@ MonoBehaviour:
     handleJointBreak: 0
     handleJointBreak2D: 0
     handleOnGUI: 0
-    handleFixedUpdate: 1
+    handleFixedUpdate: 0
     handleLateUpdate: 0
     handleApplicationEvents: 0
     handleUiEvents: 0

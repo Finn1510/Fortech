@@ -103,6 +103,15 @@ Tilemap:
       m_ObjectToInstantiate: {fileID: 0}
       m_TileFlags: 1
       m_ColliderType: 1
+  - first: {x: 0, y: -1, z: 0}
+    second:
+      m_TileIndex: 10
+      m_TileSpriteIndex: 9
+      m_TileMatrixIndex: 0
+      m_TileColorIndex: 0
+      m_ObjectToInstantiate: {fileID: 0}
+      m_TileFlags: 1
+      m_ColliderType: 1
   - first: {x: -2, y: 0, z: 0}
     second:
       m_TileIndex: 8
@@ -116,6 +125,15 @@ Tilemap:
     second:
       m_TileIndex: 1
       m_TileSpriteIndex: 1
+      m_TileMatrixIndex: 0
+      m_TileColorIndex: 0
+      m_ObjectToInstantiate: {fileID: 0}
+      m_TileFlags: 1
+      m_ColliderType: 1
+  - first: {x: 0, y: 0, z: 0}
+    second:
+      m_TileIndex: 9
+      m_TileSpriteIndex: 8
       m_TileMatrixIndex: 0
       m_TileColorIndex: 0
       m_ObjectToInstantiate: {fileID: 0}
@@ -186,6 +204,10 @@ Tilemap:
     m_Data: {fileID: 11400000, guid: 15db082c6cde9954da99027174439d28, type: 2}
   - m_RefCount: 1
     m_Data: {fileID: 11400000, guid: 4cde9b4879c9f2d4395b7acdb9e63fc0, type: 2}
+  - m_RefCount: 1
+    m_Data: {fileID: 11400000, guid: b709e387020bc664497685a3fd27d179, type: 2}
+  - m_RefCount: 1
+    m_Data: {fileID: 11400000, guid: d2987db92e7910346b8f18aac702177f, type: 2}
   m_TileSpriteArray:
   - m_RefCount: 1
     m_Data: {fileID: 21300000, guid: 4fd521b6ffafd384ea141e3c7a6b20fb, type: 3}
@@ -203,8 +225,12 @@ Tilemap:
     m_Data: {fileID: 21300000, guid: 0bb9db3a43f63ec4a9396c8120ea3afc, type: 3}
   - m_RefCount: 1
     m_Data: {fileID: 21300000, guid: 199f7a0b060c02845a1f159f5369659f, type: 3}
+  - m_RefCount: 1
+    m_Data: {fileID: 21300000, guid: 5054dde8385ea5e429f3dd3501a77768, type: 3}
+  - m_RefCount: 1
+    m_Data: {fileID: 21300000, guid: 896f009b8b9614546a5b7905a49f0268, type: 3}
   m_TileMatrixArray:
-  - m_RefCount: 9
+  - m_RefCount: 11
     m_Data:
       e00: 1
       e01: 0
@@ -223,10 +249,10 @@ Tilemap:
       e32: 0
       e33: 1
   m_TileColorArray:
-  - m_RefCount: 8
+  - m_RefCount: 10
     m_Data: {r: 1, g: 1, b: 1, a: 1}
   - m_RefCount: 1
-    m_Data: {r: 0.80815756, g: 0.43982098, b: 0.5300246, a: 1}
+    m_Data: {r: 0.86198515, g: 0.42744443, b: 0.56965846, a: 1}
   m_AnimationFrameRate: 1
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Origin: {x: -2, y: -1, z: 0}

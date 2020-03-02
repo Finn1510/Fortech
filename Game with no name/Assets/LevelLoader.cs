@@ -11,7 +11,7 @@ public class LevelLoader : MonoBehaviour
     public Animator transition;
     public float transitionTime = 1f;
     public int LevelIndex = 1;
-    ES3Settings savesettings;
+    
     public string oursaveFile;
     ES3AutoSaveMgr autoSaveMgr;
 

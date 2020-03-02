@@ -7,11 +7,18 @@ public class GroundEnemyAI : MonoBehaviour
 
     public float raydistance = 2f;
     public float movespeed = 20f;
+    public float jumpForce = 20f;
+    
     GameObject Player;
     Rigidbody2D rb;
-    Vector2 hitPoint;
+    
     public bool RIGHT;
     public bool LEFT;
+
+    public Transform raystart;
+    public Transform rayend;
+
+    public bool Jump = false;
 
     // Start is called before the first frame update
     void Start()
@@ -26,6 +33,7 @@ public class GroundEnemyAI : MonoBehaviour
         if (gameObject.transform.position.x < Player.transform.position.x)
         {
             RIGHT = true;
+            
         }
         else
         {
@@ -35,41 +43,42 @@ public class GroundEnemyAI : MonoBehaviour
         if (gameObject.transform.position.x > Player.transform.position.x)
         {
             LEFT = true;
+            
         }
         else
         {
             LEFT = false;
         }
 
-        Debug.Log(rb.velocity);
+        if (rb.velocity.x < 0)
+        {
+                    
+        }
+        
     }
 
     void FixedUpdate()
     {
-        if (LEFT = true)
+        if (LEFT == true)
         {
-            rb.velocity = new Vector2(-movespeed, 0);
+            rb.AddForce(new Vector2(-movespeed, 0));
+            transform.localScale = new Vector3(transform.localScale.x, transform.localScale.y * -1, transform.localScale.z);
         }
-        if (RIGHT = true)
+        
+        else if (RIGHT == true)
         {
-            rb.velocity = new Vector2(movespeed, 0);
-        }
-        else
-        {
-            rb.velocity = new Vector2(0, 0);
-        }
-
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.right, raydistance);
-        hit.point = hitPoint;
-        if (hit.collider != null) //&& hit.transform.tag == "obstacle"
-        {
-            jump();
-
+            rb.AddForce(new Vector2(movespeed, 0));
+            transform.localScale = new Vector3(transform.localScale.x, transform.localScale.y * 1, transform.localScale.z);
         }
 
-        void jump()
+        Debug.DrawLine(raystart.position, rayend.position, Color.cyan);
+        Jump = Physics2D.Linecast(raystart.position, rayend.position, 1 << LayerMask.NameToLayer("obstacle")); 
+
+        if (Jump == true)
         {
-            Debug.Log("I wanna Jump lol");
+            rb.AddForce(new Vector2(0, 60));
         }
+
+        
     }
 }
