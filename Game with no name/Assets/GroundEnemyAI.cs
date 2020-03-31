@@ -94,9 +94,7 @@ public class GroundEnemyAI : MonoBehaviour
     {
         if (delay == false)
         {
-            delay = true;
             float dist = Vector3.Distance(Player.transform.position, transform.position);
-
 
             if (dist <= 1.5f)
             {
@@ -112,6 +110,7 @@ public class GroundEnemyAI : MonoBehaviour
 
     IEnumerator DamageDelay()
     {
+        delay = true;
         yield return new WaitForSeconds(Damagedelay);
         delay = false;
     }
