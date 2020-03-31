@@ -1938,7 +1938,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   key: 9e9ac085-ac57-4a3e-829b-4c9208006231
   saveEvent: 1
-  loadEvent: 1
+  loadEvent: 2
   settings:
     _location: 0
     path: SaveData.es3
@@ -2296,7 +2296,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -851, y: -134}
+  m_AnchoredPosition: {x: -851, y: -157}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &589766504
@@ -5269,7 +5269,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 2064320885}
   m_Direction: 2
   m_Value: 0
-  m_Size: 0.2
+  m_Size: 0.815
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -6407,7 +6407,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -615, y: -390}
+  m_AnchoredPosition: {x: -615, y: -292}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1760564712

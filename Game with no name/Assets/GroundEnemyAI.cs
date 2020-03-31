@@ -14,6 +14,7 @@ public class GroundEnemyAI : MonoBehaviour
     
     public bool RIGHT;
     public bool LEFT;
+    
 
     public Transform raystart;
     public Transform rayend;
@@ -33,22 +34,16 @@ public class GroundEnemyAI : MonoBehaviour
         if (gameObject.transform.position.x < Player.transform.position.x)
         {
             RIGHT = true;
+            LEFT = false;
             
         }
         else
         {
             RIGHT = false;
+            LEFT = true;
         }
 
-        if (gameObject.transform.position.x > Player.transform.position.x)
-        {
-            LEFT = true;
-            
-        }
-        else
-        {
-            LEFT = false;
-        }
+        
 
         if (rb.velocity.x < 0)
         {
@@ -62,13 +57,15 @@ public class GroundEnemyAI : MonoBehaviour
         if (LEFT == true)
         {
             rb.AddForce(new Vector2(-movespeed, 0));
-            transform.localScale = new Vector3(transform.localScale.x, transform.localScale.y * -1, transform.localScale.z);
+            transform.localScale = new Vector3(transform.localScale.x, -1, transform.localScale.z);
+            
         }
         
         else if (RIGHT == true)
         {
             rb.AddForce(new Vector2(movespeed, 0));
-            transform.localScale = new Vector3(transform.localScale.x, transform.localScale.y * 1, transform.localScale.z);
+            transform.localScale = new Vector3(transform.localScale.x, 1, transform.localScale.z);
+            
         }
 
         Debug.DrawLine(raystart.position, rayend.position, Color.cyan);
