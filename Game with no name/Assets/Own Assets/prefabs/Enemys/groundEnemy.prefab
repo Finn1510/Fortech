@@ -15,9 +15,9 @@ GameObject:
   - component: {fileID: 7611209670221399484}
   - component: {fileID: 7611209670221399487}
   - component: {fileID: 7611209670221399486}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: groundEnemy
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -159,6 +159,7 @@ MonoBehaviour:
   Damagedelay: 2
   raystart: {fileID: 7611209672351492423}
   rayend: {fileID: 7611209671109584228}
+  maxDamageDistance: 2
 --- !u!114 &7611209670221399487
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -364,9 +365,9 @@ GameObject:
   m_Component:
   - component: {fileID: 7611209670243584665}
   - component: {fileID: 7611209670243584664}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: right_leg-1.png
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -444,9 +445,9 @@ GameObject:
   m_Component:
   - component: {fileID: 7611209670793759593}
   - component: {fileID: 7611209670793759592}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: right_arm-1.png
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -524,9 +525,9 @@ GameObject:
   m_Component:
   - component: {fileID: 7611209670812113632}
   - component: {fileID: 7611209670812113635}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: left_leg-1.png
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -603,9 +604,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7611209671109584228}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: RayEndPoint
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -634,9 +635,9 @@ GameObject:
   m_Component:
   - component: {fileID: 7611209671110132397}
   - component: {fileID: 7611209671110132396}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: left_arm-1.png
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -714,9 +715,9 @@ GameObject:
   m_Component:
   - component: {fileID: 7611209671253561212}
   - component: {fileID: 7611209671253561215}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Torso
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -794,9 +795,9 @@ GameObject:
   m_Component:
   - component: {fileID: 7611209672008239794}
   - component: {fileID: 7611209672008239797}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Head
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -873,9 +874,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7611209672351492423}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: RayStartPoint
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

@@ -13,6 +13,7 @@ public class GroundEnemyAI : MonoBehaviour
     [SerializeField] private float Damagedelay = 2f;
     [SerializeField] private Transform raystart;
     [SerializeField] private Transform rayend;
+    [SerializeField] private float maxDamageDistance;
 
     GameObject Player;
     Rigidbody2D rb;
@@ -96,7 +97,7 @@ public class GroundEnemyAI : MonoBehaviour
         {
             float dist = Vector3.Distance(Player.transform.position, transform.position);
 
-            if (dist <= 1.5f)
+            if (dist <= maxDamageDistance)
             {
                 Player.GetComponent<PlayerHandler>().Damage(Damage);
                 Debug.Log("Damaged Player");

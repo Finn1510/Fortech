@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6994437525373568791}
   - component: {fileID: 6994437525373568790}
   - component: {fileID: 6994437525373568785}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Eye_Mob_wings-1.png1 (1)
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -148,7 +148,7 @@ GameObject:
   - component: {fileID: 6994437525581231004}
   - component: {fileID: 3863706427225504807}
   - component: {fileID: 2319316508478525989}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Mob.Crazyeye
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -2510,7 +2510,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6994437526956388226}
   - component: {fileID: 6994437526956388227}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Freeform Light 2D
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2588,7 +2588,7 @@ GameObject:
   - component: {fileID: 6994437527058546728}
   - component: {fileID: 6994437527058546731}
   - component: {fileID: 6994437527058546730}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Eye_Mob_wings-1.png1
   m_TagString: Enemy
   m_Icon: {fileID: 0}
