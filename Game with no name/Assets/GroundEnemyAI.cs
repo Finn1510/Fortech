@@ -5,21 +5,23 @@ using UnityEngine;
 public class GroundEnemyAI : MonoBehaviour
 {
 
-    public float raydistance = 2f;
-    public float movespeed = 20f;
-    public float jumpForce = 20f;
-    
+    [Header("Parameters")]
+    [SerializeField] private float raydistance = 2f;
+    [SerializeField] private float movespeed = 20f;
+    [SerializeField] private float jumpForce = 20f;
+    [SerializeField] private float Damage = 2f;
+    [SerializeField] private float Damagedelay = 2f;
+    [SerializeField] private Transform raystart;
+    [SerializeField] private Transform rayend;
+
     GameObject Player;
     Rigidbody2D rb;
-    
-    public bool RIGHT;
-    public bool LEFT;
-    
 
-    public Transform raystart;
-    public Transform rayend;
+    bool Jump = false;
+    bool RIGHT;
+    bool LEFT;
 
-    public bool Jump = false;
+    bool delay = false;
 
     // Start is called before the first frame update
     void Start()
@@ -31,11 +33,23 @@ public class GroundEnemyAI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        movement();
+        DamagePlayer();
+    }
+
+    void FixedUpdate()
+    {
+        turning();   
+
+    } 
+
+    void movement()
+    {
         if (gameObject.transform.position.x < Player.transform.position.x)
         {
             RIGHT = true;
             LEFT = false;
-            
+
         }
         else
         {
@@ -43,39 +57,62 @@ public class GroundEnemyAI : MonoBehaviour
             LEFT = true;
         }
 
-        
+
 
         if (rb.velocity.x < 0)
         {
-                    
-        }
-        
-    }
 
-    void FixedUpdate()
+        }
+    } 
+
+    void turning()
     {
         if (LEFT == true)
         {
             rb.AddForce(new Vector2(-movespeed, 0));
             transform.localScale = new Vector3(transform.localScale.x, -1, transform.localScale.z);
-            
+
         }
-        
+
         else if (RIGHT == true)
         {
             rb.AddForce(new Vector2(movespeed, 0));
             transform.localScale = new Vector3(transform.localScale.x, 1, transform.localScale.z);
-            
+
         }
 
         Debug.DrawLine(raystart.position, rayend.position, Color.cyan);
-        Jump = Physics2D.Linecast(raystart.position, rayend.position, 1 << LayerMask.NameToLayer("obstacle")); 
+        Jump = Physics2D.Linecast(raystart.position, rayend.position, 1 << LayerMask.NameToLayer("obstacle"));
 
         if (Jump == true)
         {
             rb.AddForce(new Vector2(0, 60));
         }
+    } 
 
+    void DamagePlayer()
+    {
+        if (delay == false)
+        {
+            delay = true;
+            float dist = Vector3.Distance(Player.transform.position, transform.position);
+
+
+            if (dist <= 1.5f)
+            {
+                Player.GetComponent<PlayerHandler>().Damage(Damage);
+                Debug.Log("Damaged Player");
+
+                StartCoroutine(DamageDelay());
+            }
+        }
         
+        
+    } 
+
+    IEnumerator DamageDelay()
+    {
+        yield return new WaitForSeconds(Damagedelay);
+        delay = false;
     }
 }
