@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class GroundEnemyAI : MonoBehaviour
 {
+    [Header("References")]
+    [SerializeField] private Transform raystart;
+    [SerializeField] private Transform rayend; 
 
     [Header("Parameters")]
     [SerializeField] private float raydistance = 2f;
@@ -11,10 +14,18 @@ public class GroundEnemyAI : MonoBehaviour
     [SerializeField] private float jumpForce = 20f;
     [SerializeField] private float Damage = 2f;
     [SerializeField] private float Damagedelay = 2f;
-    [SerializeField] private Transform raystart;
-    [SerializeField] private Transform rayend;
-    [SerializeField] private float maxDamageDistance;
+    [SerializeField] private float maxDamageDistance = 2f;
+    [SerializeField] private float EnemyHealth = 50f;
 
+    [Header("BodyParts")]
+    [SerializeField] private GameObject Head;
+    [SerializeField] private GameObject Torso;
+    [SerializeField] private GameObject rightLeg;
+    [SerializeField] private GameObject leftLeg;
+    [SerializeField] private GameObject rightArm;
+    [SerializeField] private GameObject leftArm;
+
+    Animator anim;
     GameObject Player;
     Rigidbody2D rb;
 
@@ -29,19 +40,27 @@ public class GroundEnemyAI : MonoBehaviour
     {
         Player = GameObject.FindGameObjectWithTag("Player");
         rb = GetComponent<Rigidbody2D>();
+        anim = GetComponent<Animator>();
     }
 
     // Update is called once per frame
     void Update()
     {
+        if(EnemyHealth <= 0f)
+        {
+            Die();
+        }
+        
         movement();
         DamagePlayer();
     }
 
     void FixedUpdate()
     {
-        turning();   
-
+        if (EnemyHealth > 0f)
+        {
+            turning();
+        }
     } 
 
     void movement()
@@ -114,5 +133,42 @@ public class GroundEnemyAI : MonoBehaviour
         delay = true;
         yield return new WaitForSeconds(Damagedelay);
         delay = false;
+    } 
+
+    void EnemyDamage(float gottenDamage)
+    {
+        EnemyHealth = EnemyHealth - gottenDamage;
+    }  
+
+    void Die()
+    {
+        anim.SetTrigger("Die");
+
+        Head.AddComponent<Rigidbody2D>();
+        Head.transform.parent = null;
+        Head.GetComponent<CircleCollider2D>().enabled = true;
+        
+        Torso.AddComponent<Rigidbody2D>();
+        Torso.transform.parent = null;
+        Torso.GetComponent<CapsuleCollider2D>().enabled = true;
+        
+        rightArm.AddComponent<Rigidbody2D>();
+        rightArm.transform.parent = null;
+        rightArm.GetComponent<CapsuleCollider2D>().enabled = true;
+        
+        leftArm.AddComponent<Rigidbody2D>();
+        leftArm.transform.parent = null;
+        leftArm.GetComponent<CapsuleCollider2D>().enabled = true;
+
+        rightLeg.AddComponent<Rigidbody2D>();
+        rightLeg.transform.parent = null;
+        rightLeg.GetComponent<CapsuleCollider2D>().enabled = true;
+        
+        leftLeg.AddComponent<Rigidbody2D>();
+        leftLeg.transform.parent = null;
+        leftLeg.GetComponent<CapsuleCollider2D>().enabled = true;
+        
+        Destroy(this.gameObject);
+
     }
 }

@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 7611209670221399482}
   - component: {fileID: 7611209670221399483}
   - component: {fileID: 7611209670221399484}
-  - component: {fileID: 7611209670221399487}
   - component: {fileID: 7611209670221399486}
   m_Layer: 10
   m_Name: groundEnemy
@@ -152,190 +151,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7797675e332d1dd49a8952b8ab4ef74d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  raystart: {fileID: 7611209672351492423}
+  rayend: {fileID: 7611209671109584228}
   raydistance: 1
   movespeed: 7
   jumpForce: 20
   Damage: 2
   Damagedelay: 2
-  raystart: {fileID: 7611209672351492423}
-  rayend: {fileID: 7611209671109584228}
   maxDamageDistance: 2
---- !u!114 &7611209670221399487
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7611209670221399481}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 1384774831, guid: e743331561ef77147ae48cda9bcb8209, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  fsm:
-    dataVersion: 2
-    usedInTemplate: {fileID: 0}
-    name: FSM
-    startState: State 1
-    states:
-    - name: State 1
-      description: 
-      colorIndex: 0
-      position:
-        serializedVersion: 2
-        x: 50
-        y: 100
-        width: 100
-        height: 16
-      isBreakpoint: 0
-      isSequence: 0
-      hideUnused: 0
-      transitions: []
-      actionData:
-        actionNames:
-        - HutongGames.PlayMaker.Actions.GetPosition
-        customNames:
-        - 
-        actionEnabled: 01
-        actionIsOpen: 01
-        actionStartIndex: 00000000
-        actionHashCodes: 5552ad05
-        unityObjectParams: []
-        fsmGameObjectParams: []
-        fsmOwnerDefaultParams:
-        - ownerOption: 0
-          gameObject:
-            useVariable: 0
-            name: 
-            tooltip: 
-            showInInspector: 0
-            networkSync: 0
-            value: {fileID: 0}
-        animationCurveParams: []
-        functionCallParams: []
-        fsmTemplateControlParams: []
-        fsmEventTargetParams: []
-        fsmPropertyParams: []
-        layoutOptionParams: []
-        fsmStringParams: []
-        fsmObjectParams: []
-        fsmVarParams: []
-        fsmArrayParams: []
-        fsmEnumParams: []
-        fsmFloatParams:
-        - useVariable: 1
-          name: 
-          tooltip: 
-          showInInspector: 0
-          networkSync: 0
-          value: 0
-        - useVariable: 1
-          name: 
-          tooltip: 
-          showInInspector: 0
-          networkSync: 0
-          value: 0
-        - useVariable: 1
-          name: 
-          tooltip: 
-          showInInspector: 0
-          networkSync: 0
-          value: 0
-        fsmIntParams: []
-        fsmBoolParams: []
-        fsmVector2Params: []
-        fsmVector3Params:
-        - useVariable: 1
-          name: 
-          tooltip: 
-          showInInspector: 0
-          networkSync: 0
-          value: {x: 0, y: 0, z: 0}
-        fsmColorParams: []
-        fsmRectParams: []
-        fsmQuaternionParams: []
-        stringParams: []
-        byteData: 0000000000
-        arrayParamSizes: 
-        arrayParamTypes: []
-        customTypeSizes: 
-        customTypeNames: []
-        paramDataType: 140000001c0000000f0000000f0000000f0000000700000001000000
-        paramName:
-        - gameObject
-        - vector
-        - x
-        - y
-        - z
-        - space
-        - everyFrame
-        paramDataPos: 00000000000000000000000001000000020000000000000004000000
-        paramByteDataSize: 00000000000000000000000000000000000000000400000001000000
-    events: []
-    globalTransitions: []
-    variables:
-      floatVariables: []
-      intVariables: []
-      boolVariables: []
-      stringVariables: []
-      vector2Variables: []
-      vector3Variables: []
-      colorVariables: []
-      rectVariables: []
-      quaternionVariables: []
-      gameObjectVariables: []
-      objectVariables: []
-      materialVariables: []
-      textureVariables: []
-      arrayVariables: []
-      enumVariables: []
-      categories:
-      - 
-      variableCategoryIDs: 
-    description: 
-    docUrl: 
-    showStateLabel: 0
-    maxLoopCount: 0
-    watermark: 
-    password: 
-    locked: 0
-    manualUpdate: 0
-    keepDelayedEventsOnStateExit: 0
-    preprocessed: 0
-    ExposedEvents: []
-    RestartOnEnable: 1
-    EnableDebugFlow: 0
-    EnableBreakpoints: 1
-    editorFlags: 1
-    activeStateName: 
-    mouseEvents: 0
-    handleLevelLoaded: 0
-    handleTriggerEnter2D: 0
-    handleTriggerExit2D: 0
-    handleTriggerStay2D: 0
-    handleCollisionEnter2D: 0
-    handleCollisionExit2D: 0
-    handleCollisionStay2D: 0
-    handleTriggerEnter: 0
-    handleTriggerExit: 0
-    handleTriggerStay: 0
-    handleCollisionEnter: 0
-    handleCollisionExit: 0
-    handleCollisionStay: 0
-    handleParticleCollision: 0
-    handleControllerColliderHit: 0
-    handleJointBreak: 0
-    handleJointBreak2D: 0
-    handleOnGUI: 0
-    handleFixedUpdate: 0
-    handleLateUpdate: 0
-    handleApplicationEvents: 0
-    handleUiEvents: 0
-    handleLegacyNetworking: 0
-    handleAnimatorMove: 0
-    handleAnimatorIK: 0
-  fsmTemplate: {fileID: 0}
-  eventHandlerComponentsAdded: 0
+  EnemyHealth: 50
+  Head: {fileID: 7611209672008239795}
+  Torso: {fileID: 7611209671253561213}
+  rightLeg: {fileID: 7611209670243584662}
+  leftLeg: {fileID: 7611209670812113633}
+  rightArm: {fileID: 7611209670793759590}
+  leftArm: {fileID: 7611209671110132394}
 --- !u!95 &7611209670221399486
 Animator:
   serializedVersion: 3
@@ -365,6 +195,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7611209670243584665}
   - component: {fileID: 7611209670243584664}
+  - component: {fileID: 5925618427547475639}
   m_Layer: 10
   m_Name: right_leg-1.png
   m_TagString: Enemy
@@ -435,6 +266,22 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!70 &5925618427547475639
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7611209670243584662}
+  m_Enabled: 0
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.33, y: 0}
+  m_Size: {x: 0.24, y: 1.0000005}
+  m_Direction: 0
 --- !u!1 &7611209670793759590
 GameObject:
   m_ObjectHideFlags: 0
@@ -445,6 +292,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7611209670793759593}
   - component: {fileID: 7611209670793759592}
+  - component: {fileID: 2320745188414090042}
   m_Layer: 10
   m_Name: right_arm-1.png
   m_TagString: Enemy
@@ -459,13 +307,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7611209670793759590}
-  m_LocalRotation: {x: 0, y: 0, z: -0.46406907, w: 0.88579905}
+  m_LocalRotation: {x: 0, y: 0, z: -0.46174863, w: 0.8870109}
   m_LocalPosition: {x: 0.44, y: -0.39, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 7611209670221399480}
   m_RootOrder: 7
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -55.3}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -55}
 --- !u!212 &7611209670793759592
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -515,6 +363,22 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!70 &2320745188414090042
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7611209670793759590}
+  m_Enabled: 0
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.28, y: 0.06}
+  m_Size: {x: 0.36, y: 1.23}
+  m_Direction: 0
 --- !u!1 &7611209670812113633
 GameObject:
   m_ObjectHideFlags: 0
@@ -525,6 +389,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7611209670812113632}
   - component: {fileID: 7611209670812113635}
+  - component: {fileID: 7337966784642927568}
   m_Layer: 10
   m_Name: left_leg-1.png
   m_TagString: Enemy
@@ -595,6 +460,22 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!70 &7337966784642927568
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7611209670812113633}
+  m_Enabled: 0
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.3, y: 0}
+  m_Size: {x: 0.31, y: 1.0000005}
+  m_Direction: 0
 --- !u!1 &7611209671109584229
 GameObject:
   m_ObjectHideFlags: 0
@@ -635,6 +516,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7611209671110132397}
   - component: {fileID: 7611209671110132396}
+  - component: {fileID: 5360016163955701929}
   m_Layer: 10
   m_Name: left_arm-1.png
   m_TagString: Enemy
@@ -649,13 +531,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7611209671110132394}
-  m_LocalRotation: {x: -0, y: -0, z: 0.8973737, w: -0.44127148}
+  m_LocalRotation: {x: 0, y: 0, z: -0.8973739, w: 0.44127104}
   m_LocalPosition: {x: 0.56, y: 0.28, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 7611209670221399480}
   m_RootOrder: 6
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -127.630005}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -127.63}
 --- !u!212 &7611209671110132396
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -705,6 +587,22 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!70 &5360016163955701929
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7611209671110132394}
+  m_Enabled: 0
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.3200002, y: 0.04573837}
+  m_Size: {x: 0.2999996, y: 0.95147675}
+  m_Direction: 0
 --- !u!1 &7611209671253561213
 GameObject:
   m_ObjectHideFlags: 0
@@ -715,6 +613,8 @@ GameObject:
   m_Component:
   - component: {fileID: 7611209671253561212}
   - component: {fileID: 7611209671253561215}
+  - component: {fileID: 5013914730204894449}
+  - component: {fileID: 5257693036307544603}
   m_Layer: 10
   m_Name: Torso
   m_TagString: Enemy
@@ -785,6 +685,43 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!50 &5013914730204894449
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7611209671253561213}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
+--- !u!70 &5257693036307544603
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7611209671253561213}
+  m_Enabled: 0
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0.00000020861626}
+  m_Size: {x: 0.76, y: 0.86}
+  m_Direction: 0
 --- !u!1 &7611209672008239795
 GameObject:
   m_ObjectHideFlags: 0
@@ -795,6 +732,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7611209672008239794}
   - component: {fileID: 7611209672008239797}
+  - component: {fileID: 4545677004390408269}
   m_Layer: 10
   m_Name: Head
   m_TagString: Enemy
@@ -865,6 +803,22 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!58 &4545677004390408269
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7611209672008239795}
+  m_Enabled: 0
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0.00000047683716}
+  serializedVersion: 2
+  m_Radius: 0.43
 --- !u!1 &7611209672351492420
 GameObject:
   m_ObjectHideFlags: 0
