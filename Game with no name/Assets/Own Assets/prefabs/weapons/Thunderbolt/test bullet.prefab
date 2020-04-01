@@ -315,7 +315,7 @@ MonoBehaviour:
     type: 3}
   RedLight: {fileID: 7997755100480159836, guid: 60c4a143d78be6849be9616008fe396a,
     type: 3}
-  BulletDamage: 10
+  BulletDamage: 5
 --- !u!114 &4359063027988171330
 MonoBehaviour:
   m_ObjectHideFlags: 0

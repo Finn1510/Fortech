@@ -11,18 +11,21 @@ public class PlayerHandler : MonoBehaviour
     [SerializeField] float PlayerHealth = 100f;
     [SerializeField] Slider HealthBar;
 
-   
+    float temphealth; 
+
     // Start is called before the first frame update
     void Start()
     {
-       
+        HealthBar.maxValue = PlayerHealth;
+        HealthBar.value = PlayerHealth;
+        temphealth = PlayerHealth;
        
     }
 
     // Update is called once per frame
     void Update()
     {
-        HealthBar.value = PlayerHealth;
+        HealthbarSmoothChange(); 
        
     } 
 
@@ -32,5 +35,12 @@ public class PlayerHandler : MonoBehaviour
         
     } 
 
+    void HealthbarSmoothChange()
+    {
+        if(temphealth != PlayerHealth)
+        {
+            DOTween.To(() => HealthBar.value, x => HealthBar.value = x, PlayerHealth, 0.5f);
+        }    
+    }
    
 }

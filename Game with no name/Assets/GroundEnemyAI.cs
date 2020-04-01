@@ -118,9 +118,8 @@ public class GroundEnemyAI : MonoBehaviour
 
             if (dist <= maxDamageDistance)
             {
-                Player.GetComponent<PlayerHandler>().Damage(Damage);
-                Debug.Log("Damaged Player");
-
+                Player.SendMessage("Damage", Damage);
+                
                 StartCoroutine(DamageDelay());
             }
         }

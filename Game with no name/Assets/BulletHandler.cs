@@ -30,8 +30,8 @@ public class BulletHandler : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        Debug.Log("Collided with something");
-        if(collision.gameObject.tag == "Enemy")
+       
+        if (collision.gameObject.tag == "Enemy")
         {
             ImpulseCOM.GenerateImpulse(new Vector3(2, 2, 0));
             Instantiate(ImpactParticle, transform.position, transform.rotation);
