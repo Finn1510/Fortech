@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="210mm"
+   height="297mm"
+   viewBox="0 0 210 297"
+   version="1.1"
+   id="svg8"
+   inkscape:version="0.92.4 (5da689c313, 2019-01-14)"
+   sodipodi:docname="FortechLetters.svg">
+  <defs
+     id="defs2" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="0.055714076"
+     inkscape:cx="-1437.3906"
+     inkscape:cy="8216.3155"
+     inkscape:document-units="mm"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     inkscape:window-width="1920"
+     inkscape:window-height="1017"
+     inkscape:window-x="1912"
+     inkscape:window-y="73"
+     inkscape:window-maximized="1" />
+  <metadata
+     id="metadata5">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Ebene 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <rect
+       style="opacity:1;fill:#445500;fill-opacity:1;stroke-width:2.66787434"
+       id="rect4522"
+       width="10924.161"
+       height="5973.9795"
+       x="-4245.2134"
+       y="-3032.9575" />
+    <path
+       style="opacity:1;fill:#ffffff;fill-opacity:1;stroke-width:0.27748689"
+       d="m -2121.315,-1269.1591 v 72.5713 386.40842 l 91.4704,-91.47039 v -114.78473 h 105.0323 l 72.5718,-72.5718 h -177.6041 v -107.5815 h 173.8695 l 72.5707,-72.5713 h -246.4402 z"
+       id="rect4524"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="D:\Unity Projects\Fortech\Game with no name\Assets\Own Assets\sprites\Title Screen\Individual Letters\F.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
+    <path
+       style="opacity:1;fill:#ffffff;fill-opacity:1;stroke-width:0.26431012"
+       d="m -965.83998,-1243.0881 84.9633,84.9628 h 149.64975 v 327.68018 l 45.407,45.40706 45.9704,-45.97033 v -327.11691 h 149.6503 l 84.9627,-84.9628 h -234.613 -91.3774 z"
+       id="rect4617"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="D:\Unity Projects\Fortech\Game with no name\Assets\Own Assets\sprites\Title Screen\Individual Letters\T.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
+    <path
+       style="opacity:1;fill:#ffffff;fill-opacity:1;stroke-width:0.27656049"
+       d="m -311.20697,-1245.2197 -33.54265,33.5421 v 5e-4 l -33.54263,33.5422 v 5e-4 7.9974 315.25932 h 5e-4 l 33.54213,33.54266 33.54265,33.54265 h 24.27915 193.06315 l -75.08274,-75.08327 h -117.98041 v -128.60144 h 144.35399 v -75.08272 h -144.35399 v -103.5772 h 117.97988 l 75.08277,-75.0827 h -193.06265 z"
+       id="rect4718"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="D:\Unity Projects\Fortech\Game with no name\Assets\Own Assets\sprites\Title Screen\Individual Letters\E.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
+    <path
+       style="opacity:1;fill:#ffffff;fill-opacity:1;stroke-width:0.24217236"
+       d="m -1551.1206,-1270.9594 a 227.68436,238.37429 0 0 0 -227.6843,238.3743 227.68436,238.37429 0 0 0 227.6843,238.37436 227.68436,238.37429 0 0 0 227.6844,-238.37436 227.68436,238.37429 0 0 0 -227.6844,-238.3743 z m 3.3088,120.0308 a 113.84219,119.18715 0 0 1 113.8422,119.1873 113.84219,119.18715 0 0 1 -113.8422,119.18718 113.84219,119.18715 0 0 1 -113.8423,-119.18718 113.84219,119.18715 0 0 1 113.8423,-119.1873 z"
+       id="path5290"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="D:\Unity Projects\Fortech\Game with no name\Assets\Own Assets\sprites\Title Screen\Individual Letters\O.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
+    <path
+       style="opacity:1;fill:#ffffff;fill-opacity:1;stroke-width:0.23797826"
+       d="m 170.30745,-1247.5029 a 227.68435,230.18915 0 0 0 -227.684273,230.1889 227.68435,230.18915 0 0 0 227.684273,230.18896 227.68435,230.18915 0 0 0 1.80869,-0.0914 v -0.0739 h 23.34173 L 313.81705,-901.58481 H 171.3937 v 0.0579 A 113.84218,115.09458 0 0 1 59.773637,-1016.4992 113.84218,115.09458 0 0 1 172.11614,-1131.5402 v 0.042 H 314.53897 L 194.47653,-1247.438 h -22.36039 a 227.68435,230.18915 0 0 0 -1.80869,-0.064 z"
+       id="path5290-3"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="D:\Unity Projects\Fortech\Game with no name\Assets\Own Assets\sprites\Title Screen\Individual Letters\C.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
+    <path
+       style="opacity:1;fill:#ffffff;fill-opacity:1;stroke-width:0.26458332"
+       d="m 463.92613,-1245.0816 -92.6357,92.6356 v 270.37321 l 92.6357,92.6357 v -186.37364 h 160.0001 v 186.37364 l 92.6351,-92.63518 v -270.37423 l -92.6351,-92.6351 v 176.6352 h -160.0001 z"
+       id="rect5402"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="D:\Unity Projects\Fortech\Game with no name\Assets\Own Assets\sprites\Title Screen\Individual Letters\H.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
+    <path
+       style="opacity:1;fill:#ffffff;fill-opacity:1;stroke-width:0.26458332"
+       d="m 339.04378,-179.01777 v 455.64504 l 92.6357,-92.6357 V 90.253105 h 160.0001 v 93.738465 l 92.63507,92.6357 v -455.64504 l -92.63507,92.635195 V -2.3820748 H 431.67948 V -86.382075 Z"
+       id="rect5402-7"
+       inkscape:connector-curvature="0" />
+    <path
+       style="opacity:1;fill:#ffffff;fill-opacity:1;stroke-width:0.99999994"
+       d="M -4239.1465 -4721.5977 C -4254.3784 -4721.5447 -4268.8174 -4721.1407 -4284.9492 -4720.9785 L -4678.293 -4325.6816 L -4678.293 -4074.0254 L -4678.293 -3337.0234 L -4331.25 -2989.9805 L -4331.25 -3424.625 L -3896.6055 -2989.9805 L -3651.3926 -2989.9805 L -3651.3926 -3235.0117 L -3651.5742 -3235.0117 L -3651.209 -3235.377 L -4192.5273 -3776.6953 C -4084.386 -3787.4485 -3982.7006 -3835.3689 -3905.1855 -3913.0996 C -3816.6135 -4001.9185 -3766.8536 -4122.3814 -3766.8535 -4247.9902 C -3766.8535 -4373.5991 -3816.6135 -4494.062 -3905.1855 -4582.8809 C -3993.7576 -4671.6994 -4113.8865 -4721.5977 -4239.1465 -4721.5977 z M -4279.8418 -4721.5332 L -4279.6758 -4721.3672 L -4279.6758 -4721.5332 L -4279.8418 -4721.5332 z M -4209.375 -4496.2305 A 246.87499 253.125 0 0 1 -3962.5 -4243.1055 A 246.87499 253.125 0 0 1 -4209.375 -3989.9805 A 246.87499 253.125 0 0 1 -4456.25 -4243.1055 A 246.87499 253.125 0 0 1 -4209.375 -4496.2305 z "
+       id="rect5603"
+       transform="scale(0.26458333)"
+       inkscape:export-filename="D:\Unity Projects\Fortech\Game with no name\Assets\Own Assets\sprites\Title Screen\Individual Letters\R.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
+    <rect
+       style="opacity:1;fill:#000000;fill-opacity:1;stroke-width:0.25924328"
+       id="rect4528-8-1-0-0-5-7-9-2-0-5-6"
+       width="47.43618"
+       height="167.06548"
+       x="363.25244"
+       y="-560.00311"
+       transform="rotate(-135)" />
+    <rect
+       style="opacity:1;fill:#000000;fill-opacity:1;stroke-width:0.47085267"
+       id="rect4528-8-1-0-3-0"
+       width="156.48215"
+       height="167.06548"
+       x="232.38673"
+       y="17.57539"
+       transform="rotate(135)" />
+    <path
+       style="opacity:1;fill:#ffffff;fill-opacity:1;stroke-width:1.06599975"
+       d="M -4678.293 -4720.9785 L -4678.293 -4278.8066 L -4458.2031 -4278.8066 A 246.87499 253.125 0 0 1 -4278.6992 -4488.5098 L -4278.6992 -4720.9785 L -4678.293 -4720.9785 z "
+       transform="scale(0.26458333)"
+       id="rect5932" />
+    <ellipse
+       style="opacity:1;fill:#000000;fill-opacity:1;stroke-width:0.4191297"
+       id="path5755-7-8-4"
+       cx="36.883839"
+       cy="226.67323"
+       rx="65.319008"
+       ry="66.972656" />
+  </g>
+</svg>
