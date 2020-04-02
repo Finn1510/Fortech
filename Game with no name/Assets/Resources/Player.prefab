@@ -20,7 +20,7 @@ GameObject:
   - component: {fileID: 5006237927653503919}
   - component: {fileID: 5006237927653503905}
   - component: {fileID: 7280302596801636469}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -63,7 +63,7 @@ MonoBehaviour:
   m_AirControl: 1
   m_WhatIsGround:
     serializedVersion: 2
-    m_Bits: 567
+    m_Bits: 1591
   m_GroundCheck: {fileID: 5006237926075053332}
   m_CeilingCheck: {fileID: 5006237926075053333}
   m_CrouchDisableCollider: {fileID: 0}
@@ -4272,7 +4272,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5006237926075053334}
   - component: {fileID: 5006237926075053323}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: torso
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4351,7 +4351,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5006237926482845430}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: holdpoint
   m_TagString: holdpoint
   m_Icon: {fileID: 0}

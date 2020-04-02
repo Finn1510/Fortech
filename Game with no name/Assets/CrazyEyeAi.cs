@@ -27,7 +27,7 @@ public class CrazyEyeAi : MonoBehaviour
         seeker = GetComponent<Seeker>();
         rb = GetComponent<Rigidbody2D>();
 
-        //target = GameObject.FindGameObjectWithTag("CORE");
+        target = GameObject.FindGameObjectWithTag("CORE");
 
         InvokeRepeating("UpdatePath", 0f, PathUpdateDelay);
     }
@@ -79,7 +79,7 @@ public class CrazyEyeAi : MonoBehaviour
             reachedEndofPath = false;
         }
 
-        Vector2 direction = (Vector2)path.vectorPath[currentWaypoint] - rb.position.normalized;
+        Vector2 direction = ((Vector2)path.vectorPath[currentWaypoint] - rb.position).normalized;
         Vector2 force = direction * speed * Time.deltaTime;
 
         rb.AddForce(force);
