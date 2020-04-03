@@ -11,12 +11,17 @@ public class PlayerHandler : MonoBehaviour
     [SerializeField] float PlayerHealth = 100f;
     [SerializeField] Slider HealthBar;
 
-    float temphealth; 
+    float temphealth;
 
-    // Start is called before the first frame update
+
+    void Awake()
+    {
+        ES3.Load<float>("PlayerHealth", PlayerHealth);    
+    }
+
     void Start()
     {
-        HealthBar.maxValue = PlayerHealth;
+        HealthBar.maxValue = 100f;
         HealthBar.value = PlayerHealth;
         temphealth = PlayerHealth;
        
@@ -42,5 +47,10 @@ public class PlayerHandler : MonoBehaviour
             DOTween.To(() => HealthBar.value, x => HealthBar.value = x, PlayerHealth, 0.5f);
         }    
     }
-   
+
+    private void OnApplicationQuit()
+    {
+        ES3.Save<float>("PlayerHealth", PlayerHealth);
+    }
+
 }
