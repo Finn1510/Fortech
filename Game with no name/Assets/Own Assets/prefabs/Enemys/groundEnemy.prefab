@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 7611209670221399483}
   - component: {fileID: 7611209670221399484}
   - component: {fileID: 7611209670221399486}
+  - component: {fileID: 6829575214040883287}
   m_Layer: 10
   m_Name: groundEnemy
   m_TagString: Enemy
@@ -105,7 +106,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.8729081, y: -0.060401678}
+  m_Offset: {x: 1.26281, y: -0.060401678}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.44949496, y: 0.54713804}
@@ -116,7 +117,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 2.6616683, y: 1.6975095}
+  m_Size: {x: 1.8818645, y: 1.6975095}
   m_EdgeRadius: 0
 --- !u!50 &7611209670221399483
 Rigidbody2D:
@@ -185,6 +186,22 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!58 &6829575214040883287
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7611209670221399481}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.39, y: -0.06290807}
+  serializedVersion: 2
+  m_Radius: 0.8457983
 --- !u!1 &7611209670243584662
 GameObject:
   m_ObjectHideFlags: 0
