@@ -15,56 +15,14 @@ MonoBehaviour:
   variables:
     floatVariables:
     - useVariable: 1
-      name: intensity modefyer
-      tooltip: 
-      showInInspector: 0
-      networkSync: 0
-      value: 1
-    - useVariable: 1
-      name: lvl load percantage
+      name: global light intensity
       tooltip: 
       showInInspector: 0
       networkSync: 0
       value: 0
-    - useVariable: 1
-      name: mouse x
-      tooltip: 
-      showInInspector: 0
-      networkSync: 0
-      value: 0
-    - useVariable: 1
-      name: mouse y
-      tooltip: 
-      showInInspector: 0
-      networkSync: 0
-      value: 0
-    - useVariable: 1
-      name: test time
-      tooltip: 
-      showInInspector: 0
-      networkSync: 0
-      value: 0.1
     intVariables: []
-    boolVariables:
-    - useVariable: 1
-      name: I button
-      tooltip: 
-      showInInspector: 0
-      networkSync: 0
-      value: 0
-    - useVariable: 1
-      name: left mouse button
-      tooltip: 
-      showInInspector: 0
-      networkSync: 0
-      value: 0
-    stringVariables:
-    - useVariable: 1
-      name: world savefile
-      tooltip: 
-      showInInspector: 0
-      networkSync: 0
-      value: 
+    boolVariables: []
+    stringVariables: []
     vector2Variables: []
     vector3Variables: []
     colorVariables: []
@@ -88,23 +46,10 @@ MonoBehaviour:
       stringValues: []
       vector4Values: []
       objectReferences: []
-    - useVariable: 1
-      name: worlds
-      tooltip: 
-      showInInspector: 0
-      networkSync: 0
-      type: 4
-      objectTypeName: UnityEngine.Object
-      floatValues: []
-      intValues: 
-      boolValues: 
-      stringValues: []
-      vector4Values: []
-      objectReferences: []
     enumVariables: []
     categories:
     - 
-    variableCategoryIDs: 00000000000000000000000000000000000000000000000000000000000000000000000000000000
+    variableCategoryIDs: 0000000000000000
   events:
   - PHOTON / CLIENT STATE / AUTHENTICATED
   - PHOTON / CLIENT STATE / AUTHENTICATING
@@ -149,5 +94,3 @@ MonoBehaviour:
   - PHOTON / ON REGION LIST RECEIVED
   - PHOTON / ON WEBRPC RESPONSE
   - PHOTON / ON PHOTON INSTANTIATE
-  - updatedropdown
-  - allowed to load
