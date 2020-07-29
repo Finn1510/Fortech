@@ -191,6 +191,7 @@ GameObject:
   - component: {fileID: 1253378463707916718}
   - component: {fileID: 1253378463707916717}
   - component: {fileID: 1253378463707916707}
+  - component: {fileID: 3238950504225208157}
   m_Layer: 8
   m_Name: Player
   m_TagString: Player
@@ -234,7 +235,7 @@ MonoBehaviour:
   m_AirControl: 1
   m_WhatIsGround:
     serializedVersion: 2
-    m_Bits: 567
+    m_Bits: 1591
   m_GroundCheck: {fileID: 5571237859217904689}
   m_CeilingCheck: {fileID: 5571237859161071609}
   m_CrouchDisableCollider: {fileID: 0}
@@ -294,7 +295,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.12244117, y: 0.62573993}
+  m_Offset: {x: -0.12974817, y: 0.6135613}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -305,7 +306,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.946939, y: 1.1972206}
+  m_Size: {x: 0.961553, y: 1.2215779}
   m_EdgeRadius: 0
 --- !u!114 &5571237860116454448
 MonoBehaviour:
@@ -319,8 +320,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9860333ade20a0e41be2be3e5b58f7ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  controller: {fileID: 5571237860116454452}
   runSpeed: 50
+  Health: 100
+  controller: {fileID: 5571237860116454452}
+  Healthtext: {fileID: 0}
+  HealthSlider: {fileID: 0}
 --- !u!114 &1253378463707916715
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1304,8 +1308,8 @@ MonoBehaviour:
           tooltip: 
           showInInspector: 0
           networkSync: 0
-          type: -1
-          objectTypeName: 
+          type: 3
+          objectTypeName: UnityEngine.GameObject
           floatValues: []
           intValues: 
           boolValues: 
@@ -2104,8 +2108,8 @@ MonoBehaviour:
           tooltip: 
           showInInspector: 0
           networkSync: 0
-          type: -1
-          objectTypeName: 
+          type: 3
+          objectTypeName: UnityEngine.GameObject
           floatValues: []
           intValues: 
           boolValues: 
@@ -2208,7 +2212,7 @@ MonoBehaviour:
         - 
         - 
         actionEnabled: 010101010101010101
-        actionIsOpen: 000100000000010101
+        actionIsOpen: 010100000000010101
         actionStartIndex: 00000000050000000a0000000e0000001000000014000000170000001900000021000000
         actionHashCodes: bf83c9005b66cf00ea32a105fc838600184b5704c4b05004978a9b03f6e5be032a6e8a00
         unityObjectParams: []
@@ -2954,7 +2958,7 @@ MonoBehaviour:
           value: 
         fsmObjectParams: []
         fsmVarParams:
-        - variableName: 
+        - variableName: Inventory
           objectType: UnityEngine.GameObject
           useVariable: 1
           type: 13
@@ -2966,7 +2970,7 @@ MonoBehaviour:
           objectReference: {fileID: 0}
           arrayValue:
             useVariable: 1
-            name: 
+            name: Inventory
             tooltip: 
             showInInspector: 0
             networkSync: 0
@@ -3134,7 +3138,7 @@ MonoBehaviour:
           value: 
         fsmObjectParams: []
         fsmVarParams:
-        - variableName: 
+        - variableName: Inventory
           objectType: UnityEngine.GameObject
           useVariable: 1
           type: 13
@@ -3146,7 +3150,7 @@ MonoBehaviour:
           objectReference: {fileID: 0}
           arrayValue:
             useVariable: 1
-            name: 
+            name: Inventory
             tooltip: 
             showInInspector: 0
             networkSync: 0
@@ -4446,3 +4450,44 @@ MonoBehaviour:
     handleAnimatorIK: 0
   fsmTemplate: {fileID: 0}
   eventHandlerComponentsAdded: 0
+--- !u!114 &3238950504225208157
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5571237860116454454}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 180ecf9b41d478f468eb3e9083753217, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ImpulseDefinition:
+    m_ImpulseChannel: 1
+    m_RawSignal: {fileID: 11400000, guid: c580c8ad9fbc3ff4cb9b5370bd6148b9, type: 2}
+    m_AmplitudeGain: 2
+    m_FrequencyGain: 3
+    m_RepeatMode: 0
+    m_Randomize: 1
+    m_TimeEnvelope:
+      m_AttackShape:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      m_DecayShape:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      m_AttackTime: 0
+      m_SustainTime: 0.2
+      m_DecayTime: 0.7
+      m_ScaleWithImpact: 1
+      m_HoldForever: 0
+    m_ImpactRadius: 100
+    m_DirectionMode: 0
+    m_DissipationMode: 2
+    m_DissipationDistance: 1000
