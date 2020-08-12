@@ -1,5 +1,35 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &5393012072649450930
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5953466755017720283}
+  m_Layer: 10
+  m_Name: CenterPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5953466755017720283
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5393012072649450930}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.93, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 7611209670221399480}
+  m_RootOrder: 8
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7611209670221399481
 GameObject:
   m_ObjectHideFlags: 0
@@ -41,6 +71,7 @@ Transform:
   - {fileID: 7611209670812113632}
   - {fileID: 7611209671110132397}
   - {fileID: 7611209670793759593}
+  - {fileID: 5953466755017720283}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -90.00001}
@@ -154,6 +185,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   raystart: {fileID: 7611209672351492423}
   rayend: {fileID: 7611209671109584228}
+  Centerpoint: {fileID: 5953466755017720283}
   raydistance: 1
   movespeed: 7
   jumpForce: 20
@@ -161,6 +193,7 @@ MonoBehaviour:
   Damagedelay: 2
   maxDamageDistance: 2
   EnemyHealth: 50
+  Knockbackstrengh: 200
   Head: {fileID: 7611209672008239795}
   Torso: {fileID: 7611209671253561213}
   rightLeg: {fileID: 7611209670243584662}

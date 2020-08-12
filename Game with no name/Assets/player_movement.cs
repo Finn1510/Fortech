@@ -19,6 +19,7 @@ public class player_movement : MonoBehaviour
     [SerializeField] Text Healthtext;
     [SerializeField] Slider HealthSlider;
     CinemachineImpulseSource ImpulseGEN;
+    Rigidbody2D rigid;
 
     bool Jump = false;
 
@@ -29,6 +30,7 @@ public class player_movement : MonoBehaviour
         HealthSlider.value = Health;
 
         ImpulseGEN = GetComponent<CinemachineImpulseSource>();
+        rigid = GetComponent<Rigidbody2D>();
     }
     
     // Update is called once per frame
@@ -52,7 +54,25 @@ public class player_movement : MonoBehaviour
         Health = Health - amount;
         Healthtext.text = Health.ToString();
         HealthSlider.value = Health;
-        ImpulseGEN.GenerateImpulse(new Vector3(2, 2, 0));
+        ImpulseGEN.GenerateImpulse(new Vector3(2, 2, 0)); 
+    } 
+
+    public void applyKnockback(Hashtable KnockbackDATA)
+    {
+        Vector3 Knockbackdirection = (Vector3)KnockbackDATA["Direction"];
+        
+        if (Knockbackdirection.x < transform.position.x)
+        {
+            rigid.AddForce(new Vector3(10, 2) * (float)KnockbackDATA["Strengh"]);
+        }
+        else
+        {
+            rigid.AddForce(new Vector3(-10, 2) * (float)KnockbackDATA["Strengh"]);
+        }
+
+        //ForceMode2D.Impulse maybe ???
+        
+        Debug.Log("applied Knockback Direction: " + (Vector3)KnockbackDATA["Direction"] + " Strengh: " + (float)KnockbackDATA["Strengh"]);
     }
 
 }

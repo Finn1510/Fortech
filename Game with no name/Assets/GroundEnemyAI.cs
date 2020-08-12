@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using DG.Tweening;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,7 +7,8 @@ public class GroundEnemyAI : MonoBehaviour
 {
     [Header("References")]
     [SerializeField] private Transform raystart;
-    [SerializeField] private Transform rayend; 
+    [SerializeField] private Transform rayend;
+    [SerializeField] private Transform Centerpoint;
 
     [Header("Parameters")]
     [SerializeField] private float raydistance = 2f;
@@ -16,6 +18,7 @@ public class GroundEnemyAI : MonoBehaviour
     [SerializeField] private float Damagedelay = 2f;
     [SerializeField] private float maxDamageDistance = 2f;
     [SerializeField] private float EnemyHealth = 50f;
+    [SerializeField] private float Knockbackstrengh = 10f;
 
     [Header("BodyParts")]
     [SerializeField] private GameObject Head;
@@ -119,6 +122,10 @@ public class GroundEnemyAI : MonoBehaviour
             if (dist <= maxDamageDistance)
             {
                 Player.SendMessage("Damage", Damage);
+                Hashtable KnockbackDATA = new Hashtable();
+                KnockbackDATA.Add("Direction", Centerpoint.position);
+                KnockbackDATA.Add("Strengh", Knockbackstrengh);
+                Player.SendMessage("applyKnockback", KnockbackDATA);
                 
                 StartCoroutine(DamageDelay());
             }
