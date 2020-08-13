@@ -13,13 +13,7 @@ MonoBehaviour:
   m_Name: PlayMakerGlobals
   m_EditorClassIdentifier: 
   variables:
-    floatVariables:
-    - useVariable: 1
-      name: global light intensity
-      tooltip: 
-      showInInspector: 0
-      networkSync: 0
-      value: 0
+    floatVariables: []
     intVariables: []
     boolVariables: []
     stringVariables: []
@@ -32,24 +26,11 @@ MonoBehaviour:
     objectVariables: []
     materialVariables: []
     textureVariables: []
-    arrayVariables:
-    - useVariable: 1
-      name: Inventory
-      tooltip: 
-      showInInspector: 0
-      networkSync: 0
-      type: 3
-      objectTypeName: UnityEngine.GameObject
-      floatValues: []
-      intValues: 
-      boolValues: 
-      stringValues: []
-      vector4Values: []
-      objectReferences: []
+    arrayVariables: []
     enumVariables: []
     categories:
     - 
-    variableCategoryIDs: 0000000000000000
+    variableCategoryIDs: 
   events:
   - PHOTON / CLIENT STATE / AUTHENTICATED
   - PHOTON / CLIENT STATE / AUTHENTICATING

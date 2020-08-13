@@ -189,8 +189,8 @@ MonoBehaviour:
   raydistance: 1
   movespeed: 7
   jumpForce: 20
-  Damage: 2
-  Damagedelay: 2
+  Damage: 4
+  Damagedelay: 1
   maxDamageDistance: 2
   EnemyHealth: 50
   Knockbackstrengh: 200
