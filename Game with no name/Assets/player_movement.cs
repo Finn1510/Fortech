@@ -22,6 +22,7 @@ public class player_movement : MonoBehaviour
     Rigidbody2D rigid;
 
     bool Jump = false;
+    bool Playerdied = false;
 
     void Start()
     {
@@ -40,6 +41,12 @@ public class player_movement : MonoBehaviour
         if (Input.GetButtonDown("Jump"))
         {
             Jump = true;
+        } 
+
+        if (Health == 0f)
+        {
+            Playerdied = true; 
+
         }
     }
 
