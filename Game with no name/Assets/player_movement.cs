@@ -15,6 +15,7 @@ public class player_movement : MonoBehaviour
     [SerializeField] float VignetteIntensity = 0.25f;
     [SerializeField] float VignetDuration = 0.2f;
     float Horizontalmove = 0f;
+    float MouseXpos;
 
     [Space]
 
@@ -25,6 +26,7 @@ public class player_movement : MonoBehaviour
     [SerializeField] PostProcessVolume DiedPostProcess;
     [SerializeField] PostProcessVolume PostProcessing;
     [SerializeField] GameObject YouDiedtext;
+    [SerializeField] GameObject DiedMenu;
     CinemachineImpulseSource ImpulseGEN;
     Rigidbody2D rigid;
 
@@ -59,6 +61,16 @@ public class player_movement : MonoBehaviour
             Jump = true;
         }
 
+        //Flip player according mouse position
+        MouseXpos = Input.mousePosition.x / Screen.width;
+        if (MouseXpos < 0.5)
+        {
+            transform.localScale = new Vector3(-1, transform.localScale.y, transform.localScale.z);
+        }
+        else if(MouseXpos > 0.5)
+        {
+            transform.localScale = new Vector3(1, transform.localScale.y, transform.localScale.z);
+        }
         
         if (Health <= 0f)
         {
@@ -75,6 +87,8 @@ public class player_movement : MonoBehaviour
                 }
 
                 YouDiedtext.active = true;
+                DiedMenu.active = true;
+
                 DOTween.To(() => Time.timeScale, x => Time.timeScale = x, 0.00001f, 1f);
                 
                 DOTween.To(() => DiedPostProcess.weight, x => DiedPostProcess.weight = x, 1, 0.5f);
