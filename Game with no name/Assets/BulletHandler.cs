@@ -8,6 +8,7 @@ public class BulletHandler : MonoBehaviour
     [Header("References")]
     [SerializeField] private GameObject ImpactParticle;
     [SerializeField] private GameObject RedLight;
+    [SerializeField] private GameObject hitsound;
     
     [Header("Parameters")]
     [SerializeField] private float BulletDamage = 10f;
@@ -33,6 +34,7 @@ public class BulletHandler : MonoBehaviour
        
         if (collision.gameObject.tag == "Enemy")
         {
+            Instantiate(hitsound, transform.position, Quaternion.identity);
             ImpulseCOM.GenerateImpulse(new Vector3(2, 2, 0));
             Instantiate(ImpactParticle, transform.position, transform.rotation);
             Instantiate(RedLight, transform.position, transform.rotation);

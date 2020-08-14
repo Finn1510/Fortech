@@ -412,4 +412,6 @@ MonoBehaviour:
     type: 3}
   RedLight: {fileID: 7997755100480159836, guid: f3b3a89c942bd2a4e87ac0d28bdb1578,
     type: 3}
+  hitsound: {fileID: 4352443838503712169, guid: 5bebcbd1e61407f4ea6b72a39bb757ab,
+    type: 3}
   BulletDamage: 10
