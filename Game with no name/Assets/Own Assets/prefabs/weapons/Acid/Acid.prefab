@@ -258,6 +258,7 @@ GameObject:
   - component: {fileID: -5772087490310160604}
   - component: {fileID: 3276041942217811748}
   - component: {fileID: 3821549207035753461}
+  - component: {fileID: 2467174775289184305}
   m_Layer: 0
   m_Name: Acid
   m_TagString: weapon
@@ -2654,7 +2655,7 @@ MonoBehaviour:
     locked: 0
     manualUpdate: 0
     keepDelayedEventsOnStateExit: 0
-    preprocessed: 1
+    preprocessed: 0
     ExposedEvents: []
     RestartOnEnable: 1
     EnableDebugFlow: 0
@@ -2816,3 +2817,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   saveChildren: 1
+--- !u!114 &2467174775289184305
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3858147402227335871}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 994a97a6752b0ba41b8d1e4dd6bfe0a1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rotationSpeed: 100
+  FireKey: 323
+  Bullet: {fileID: 0}
+  pickedUp: 0
+  Shooting: 0
