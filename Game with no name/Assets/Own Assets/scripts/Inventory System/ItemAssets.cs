@@ -15,6 +15,7 @@ public class ItemAssets : MonoBehaviour
     public Sprite ThunderboltSprite;
     public Sprite CoinSprite;
     public Sprite HealthPotionSprite;
+    public Sprite LightingBoltSprite;
     
 
 }

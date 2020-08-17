@@ -9,7 +9,8 @@ public class Item
         HealthPotion, 
         Acid, 
         Thunderbolt, 
-        Coin,
+        Coin, 
+        Lighting_Hawk,
     }
 
     public ItemType itemType;
@@ -24,6 +25,7 @@ public class Item
             case ItemType.Thunderbolt: return ItemAssets.Instance.ThunderboltSprite; 
             case ItemType.HealthPotion: return ItemAssets.Instance.HealthPotionSprite;
             case ItemType.Coin: return ItemAssets.Instance.CoinSprite;
+            case ItemType.Lighting_Hawk: return ItemAssets.Instance.LightingBoltSprite;
         }
     }
 }

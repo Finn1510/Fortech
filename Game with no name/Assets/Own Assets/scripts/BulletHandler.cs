@@ -23,11 +23,7 @@ public class BulletHandler : MonoBehaviour
         StartCoroutine(destroyDelay());    
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -38,7 +34,7 @@ public class BulletHandler : MonoBehaviour
             ImpulseCOM.GenerateImpulse(new Vector3(2, 2, 0));
             Instantiate(ImpactParticle, transform.position, transform.rotation);
             Instantiate(RedLight, transform.position, transform.rotation);
-            collision.gameObject.SendMessage("EnemyDamage", BulletDamage);
+            collision.gameObject.SendMessage("EnemyDamage", BulletDamage, SendMessageOptions.DontRequireReceiver);
             
             Destroy(this.gameObject);
         }
