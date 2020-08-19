@@ -32,6 +32,7 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    m_Floats: []
+    m_Floats:
+    - _OutlineThickness: 0.87
     m_Colors:
-    - _OutlineColor: {r: 0.1568628, g: 2, b: 0.1019608, a: 0}
+    - _OutlineColor: {r: 0.09996555, g: 1.7394005, b: 1.9093419, a: 1}

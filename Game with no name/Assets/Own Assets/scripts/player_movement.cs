@@ -159,4 +159,18 @@ public class player_movement : MonoBehaviour
         
     }
 
+    private void OnTriggerEnter2D(Collider2D collider)
+    {
+        Debug.Log("touched somethibng");
+        ItemWorld itemWorld = collider.GetComponent<ItemWorld>();  
+        if (itemWorld != null)
+        {
+            //touching item 
+            Debug.Log("touched item");
+            inventory.AddItem(itemWorld.GetItem());
+            itemWorld.DestroySelf();
+        }
+        
+    }
+
 }

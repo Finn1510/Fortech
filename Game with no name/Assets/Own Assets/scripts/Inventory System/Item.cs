@@ -1,7 +1,9 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[Serializable]
 public class Item 
 {
     public enum ItemType
@@ -25,7 +27,7 @@ public class Item
             case ItemType.Thunderbolt: return ItemAssets.Instance.ThunderboltSprite; 
             case ItemType.HealthPotion: return ItemAssets.Instance.HealthPotionSprite;
             case ItemType.Coin: return ItemAssets.Instance.CoinSprite;
-            case ItemType.Lighting_Hawk: return ItemAssets.Instance.LightingBoltSprite;
+            case ItemType.Lighting_Hawk: return ItemAssets.Instance.LightingHawkSprite;
         }
     }
 }
