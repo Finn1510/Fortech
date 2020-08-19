@@ -48,6 +48,8 @@ public class player_movement : MonoBehaviour
     {
         inventory = new Inventory();
         uiInventory.SetInventory(inventory);
+
+        ItemWorld.SpawnItemWorld(new Vector3(3, 4), new Item { itemType = Item.ItemType.Acid, amount = 1 });
     }
 
     void Start()
@@ -98,8 +100,8 @@ public class player_movement : MonoBehaviour
                     }
                 }
 
-                YouDiedtext.active = true;
-                DiedMenu.active = true;
+                YouDiedtext.SetActive(true);
+                DiedMenu.SetActive(true);
 
                 DOTween.To(() => Time.timeScale, x => Time.timeScale = x, 0.00001f, 1f);
                 
