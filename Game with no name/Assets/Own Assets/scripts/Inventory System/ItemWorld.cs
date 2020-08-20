@@ -6,7 +6,6 @@ public class ItemWorld : MonoBehaviour
 {
     public static ItemWorld SpawnItemWorld(Vector3 position, Item item)
     {
-        Vector3 test = ItemAssets.Instance.pfItemworld.position;
         Transform transform = Instantiate(ItemAssets.Instance.pfItemworld, position, Quaternion.identity);
 
         ItemWorld itemWorld = transform.GetComponent<ItemWorld>();

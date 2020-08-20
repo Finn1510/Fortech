@@ -12753,7 +12753,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   item:
-    itemType: 1
+    itemType: 2
     amount: 1
 --- !u!4 &937611549
 Transform:
