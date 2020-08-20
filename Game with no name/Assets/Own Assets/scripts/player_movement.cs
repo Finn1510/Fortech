@@ -28,7 +28,8 @@ public class player_movement : MonoBehaviour
     [SerializeField] GameObject YouDiedtext;
     [SerializeField] GameObject DiedMenu;
     [SerializeField] UI_Inventory uiInventory;
-    CinemachineImpulseSource ImpulseGEN;
+    AudioSource damageAudio;
+    CinemachineImpulseSource ImpulseGEN; 
     Rigidbody2D rigid;
 
     bool Jump = false;
@@ -63,6 +64,7 @@ public class player_movement : MonoBehaviour
 
         ImpulseGEN = GetComponent<CinemachineImpulseSource>();
         rigid = GetComponent<Rigidbody2D>();
+        damageAudio = GetComponent<AudioSource>();
 
     }
 
@@ -124,6 +126,7 @@ public class player_movement : MonoBehaviour
         Health = Health - amount;
         Healthtext.text = Health.ToString();
         HealthSlider.value = Health;
+        damageAudio.Play();
         ImpulseGEN.GenerateImpulse(new Vector3(2, 2, 0));
         DOTween.To(() => Vignet.intensity.value, x => Vignet.intensity.value = x, VignetteIntensity, 0.2f);
         StartCoroutine(DamageVignetDelay());
