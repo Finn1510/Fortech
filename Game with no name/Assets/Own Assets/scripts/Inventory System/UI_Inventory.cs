@@ -1,10 +1,15 @@
-﻿using System.Collections;
+﻿using CodeMonkey.Utils;
+using Photon.Realtime;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class UI_Inventory : MonoBehaviour
 {
+    [Header("References")]
+    [SerializeField] private Transform PlayerPosition;
+    
     private Inventory inventory;
     private Transform itemSlotContainer;
     private Transform itemSlotTemplate;
@@ -43,9 +48,33 @@ public class UI_Inventory : MonoBehaviour
         {
             RectTransform itemSlotRectTransform = Instantiate(itemSlotTemplate, itemSlotContainer).GetComponent<RectTransform>();
             itemSlotRectTransform.gameObject.SetActive(true);
+
+            itemSlotRectTransform.GetComponent<Button_UI>().ClickFunc = () =>
+            {
+                // Use Item
+            };
+
+            itemSlotRectTransform.GetComponent<Button_UI>().MouseRightClickFunc = () =>
+            {
+                // Drop item 
+                inventory.RemoveItem(item);
+                ItemWorld.DropItem(PlayerPosition,item);
+            };
+
             itemSlotRectTransform.anchoredPosition = new Vector2(x * itemSlotCellSize, y * itemSlotCellSize);
             Image image = itemSlotRectTransform.Find("Icon").GetComponent<Image>();
             image.sprite = item.GetSprite();
+            Text uiText = itemSlotRectTransform.Find("amountText").GetComponent<Text>();
+            
+            if(item.amount > 1)
+            {
+                uiText.text = item.amount.ToString();
+            }
+            else
+            {
+                uiText.text = "";
+            }
+            
 
 
             x++; 

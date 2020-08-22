@@ -29,5 +29,21 @@ public class Item
             case ItemType.Coin: return ItemAssets.Instance.CoinSprite;
             case ItemType.Lighting_Hawk: return ItemAssets.Instance.LightingHawkSprite;
         }
+    } 
+
+    public bool IsStackable()
+    {
+        switch (itemType)
+        {
+            default:
+            case ItemType.Acid:
+            case ItemType.Lighting_Hawk:
+            case ItemType.Thunderbolt:
+                return false;
+            case ItemType.Coin:
+            case ItemType.HealthPotion:
+                return true;
+            
+        }
     }
 }

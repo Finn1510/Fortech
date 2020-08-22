@@ -125,7 +125,7 @@ public class player_movement : MonoBehaviour
     {
         Health = Health - amount;
         Healthtext.text = Health.ToString();
-        HealthSlider.value = Health;
+        DOTween.To(() => HealthSlider.value, x => HealthSlider.value = x, Health, 0.5f);
         damageAudio.Play();
         ImpulseGEN.GenerateImpulse(new Vector3(2, 2, 0));
         DOTween.To(() => Vignet.intensity.value, x => Vignet.intensity.value = x, VignetteIntensity, 0.2f);
