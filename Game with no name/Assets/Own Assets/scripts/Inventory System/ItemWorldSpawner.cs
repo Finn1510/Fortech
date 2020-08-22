@@ -7,7 +7,7 @@ public class ItemWorldSpawner : MonoBehaviour
 
     public Item item;
 
-    private void Start() //ez error fixed xD
+    private void Start() 
     {
         ItemWorld.SpawnItemWorld(transform.position, item);
         Destroy(gameObject);
