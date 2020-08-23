@@ -47,7 +47,7 @@ public class player_movement : MonoBehaviour
 
     void Awake()
     {
-        inventory = new Inventory();
+        inventory = new Inventory(UseItem);
         uiInventory.SetInventory(inventory);
 
         ItemWorld.SpawnItemWorld(new Vector3(3, 4), new Item { itemType = Item.ItemType.Acid, amount = 1 });
@@ -69,6 +69,7 @@ public class player_movement : MonoBehaviour
     }
 
     // Update is called once per frame
+    
     void Update()
     {
         Horizontalmove = Input.GetAxisRaw("Horizontal") * runSpeed; 
@@ -173,6 +174,23 @@ public class player_movement : MonoBehaviour
             itemWorld.DestroySelf();
         }
         
+    } 
+
+    private void UseItem(Item item)
+    {
+        switch (item.itemType)
+        {
+            case Item.ItemType.HealthPotion:
+                //TODO some VFX 
+                if (Health + 20 <= 100)
+                {
+                    Health += 20;
+                    Healthtext.text = Health.ToString();
+                    DOTween.To(() => HealthSlider.value, x => HealthSlider.value = x, Health, 0.5f);
+                    inventory.RemoveItem(new Item { itemType = Item.ItemType.HealthPotion, amount = 1 });
+                }
+                break;
+        }
     }
 
 }
