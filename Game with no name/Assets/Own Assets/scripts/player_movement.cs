@@ -14,6 +14,7 @@ public class player_movement : MonoBehaviour
     [SerializeField] float Health = 100;
     [SerializeField] float VignetteIntensity = 0.25f;
     [SerializeField] float VignetDuration = 0.2f;
+    [SerializeField] KeyCode InventoryKey = KeyCode.I;
     float Horizontalmove = 0f;
     float MouseXpos;
 
@@ -28,6 +29,7 @@ public class player_movement : MonoBehaviour
     [SerializeField] GameObject YouDiedtext;
     [SerializeField] GameObject DiedMenu;
     [SerializeField] UI_Inventory uiInventory;
+    [SerializeField] GameObject UI_Inventory;
     AudioSource damageAudio;
     CinemachineImpulseSource ImpulseGEN; 
     Rigidbody2D rigid;
@@ -65,6 +67,8 @@ public class player_movement : MonoBehaviour
         ImpulseGEN = GetComponent<CinemachineImpulseSource>();
         rigid = GetComponent<Rigidbody2D>();
         damageAudio = GetComponent<AudioSource>();
+        
+        UI_Inventory.SetActive(false);
 
     }
 
@@ -91,6 +95,7 @@ public class player_movement : MonoBehaviour
         
         if (Health <= 0f)
         {
+            UI_Inventory.SetActive(false);
             Playerdied = true; 
             if(DiedMessageSent == false)
             {
@@ -113,6 +118,22 @@ public class player_movement : MonoBehaviour
 
             }
 
+        } 
+
+        if(Input.GetKeyDown(InventoryKey) == true)
+        {
+            if(Playerdied == false)
+            {
+                if (UI_Inventory.active == false)
+                {
+                    UI_Inventory.SetActive(true);
+                }
+                else
+                {
+                    UI_Inventory.SetActive(false);
+                }
+
+            }
         }
     }
 
@@ -170,6 +191,22 @@ public class player_movement : MonoBehaviour
         if (itemWorld != null)
         {
             //touching item 
+            
+            //Checking if Inventory is full
+            int InventorySpace = 1;
+            foreach(Item item in inventory.GetItemList())
+            {
+                InventorySpace++;
+                
+            }
+            //Debug.Log(InventorySpace + " unique Items in Inventory");
+
+            if (InventorySpace > 40)
+            {
+                Debug.Log("Inventory Full");
+                return;
+            }
+            
             inventory.AddItem(itemWorld.GetItem());
             itemWorld.DestroySelf();
         }

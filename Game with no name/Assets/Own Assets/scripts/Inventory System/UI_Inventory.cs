@@ -80,10 +80,10 @@ public class UI_Inventory : MonoBehaviour
 
 
             x++; 
-            if (x > 8)
+            if (x > 7)
             {
                 x = 0;
-                y++;
+                y--;
             }
             
         }
