@@ -30,10 +30,15 @@ public class player_movement : MonoBehaviour
     [SerializeField] GameObject DiedMenu;
     [SerializeField] UI_Inventory uiInventory;
     [SerializeField] GameObject UI_Inventory;
+    [SerializeField] Transform holdPoint;
     AudioSource damageAudio;
     CinemachineImpulseSource ImpulseGEN; 
     Rigidbody2D rigid;
 
+    GameObject heldWeapon;
+    Item.ItemType heldItemType;
+
+    GameObject WeaponPrefab;
     bool Jump = false;
     bool Playerdied = false;
     bool DiedMessageSent = false;
@@ -227,6 +232,76 @@ public class player_movement : MonoBehaviour
                     inventory.RemoveItem(new Item { itemType = Item.ItemType.HealthPotion, amount = 1 });
                 }
                 break;
+            case Item.ItemType.Acid:
+                if(heldWeapon != null)
+                {
+                    Destroy(heldWeapon);
+                }
+
+                WeaponPrefab = ItemAssets.Instance.AcidPrefab;
+                heldItemType = Item.ItemType.Acid;
+
+                heldWeapon = Instantiate(WeaponPrefab,holdPoint.position,Quaternion.identity, holdPoint);
+                
+                break;
+            case Item.ItemType.Thunderbolt:
+                if (heldWeapon != null)
+                {
+                    Destroy(heldWeapon);
+                }
+
+                WeaponPrefab = ItemAssets.Instance.ThunderboltPrefab;
+                heldItemType = Item.ItemType.Thunderbolt;
+
+                heldWeapon = Instantiate(WeaponPrefab, holdPoint.position, Quaternion.identity, holdPoint);
+
+                break;
+            case Item.ItemType.Lighting_Hawk:
+                if (heldWeapon != null)
+                {
+                    Destroy(heldWeapon);
+                }
+
+                WeaponPrefab = ItemAssets.Instance.LightingHawkPrefab;
+                heldItemType = Item.ItemType.Lighting_Hawk;
+
+                heldWeapon = Instantiate(WeaponPrefab, holdPoint.position, Quaternion.identity, holdPoint);
+
+                break;
+
+
+        }
+    } 
+
+    public void removedItem(Item item)
+    {
+        bool heldWeaponstillinInventory = false;
+        
+        if(item.itemType != heldItemType)
+        {
+            
+            return;
+        }
+        else
+        {
+            Debug.Log("removedItem was helditem's type investigating...");
+            foreach (Item inventoryItem in inventory.GetItemList())
+            {
+                
+                if (inventoryItem.itemType == heldItemType)
+                {
+                    heldWeaponstillinInventory = true;
+                   
+                    
+                }
+            } 
+
+            if(heldWeaponstillinInventory == false)
+            {
+                //destroy held weapon
+                Destroy(heldWeapon);
+                
+            }
         }
     }
 

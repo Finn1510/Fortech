@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class UI_Inventory : MonoBehaviour
 {
     [Header("References")]
-    [SerializeField] private Transform PlayerPosition;
+    [SerializeField] GameObject Player;
     
     private Inventory inventory;
     private Transform itemSlotContainer;
@@ -59,7 +59,9 @@ public class UI_Inventory : MonoBehaviour
                 // Drop item 
                 Item duplicateItem = new Item { itemType = item.itemType, amount = item.amount };
                 inventory.RemoveItem(item);
-                ItemWorld.DropItem(PlayerPosition, duplicateItem);
+                ItemWorld.DropItem(Player.transform, duplicateItem);
+                
+                
             };
 
             itemSlotRectTransform.anchoredPosition = new Vector2(x * itemSlotCellSize, y * itemSlotCellSize);

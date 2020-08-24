@@ -7,6 +7,13 @@ using UnityEngine.Diagnostics;
 
 public class ItemWorld : MonoBehaviour
 {
+    static GameObject Player;
+
+    private void Start()
+    {
+        Player = GameObject.FindGameObjectWithTag("Player");
+    }
+
     public static ItemWorld SpawnItemWorld(Vector3 position, Item item)
     {
         Transform transform = Instantiate(ItemAssets.Instance.pfItemworld, position, Quaternion.identity);
@@ -33,6 +40,10 @@ public class ItemWorld : MonoBehaviour
         
         ItemWorld itemWorld = SpawnItemWorld(dropPosition.position + randomDir * 5f, item);
         itemWorld.GetComponent<Rigidbody2D>().AddForce(randomDir * 5f, ForceMode2D.Impulse);
+        
+        //Check if held weapon is still in Inventory
+        Player.GetComponent<player_movement>().removedItem(item);
+        
         return itemWorld;
     }
     
@@ -45,6 +56,7 @@ public class ItemWorld : MonoBehaviour
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
         amountText = transform.Find("Text").GetComponent<TextMeshPro>();
+        
     }
 
     public void SetItem (Item item)

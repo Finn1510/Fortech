@@ -1,39 +1,82 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Experimental.Rendering.LWRP;
+using DG.Tweening;
 
 public class Gunsystem : MonoBehaviour
 {
     [Header("Parameters")]
     [SerializeField] float rotationSpeed = 100f;
+    [SerializeField] float BulletForce = 1500;
+    [SerializeField] float GunDelaySeconds = 0.02f;
     [SerializeField] KeyCode FireKey = KeyCode.Mouse0;
+    [SerializeField] float LightMuzzleFlashIntensity = 2f;
+    [SerializeField] float LightMuzzleFlashDurationSeconds = 0.05f;
 
     [Header("References")]
     [SerializeField] GameObject Bullet;
     [SerializeField] Transform Firepoint;
-    [SerializeField] GameObject Muzzleflash;
-
-    [Header("WeaponState")]
-    [SerializeField] bool pickedUp;
-    [SerializeField] bool Shooting;
-
+    [SerializeField] Light2D LightMuzzleflash;
+    [SerializeField] GameObject GunfireVFX;
+    [SerializeField] AudioSource GunAudio;
+    GameObject UI_Inventory;
+    
+    bool GunDelayOver = true;
     bool Playerdied = false;
+    Transform Player;
 
-    // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
-        
+        Player = GameObject.FindGameObjectWithTag("Player").transform;
+        UI_Inventory = GameObject.FindGameObjectWithTag("UI_Inventory");
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Playerdied != true && pickedUp == true)
+        
+        if (Playerdied != true)
         {
             aimtwrdsmouse();
-        }   
+            flipLikePlayer();
+        }  
+        
+        if(Input.GetKey(FireKey) == true && GunDelayOver == true && Playerdied == false && UI_Inventory.active == false)
+        {
+            GunDelayOver = false;
+            
+            //Instantiate Bullet & add force
+            GameObject Firedbullet = Instantiate(Bullet, Firepoint.position, transform.rotation);
+            Firedbullet.GetComponent<Rigidbody2D>().AddRelativeForce(new Vector2(BulletForce, 0));
+
+            //Play GunShootSound 
+            GunAudio.Play();
+
+            //Instanciate Gunfire VFX
+            Instantiate(GunfireVFX, Firepoint.position, Quaternion.identity);
+
+            //Fade 2d light MuzzleFlash In and out
+            DOTween.To(() => LightMuzzleflash.intensity, x => LightMuzzleflash.intensity = x, LightMuzzleFlashIntensity, LightMuzzleFlashDurationSeconds);
+            StartCoroutine(MuzzleFlashDelay());
+            
+            StartCoroutine(GunDelay()); 
+            
+        }
     } 
 
+    IEnumerator GunDelay()
+    {
+        yield return new WaitForSeconds(GunDelaySeconds);
+        GunDelayOver = true;
+    } 
+
+    IEnumerator MuzzleFlashDelay()
+    {
+        yield return new WaitForSeconds(LightMuzzleFlashDurationSeconds);
+        DOTween.To(() => LightMuzzleflash.intensity, x => LightMuzzleflash.intensity = x, 0, LightMuzzleFlashDurationSeconds);
+    }
+    
     void aimtwrdsmouse()
     {
         Vector2 direction = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
@@ -41,6 +84,12 @@ public class Gunsystem : MonoBehaviour
         Quaternion rotation = Quaternion.AngleAxis(angle, Vector3.forward);
         transform.rotation = Quaternion.Slerp(transform.rotation, rotation, rotationSpeed * Time.deltaTime);
     } 
+
+    void flipLikePlayer()
+    {
+        transform.localScale = new Vector3(Player.localScale.x, Player.localScale.x, transform.localScale.z);
+            
+    }
 
     public void PlayerDied()
     {
