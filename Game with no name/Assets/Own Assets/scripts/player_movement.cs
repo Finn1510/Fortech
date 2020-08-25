@@ -242,7 +242,8 @@ public class player_movement : MonoBehaviour
                 heldItemType = Item.ItemType.Acid;
 
                 heldWeapon = Instantiate(WeaponPrefab,holdPoint.position,Quaternion.identity, holdPoint);
-                
+                UI_Inventory.SetActive(false);
+
                 break;
             case Item.ItemType.Thunderbolt:
                 if (heldWeapon != null)
@@ -254,6 +255,7 @@ public class player_movement : MonoBehaviour
                 heldItemType = Item.ItemType.Thunderbolt;
 
                 heldWeapon = Instantiate(WeaponPrefab, holdPoint.position, Quaternion.identity, holdPoint);
+                UI_Inventory.SetActive(false);
 
                 break;
             case Item.ItemType.Lighting_Hawk:
@@ -266,6 +268,7 @@ public class player_movement : MonoBehaviour
                 heldItemType = Item.ItemType.Lighting_Hawk;
 
                 heldWeapon = Instantiate(WeaponPrefab, holdPoint.position, Quaternion.identity, holdPoint);
+                UI_Inventory.SetActive(false);
 
                 break;
 
