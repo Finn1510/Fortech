@@ -26,10 +26,15 @@ public class Gunsystem : MonoBehaviour
     bool Playerdied = false;
     Transform Player;
 
+    private void Awake()
+    {
+        UI_Inventory = GameObject.FindGameObjectWithTag("UI_Inventory");
+    }
+
     private void Start()
     {
         Player = GameObject.FindGameObjectWithTag("Player").transform;
-        UI_Inventory = GameObject.FindGameObjectWithTag("UI_Inventory");
+        
     }
 
     // Update is called once per frame

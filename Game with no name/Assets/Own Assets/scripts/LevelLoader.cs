@@ -4,7 +4,6 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using System.IO;
-using HutongGames.PlayMaker;
 
 public class LevelLoader : MonoBehaviour
 {
