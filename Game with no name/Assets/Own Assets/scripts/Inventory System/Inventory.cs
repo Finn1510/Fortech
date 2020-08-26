@@ -13,11 +13,19 @@ public class Inventory
     public Inventory(Action<Item> useItemAction )
     {
         this.useItemAction = useItemAction;
-        itemList = new List<Item>();
 
-        //AddItem(new Item { itemType = Item.ItemType.Acid, amount = 1 });
-        //AddItem(new Item { itemType = Item.ItemType.Coin, amount = 1 });
-        //AddItem(new Item { itemType = Item.ItemType.HealthPotion, amount = 1 });
+        if (ES3.KeyExists("inventoryList"))
+        {
+            itemList = ES3.Load<List<Item>>("inventoryList");
+        }
+
+        else
+        {
+            itemList = new List<Item>();
+        }
+        
+
+        
         
     } 
     public void AddItem(Item item)
@@ -89,6 +97,7 @@ public class Inventory
     public List<Item> GetItemList()
     {
         return itemList;
-    }
+    } 
+
 } 
 

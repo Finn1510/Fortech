@@ -308,4 +308,14 @@ public class player_movement : MonoBehaviour
         }
     }
 
+    void Save()
+    {
+        ES3.Save<List<Item>>("inventoryList", inventory.GetItemList());
+    }
+
+    private void OnApplicationQuit()
+    {
+        Save();
+    }
+
 }
