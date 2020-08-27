@@ -36,7 +36,7 @@ public class player_movement : MonoBehaviour
     Rigidbody2D rigid;
 
     GameObject heldWeapon;
-    Item.ItemType heldItemType;
+    Item heldItem;
 
     GameObject WeaponPrefab;
     bool Jump = false;
@@ -58,6 +58,13 @@ public class player_movement : MonoBehaviour
         uiInventory.SetInventory(inventory);
 
         ItemWorld.SpawnItemWorld(new Vector3(3, 4), new Item { itemType = Item.ItemType.Acid, amount = 1 });
+
+        if (ES3.KeyExists("inventoryList"))
+        {
+            Load();
+        }
+
+        
     }
 
     void Start()
@@ -239,7 +246,7 @@ public class player_movement : MonoBehaviour
                 }
 
                 WeaponPrefab = ItemAssets.Instance.AcidPrefab;
-                heldItemType = Item.ItemType.Acid;
+                heldItem = item;
 
                 heldWeapon = Instantiate(WeaponPrefab,holdPoint.position,Quaternion.identity, holdPoint);
                 UI_Inventory.SetActive(false);
@@ -252,7 +259,7 @@ public class player_movement : MonoBehaviour
                 }
 
                 WeaponPrefab = ItemAssets.Instance.ThunderboltPrefab;
-                heldItemType = Item.ItemType.Thunderbolt;
+                heldItem = item;
 
                 heldWeapon = Instantiate(WeaponPrefab, holdPoint.position, Quaternion.identity, holdPoint);
                 UI_Inventory.SetActive(false);
@@ -265,7 +272,7 @@ public class player_movement : MonoBehaviour
                 }
 
                 WeaponPrefab = ItemAssets.Instance.LightingHawkPrefab;
-                heldItemType = Item.ItemType.Lighting_Hawk;
+                heldItem = item;
 
                 heldWeapon = Instantiate(WeaponPrefab, holdPoint.position, Quaternion.identity, holdPoint);
                 UI_Inventory.SetActive(false);
@@ -280,7 +287,7 @@ public class player_movement : MonoBehaviour
     {
         bool heldWeaponstillinInventory = false;
         
-        if(item.itemType != heldItemType)
+        if(item.itemType != heldItem.itemType)
         {
             
             return;
@@ -291,7 +298,7 @@ public class player_movement : MonoBehaviour
             foreach (Item inventoryItem in inventory.GetItemList())
             {
                 
-                if (inventoryItem.itemType == heldItemType)
+                if (inventoryItem.itemType == heldItem.itemType)
                 {
                     heldWeaponstillinInventory = true;
                    
@@ -311,6 +318,14 @@ public class player_movement : MonoBehaviour
     void Save()
     {
         ES3.Save<List<Item>>("inventoryList", inventory.GetItemList());
+        ES3.Save<Item>("heldItemType", heldItem);
+    }
+
+    void Load()
+    {
+        //Equip weapon again
+        heldItem = ES3.Load<Item>("heldItemType");
+        UseItem(heldItem);
     }
 
     private void OnApplicationQuit()
