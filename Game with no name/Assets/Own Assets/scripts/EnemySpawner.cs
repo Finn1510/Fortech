@@ -16,6 +16,9 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] float WorldBorderLeft = -130;
     [SerializeField] float WorldBorderRight = 130;
 
+    [Header("Zombie")]
+    [SerializeField] float ZombieSpawnChance = 5;
+
     Vector3 Spawnpos;
     
     // Start is called before the first frame update
@@ -27,7 +30,7 @@ public class EnemySpawner : MonoBehaviour
     void SpawnZombie()
     {
         // Zombie Spawn
-        if (Random.Range(0, 10) == Random.Range(0, 10))
+        if (Random.Range(0, ZombieSpawnChance) == Random.Range(0, ZombieSpawnChance))
         {
             Spawnpos = new Vector3(Random.Range(WorldBorderLeft, WorldBorderRight), 7, 0);
             Instantiate(Zombie, Spawnpos, Quaternion.identity);
