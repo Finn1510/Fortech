@@ -9,6 +9,7 @@ public class GroundEnemyAI : MonoBehaviour
     [SerializeField] private Transform raystart;
     [SerializeField] private Transform rayend;
     [SerializeField] private Transform Centerpoint;
+    Renderer ourRenderer;
 
     [Header("Parameters")]
     [SerializeField] private float raydistance = 2f;
@@ -37,6 +38,15 @@ public class GroundEnemyAI : MonoBehaviour
     bool LEFT;
 
     bool delay = false;
+
+    private void Awake()
+    {
+        ourRenderer = GetComponent<SpriteRenderer>(); 
+        if (ourRenderer.isVisible == true)
+        {
+            Destroy(gameObject);
+        }
+    }
 
     // Start is called before the first frame update
     void Start()
