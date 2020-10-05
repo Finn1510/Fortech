@@ -24,7 +24,7 @@ public class DayNightC : MonoBehaviour
 
 
     float RealStateDuration;
-    int StateIndex;
+    public int StateIndex;
     string methodName;
 
     private void Start()
