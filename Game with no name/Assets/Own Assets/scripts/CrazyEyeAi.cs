@@ -8,7 +8,12 @@ public class CrazyEyeAi : MonoBehaviour
     [Header("References")]
     [SerializeField] private Animator anim;
     [SerializeField] private GameObject target;
-    
+
+    [Header("BodyParts")]
+    [SerializeField] private GameObject LeftWing;
+    [SerializeField] private GameObject RightWing;
+    [SerializeField] private GameObject Eye;
+
     [Header("Parameters")]
     [SerializeField] private float EnemyHealth = 30f;
     [SerializeField] private float speed = 200f;
@@ -18,6 +23,8 @@ public class CrazyEyeAi : MonoBehaviour
     Path path;
     int currentWaypoint = 0;
     bool reachedEndofPath = false;
+    bool Dead = false;
+    bool DeadStarted = false;
     Seeker seeker;
     Rigidbody2D rb;
     
@@ -35,16 +42,21 @@ public class CrazyEyeAi : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(EnemyHealth <= 0f)
+        if(EnemyHealth <= 0f && DeadStarted == false)
         {
-            Die();
+            Dead = true;
+            Die(); 
         }
         
     }
 
     void FixedUpdate()
     {
-        movement();    
+        if(Dead != true)
+        {
+            movement();
+        }
+         
     }
 
     void UpdatePath()
@@ -66,6 +78,8 @@ public class CrazyEyeAi : MonoBehaviour
 
     void movement()
     {
+
+
         if (path == null)
             return; 
 
@@ -82,6 +96,15 @@ public class CrazyEyeAi : MonoBehaviour
         Vector2 direction = ((Vector2)path.vectorPath[currentWaypoint] - rb.position).normalized;
         Vector2 force = direction * speed * Time.deltaTime;
 
+        if (force.x >= 0.01f)
+        {
+            transform.localScale = new Vector3(-1f, 1f, 1f);
+        }
+        else if (force.x <= -0.01f)
+        {
+            transform.localScale = new Vector3(1f, 1f, 1f);
+        }
+
         rb.AddForce(force);
         
         float distance = Vector2.Distance(rb.position, path.vectorPath[currentWaypoint]); 
@@ -91,14 +114,7 @@ public class CrazyEyeAi : MonoBehaviour
             currentWaypoint = currentWaypoint + 1;
         } 
 
-        if (force.x >= 0.01f)
-        {
-            transform.localScale = new Vector3(-1f, 1f, 1f);
-        } 
-        else if (force.x <= -0.01f)
-        {
-            transform.localScale = new Vector3(1f, 1f, 1f);
-        }
+        
 
         
     }
@@ -108,12 +124,33 @@ public class CrazyEyeAi : MonoBehaviour
     void EnemyDamage(float gottenDamage)
     {
         EnemyHealth = EnemyHealth - gottenDamage;
+        target = GameObject.FindGameObjectWithTag("Player");
     }
 
   
     void Die()
     {
+        DeadStarted = true;
         anim.SetTrigger("Die");
+
+        LeftWing.AddComponent<Rigidbody2D>();
+        LeftWing.transform.parent = null;
+        LeftWing.GetComponent<PolygonCollider2D>().enabled = true;
+        
+
+        RightWing.AddComponent<Rigidbody2D>();
+        RightWing.transform.parent = null;
+        RightWing.GetComponent<PolygonCollider2D>().enabled = true;
+        
+
+        Eye.GetComponent<Rigidbody2D>().gravityScale = 1;
+        Eye.GetComponent<Animator>().enabled = false;
+        //Eye.transform.parent = null; Eye IS parent ! ??
+        Eye.GetComponent<CircleCollider2D>().enabled = true;
+        Eye.GetComponent<Rigidbody2D>().AddForce(new Vector2(Random.Range(-2, 2), Random.Range(-2, 2)));
+
+        
+
     }
 
 }

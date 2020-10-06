@@ -163,7 +163,6 @@ Transform:
   m_Children:
   - {fileID: 6994437527058546728}
   - {fileID: 6994437525373568791}
-  - {fileID: 6994437526956388226}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -313,8 +312,8 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 1.5
+  m_Mass: 0.25
+  m_LinearDrag: 0.05
   m_AngularDrag: 0.05
   m_GravityScale: 0
   m_Material: {fileID: 0}
@@ -336,87 +335,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   anim: {fileID: 6994437525581230992}
   target: {fileID: 0}
+  LeftWing: {fileID: 6994437525373568788}
+  RightWing: {fileID: 6994437527058546729}
+  Eye: {fileID: 6994437525581230987}
   EnemyHealth: 30
-  speed: 400
+  speed: 800
   nextWaypointDistance: 3
   PathUpdateDelay: 0.5
---- !u!1 &6994437526956388224
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 6994437526956388226}
-  - component: {fileID: 6994437526956388227}
-  m_Layer: 10
-  m_Name: Freeform Light 2D
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &6994437526956388226
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6994437526956388224}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.3940544, y: 0.08799982, z: 2.18}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 6994437525581230999}
-  m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6994437526956388227
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6994437526956388224}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 073797afb82c5a1438f328866b10b3f0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_LightType: 1
-  m_BlendStyleIndex: 0
-  m_FalloffIntensity: 0.301
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 1
-  m_LightVolumeOpacity: 0
-  m_ApplyToSortingLayers: 00000000
-  m_LightCookieSprite: {fileID: 0}
-  m_UseNormalMap: 0
-  m_LightOrder: 0
-  m_AlphaBlendOnOverlap: 0
-  m_PointLightInnerAngle: 360
-  m_PointLightOuterAngle: 360
-  m_PointLightInnerRadius: 0
-  m_PointLightOuterRadius: 1
-  m_PointLightDistance: 3
-  m_PointLightQuality: 1
-  m_ShapeLightParametricSides: 5
-  m_ShapeLightParametricAngleOffset: 0
-  m_ShapeLightParametricRadius: 1
-  m_ShapeLightFalloffSize: 0
-  m_ShapeLightFalloffOffset: {x: 0, y: 0}
-  m_ShapePath:
-  - {x: 0.010810852, y: -0.4020362, z: 0}
-  - {x: 0.4338913, y: -0.48311663, z: 0}
-  - {x: 0.7029228, y: -0.36005116, z: 0}
-  - {x: 0.7837601, y: -0.23120975, z: 0}
-  - {x: 0.79076004, y: -0.02828455, z: 0}
-  - {x: 0.71692276, y: 0.22710085, z: 0}
-  - {x: 0.33592606, y: 0.3425789, z: 0}
-  - {x: 0.066791534, y: 0.23409796, z: 0}
-  - {x: 0.25195312, y: 0.055684566, z: 0}
-  - {x: 0.25195694, y: -0.16823292, z: 0}
-  - {x: 0.16099167, y: -0.35016584, z: 0}
 --- !u!1 &6994437527058546729
 GameObject:
   m_ObjectHideFlags: 0

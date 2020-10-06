@@ -163,27 +163,33 @@ public class GroundEnemyAI : MonoBehaviour
         Head.AddComponent<Rigidbody2D>();
         Head.transform.parent = null;
         Head.GetComponent<CircleCollider2D>().enabled = true;
-        
+        Head.GetComponent<Rigidbody2D>().AddForce(new Vector2(Random.Range(-100, 100), Random.Range(-100, 10)));
+
         Torso.AddComponent<Rigidbody2D>();
         Torso.transform.parent = null;
-        Torso.GetComponent<CapsuleCollider2D>().enabled = true;
-        
+        Torso.GetComponent<CapsuleCollider2D>().enabled = true; 
+        Torso.GetComponent<Rigidbody2D>().AddForce(new Vector2(Random.Range(-100, 100), Random.Range(-100, 10)));
+
         rightArm.AddComponent<Rigidbody2D>();
         rightArm.transform.parent = null;
-        rightArm.GetComponent<CapsuleCollider2D>().enabled = true;
-        
+        rightArm.GetComponent<CapsuleCollider2D>().enabled = true; 
+        rightArm.GetComponent<Rigidbody2D>().AddForce(new Vector2(Random.Range(-100, 100), Random.Range(-100, 10)));
+
         leftArm.AddComponent<Rigidbody2D>();
         leftArm.transform.parent = null;
-        leftArm.GetComponent<CapsuleCollider2D>().enabled = true;
+        leftArm.GetComponent<CapsuleCollider2D>().enabled = true; 
+        leftArm.GetComponent<Rigidbody2D>().AddForce(new Vector2(Random.Range(-100, 100), Random.Range(-100, 10)));
 
         rightLeg.AddComponent<Rigidbody2D>();
         rightLeg.transform.parent = null;
-        rightLeg.GetComponent<CapsuleCollider2D>().enabled = true;
-        
+        rightLeg.GetComponent<CapsuleCollider2D>().enabled = true; 
+        rightLeg.GetComponent<Rigidbody2D>().AddForce(new Vector2(Random.Range(-100, 100), Random.Range(-100, 10)));
+
         leftLeg.AddComponent<Rigidbody2D>();
         leftLeg.transform.parent = null;
-        leftLeg.GetComponent<CapsuleCollider2D>().enabled = true;
-        
+        leftLeg.GetComponent<CapsuleCollider2D>().enabled = true; 
+        leftLeg.GetComponent<Rigidbody2D>().AddForce(new Vector2(Random.Range(-100, 100), Random.Range(-100, 10)));
+
         Destroy(this.gameObject);
 
     }

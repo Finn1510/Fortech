@@ -18,6 +18,11 @@ public class EnemySpawner : MonoBehaviour
 
     [Header("Zombie")]
     [SerializeField] float ZombieSpawnChance = 5;
+    [SerializeField] float ZombieSpawnHeight = 7;
+
+    [Header("CrazyEye")]
+    [SerializeField] float CrazyEyeSpawnChance = 3;
+    [SerializeField] float CrazyEyeSpawnHeight = 9;
 
     Vector3 Spawnpos;
     
@@ -32,10 +37,22 @@ public class EnemySpawner : MonoBehaviour
         // Zombie Spawn
         if (Random.Range(0, ZombieSpawnChance) == Random.Range(0, ZombieSpawnChance))
         {
-            Spawnpos = new Vector3(Random.Range(WorldBorderLeft, WorldBorderRight), 7, 0);
+            Spawnpos = new Vector3(Random.Range(WorldBorderLeft, WorldBorderRight), ZombieSpawnHeight, 0);
             Instantiate(Zombie, Spawnpos, Quaternion.identity);
 
-            Debug.Log("Spawned Zomnie at " + Spawnpos + "and " + DayNightCycle.StateIndex);
+            Debug.Log("Spawned Zombie at " + Spawnpos + "and " + DayNightCycle.StateIndex);
+        }
+    } 
+
+    void SpawnCrazyEye()
+    {
+        // CrazyEye Spawn
+        if (Random.Range(0, CrazyEyeSpawnChance) == Random.Range(0, CrazyEyeSpawnChance))
+        {
+            Spawnpos = new Vector3(Random.Range(WorldBorderLeft, WorldBorderRight), CrazyEyeSpawnHeight, 0);
+            Instantiate(Zombie, Spawnpos, Quaternion.identity);
+
+            Debug.Log("Spawned CrazyEye at " + Spawnpos + "and " + DayNightCycle.StateIndex);
         }
     }
 
@@ -44,6 +61,7 @@ public class EnemySpawner : MonoBehaviour
         if (DayNightCycle.StateIndex == 1)
         {
             SpawnZombie();
+            SpawnCrazyEye();
         }
         if (DayNightCycle.StateIndex == 2)
         {
@@ -76,10 +94,12 @@ public class EnemySpawner : MonoBehaviour
         if (DayNightCycle.StateIndex == 9)
         {
             SpawnZombie();
+            SpawnCrazyEye();
         } 
         if (DayNightCycle.StateIndex == 10)
         {
             SpawnZombie();
+            SpawnCrazyEye();
         }
     }
 }
