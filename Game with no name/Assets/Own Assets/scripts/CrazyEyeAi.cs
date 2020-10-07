@@ -8,6 +8,7 @@ public class CrazyEyeAi : MonoBehaviour
     [Header("References")]
     [SerializeField] private Animator anim;
     [SerializeField] private GameObject target;
+    [SerializeField] private Transform Centerpoint;
 
     [Header("BodyParts")]
     [SerializeField] private GameObject LeftWing;
@@ -19,15 +20,31 @@ public class CrazyEyeAi : MonoBehaviour
     [SerializeField] private float speed = 200f;
     [SerializeField] private float nextWaypointDistance = 3f;
     [SerializeField] private float PathUpdateDelay = 0.5f;
+    [SerializeField] private float maxDamageDistance = 2f;
+    [SerializeField] private float Damage = 3;
+    [SerializeField] private float Knockbackstrengh = 200;
+    [SerializeField] private float DamageDelay = 0.5f ;
 
     Path path;
+    GameObject Player;
     int currentWaypoint = 0;
     bool reachedEndofPath = false;
     bool Dead = false;
     bool DeadStarted = false;
+    bool delay;
     Seeker seeker;
     Rigidbody2D rb;
-    
+    SpriteRenderer ourRenderer;
+
+    private void Awake()
+    {
+        ourRenderer = GetComponent<SpriteRenderer>();
+        if (ourRenderer.isVisible == true)
+        {
+            Destroy(gameObject);
+        }
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -35,6 +52,7 @@ public class CrazyEyeAi : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
 
         target = GameObject.FindGameObjectWithTag("CORE");
+        Player = GameObject.FindGameObjectWithTag("Player");
 
         InvokeRepeating("UpdatePath", 0f, PathUpdateDelay);
     }
@@ -45,7 +63,13 @@ public class CrazyEyeAi : MonoBehaviour
         if(EnemyHealth <= 0f && DeadStarted == false)
         {
             Dead = true;
-            Die(); 
+            Die();
+            //TODO: find another solution for disableling pathfinding
+            PathUpdateDelay = 9999999999;
+        }
+        if(Dead == false)
+        {
+            AttackFoe();
         }
         
     }
@@ -125,8 +149,6 @@ public class CrazyEyeAi : MonoBehaviour
         
     }
     
-    
-    
     void EnemyDamage(float gottenDamage)
     {
         EnemyHealth = EnemyHealth - gottenDamage;
@@ -142,21 +164,60 @@ public class CrazyEyeAi : MonoBehaviour
         LeftWing.AddComponent<Rigidbody2D>();
         LeftWing.transform.parent = null;
         LeftWing.GetComponent<PolygonCollider2D>().enabled = true;
+        LeftWing.tag = "Untagged";
         
 
         RightWing.AddComponent<Rigidbody2D>();
         RightWing.transform.parent = null;
         RightWing.GetComponent<PolygonCollider2D>().enabled = true;
-        
+        RightWing.tag = "Untagged";
+
 
         Eye.GetComponent<Rigidbody2D>().gravityScale = 1;
         Eye.GetComponent<Animator>().enabled = false;
         //Eye.transform.parent = null; Eye IS parent ! ??
         Eye.GetComponent<CircleCollider2D>().enabled = true;
-        Eye.GetComponent<Rigidbody2D>().AddForce(new Vector2(Random.Range(-100, 100), Random.Range(-100, 100)));
+        Eye.tag = "Untagged";
+        Eye.GetComponent<Rigidbody2D>().AddForce(new Vector2(Random.Range(-100, 100), Random.Range(-100, 100))); 
 
-        
+    } 
 
+    void AttackFoe()
+    {
+        if(Vector2.Distance(transform.position,target.transform.position) <= maxDamageDistance)
+        {
+            Debug.Log("We're allowed to damage someone");
+
+            if (target.tag == "Player")
+            {
+                
+                if (delay == false)
+                {
+                    float dist = Vector3.Distance(Player.transform.position, transform.position);
+
+                    
+                        Player.SendMessage("Damage", Damage);
+                        Hashtable KnockbackDATA = new Hashtable();
+                        KnockbackDATA.Add("Direction", Centerpoint.position);
+                        KnockbackDATA.Add("Strengh", Knockbackstrengh);
+                        Player.SendMessage("applyKnockback", KnockbackDATA);
+
+                        StartCoroutine(Damagedelay());
+                    
+                }
+            }  
+            if(target.tag == "CORE")
+            {
+
+            }
+        }
+    }
+
+    IEnumerator Damagedelay()
+    {
+        delay = true;
+        yield return new WaitForSeconds(DamageDelay);
+        delay = false;
     }
 
 }

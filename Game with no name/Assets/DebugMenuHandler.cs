@@ -19,7 +19,9 @@ public class DebugMenuHandler : MonoBehaviour
     void Awake()
     {
         DebugMenuParent.SetActive(false);    
-    }
+    } 
+
+
 
     // Update is called once per frame
     void Update()
