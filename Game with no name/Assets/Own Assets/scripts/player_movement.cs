@@ -11,7 +11,7 @@ public class player_movement : MonoBehaviour
 {
     [Header("Parameters")]
     [SerializeField] float runSpeed = 40f;
-    [SerializeField] float Health = 100;
+    [SerializeField] float maxHealth = 100;
     [SerializeField] float VignetteIntensity = 0.25f;
     [SerializeField] float VignetDuration = 0.2f;
     [SerializeField] KeyCode InventoryKey = KeyCode.I;
@@ -39,6 +39,7 @@ public class player_movement : MonoBehaviour
     Item heldItem;
 
     GameObject WeaponPrefab;
+    public float Health = 100;
     bool Jump = false;
     bool Playerdied = false;
     bool DiedMessageSent = false;
@@ -70,7 +71,7 @@ public class player_movement : MonoBehaviour
     void Start()
     {
         Healthtext.text = Health.ToString();
-        HealthSlider.maxValue = Health;
+        HealthSlider.maxValue = maxHealth;
         HealthSlider.value = Health;
 
         DiedPostProcess.sharedProfile.TryGetSettings<ColorGrading>(out ColorGrade);
@@ -319,10 +320,13 @@ public class player_movement : MonoBehaviour
     {
         ES3.Save<List<Item>>("inventoryList", inventory.GetItemList());
         ES3.Save<Item>("heldItemType", heldItem);
+        ES3.Save<float>("PlayerHealth", Health);
     }
 
     void Load()
     {
+        Health = ES3.Load<float>("PlayerHealth");
+        
         //Equip weapon again
         heldItem = ES3.Load<Item>("heldItemType");
         UseItem(heldItem);
