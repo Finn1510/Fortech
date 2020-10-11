@@ -38,7 +38,7 @@ public class EnemySpawner : MonoBehaviour
         if (Random.Range(0, ZombieSpawnChance) == Random.Range(0, ZombieSpawnChance))
         {
             Spawnpos = new Vector3(Random.Range(WorldBorderLeft, WorldBorderRight), ZombieSpawnHeight, 0);
-            Instantiate(Zombie, Spawnpos, Quaternion.identity);
+            Instantiate(Zombie, Spawnpos, Quaternion.Euler(0,0,-270));
 
             Debug.Log("Spawned Zombie at " + Spawnpos + "and " + DayNightCycle.StateIndex);
         }
