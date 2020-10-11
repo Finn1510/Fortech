@@ -28,17 +28,17 @@ public class DebugMenuHandler : MonoBehaviour
     {
         if (Input.GetKeyDown(DebugMenuActivateKey))
         {
-            Debug.Log("activated Debugmenu");
+            
             if (DebugMenuActivated == false)
             {
-                Debug.Log("actually activated it");
+                
                 DebugMenuParent.SetActive(true);
                 DebugMenuActivated = true;
                 return;
             } 
             if(DebugMenuActivated == true)
             {
-                Debug.Log("Deactivated it");
+                
                 DebugMenuParent.SetActive(false);
                 DebugMenuActivated = false; 
                 return;

@@ -319,17 +319,27 @@ public class player_movement : MonoBehaviour
     void Save()
     {
         ES3.Save<List<Item>>("inventoryList", inventory.GetItemList());
-        ES3.Save<Item>("heldItemType", heldItem);
+        if (heldItem != null)
+        {
+            ES3.Save<Item>("heldItemType", heldItem);
+        }
         ES3.Save<float>("PlayerHealth", Health);
     }
 
     void Load()
     {
         Health = ES3.Load<float>("PlayerHealth");
-        
+
         //Equip weapon again
-        heldItem = ES3.Load<Item>("heldItemType");
-        UseItem(heldItem);
+        if(ES3.KeyExists("heldItemType") == true)
+        {
+            if(heldItem != null)
+            {
+                heldItem = ES3.Load<Item>("heldItemType");
+                UseItem(heldItem);
+            }
+            
+        }
     }
 
     private void OnApplicationQuit()

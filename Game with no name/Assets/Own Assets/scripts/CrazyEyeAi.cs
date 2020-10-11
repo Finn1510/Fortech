@@ -195,8 +195,10 @@ public class CrazyEyeAi : MonoBehaviour
                 {
                     float dist = Vector3.Distance(Player.transform.position, transform.position);
 
-                    
+                        //Apply damage to Player
                         Player.SendMessage("Damage", Damage);
+                        
+                        //Send Knockbag Data
                         Hashtable KnockbackDATA = new Hashtable();
                         KnockbackDATA.Add("Direction", Centerpoint.position);
                         KnockbackDATA.Add("Strengh", Knockbackstrengh);
@@ -208,7 +210,13 @@ public class CrazyEyeAi : MonoBehaviour
             }  
             if(target.tag == "CORE")
             {
-
+                if(delay == false)
+                {
+                    //Apply damage to Core
+                    target.SendMessage("Damage", Damage);
+                    StartCoroutine(Damagedelay());
+                }
+                
             }
         }
     }
