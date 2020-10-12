@@ -35,7 +35,7 @@ public class EnemySpawner : MonoBehaviour
     void SpawnZombie()
     {
         // Zombie Spawn
-        if (Random.Range(0, ZombieSpawnChance) == Random.Range(0, ZombieSpawnChance))
+        if (Random.Range(0, ZombieSpawnChance) == 0)
         {
             Spawnpos = new Vector3(Random.Range(WorldBorderLeft, WorldBorderRight), ZombieSpawnHeight, 0);
             Instantiate(Zombie, Spawnpos, Quaternion.Euler(0,0,-270));
@@ -47,7 +47,7 @@ public class EnemySpawner : MonoBehaviour
     void SpawnCrazyEye()
     {
         // CrazyEye Spawn
-        if (Random.Range(0, CrazyEyeSpawnChance) == Random.Range(0, CrazyEyeSpawnChance))
+        if (Random.Range(0, CrazyEyeSpawnChance) == 0)
         {
             Spawnpos = new Vector3(Random.Range(WorldBorderLeft, WorldBorderRight), CrazyEyeSpawnHeight, 0);
             Instantiate(Zombie, Spawnpos, Quaternion.identity);

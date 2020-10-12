@@ -62,6 +62,7 @@ public class DayNightC : MonoBehaviour
     {
         Debug.Log("State1");
         StateIndex = 1;
+        SunLight.intensity = 0.2f;
         DOTween.To(() => SunLight.intensity, x => SunLight.intensity = x, 0.36f, RealStateDuration);
         StartCoroutine(StateWait());
     }
@@ -70,6 +71,7 @@ public class DayNightC : MonoBehaviour
     {
         Debug.Log("State2");
         StateIndex = 2;
+        SunLight.intensity = 0.36f;
         DOTween.To(() => SunLight.intensity, x => SunLight.intensity = x, 0.52f, RealStateDuration);
         StartCoroutine(StateWait());
     }
@@ -78,6 +80,7 @@ public class DayNightC : MonoBehaviour
     {
         Debug.Log("State3");
         StateIndex = 3;
+        SunLight.intensity = 0.52f;
         DOTween.To(() => SunLight.intensity, x => SunLight.intensity = x, 0.68f, RealStateDuration);
         StartCoroutine(StateWait());
     }
@@ -86,6 +89,7 @@ public class DayNightC : MonoBehaviour
     {
         Debug.Log("State4");
         StateIndex = 4;
+        SunLight.intensity = 0.68f;
         DOTween.To(() => SunLight.intensity, x => SunLight.intensity = x, 0.84f, RealStateDuration);
         StartCoroutine(StateWait());
     }
@@ -94,6 +98,7 @@ public class DayNightC : MonoBehaviour
     {
         Debug.Log("State5");
         StateIndex = 5;
+        SunLight.intensity = 0.84f;
         DOTween.To(() => SunLight.intensity, x => SunLight.intensity = x, 1, RealStateDuration);
         StartCoroutine(StateWait());
     }
@@ -102,6 +107,7 @@ public class DayNightC : MonoBehaviour
     {
         Debug.Log("State6");
         StateIndex = 6;
+        SunLight.intensity = 1;
         DOTween.To(() => SunLight.intensity, x => SunLight.intensity = x, 0.84f, RealStateDuration);
         StartCoroutine(StateWait());
     }
@@ -110,6 +116,7 @@ public class DayNightC : MonoBehaviour
     {
         Debug.Log("State7");
         StateIndex = 7;
+        SunLight.intensity = 0.84f;
         DOTween.To(() => SunLight.intensity, x => SunLight.intensity = x, 0.68f, RealStateDuration);
         StartCoroutine(StateWait());
     }
@@ -118,6 +125,7 @@ public class DayNightC : MonoBehaviour
     {
         Debug.Log("State8");
         StateIndex = 8;
+        SunLight.intensity = 0.68f;
         DOTween.To(() => SunLight.intensity, x => SunLight.intensity = x, 0.52f, RealStateDuration);
         StartCoroutine(StateWait());
     }
@@ -126,6 +134,7 @@ public class DayNightC : MonoBehaviour
     {
         Debug.Log("State9");
         StateIndex = 9;
+        SunLight.intensity = 0.52f;
         DOTween.To(() => SunLight.intensity, x => SunLight.intensity = x, 0.36f, RealStateDuration);
         StartCoroutine(StateWait());
     }
@@ -135,6 +144,7 @@ public class DayNightC : MonoBehaviour
     {
         Debug.Log("State10");
         StateIndex = 10;
+        SunLight.intensity = 0.36f;
         DOTween.To(() => SunLight.intensity, x => SunLight.intensity = x, 0.2f, RealStateDuration);
         StartCoroutine(StateWait());
     }
