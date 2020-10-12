@@ -41,6 +41,7 @@ public class GroundEnemyAI : MonoBehaviour
 
     private void Awake()
     {
+        transform.rotation = Quaternion.Euler(0, 0, -270);
         ourRenderer = GetComponent<SpriteRenderer>(); 
         if (ourRenderer.isVisible == true)
         {
