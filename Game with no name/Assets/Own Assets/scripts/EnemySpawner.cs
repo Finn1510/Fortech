@@ -17,11 +17,11 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] float WorldBorderRight = 130;
 
     [Header("Zombie")]
-    [SerializeField] float ZombieSpawnChance = 5;
+    [SerializeField] int ZombieSpawnChance = 5;
     [SerializeField] float ZombieSpawnHeight = 7;
 
     [Header("CrazyEye")]
-    [SerializeField] float CrazyEyeSpawnChance = 3;
+    [SerializeField] int CrazyEyeSpawnChance = 3;
     [SerializeField] float CrazyEyeSpawnHeight = 9;
 
     Vector3 Spawnpos;
@@ -38,7 +38,7 @@ public class EnemySpawner : MonoBehaviour
         if (Random.Range(0, ZombieSpawnChance) == 0)
         {
             Spawnpos = new Vector3(Random.Range(WorldBorderLeft, WorldBorderRight), ZombieSpawnHeight, 0);
-            Instantiate(Zombie, Spawnpos, Quaternion.Euler(0,0,-270));
+            Instantiate(Zombie, Spawnpos, Quaternion.Euler(0, 0, -270)); 
 
             Debug.Log("Spawned Zombie at " + Spawnpos + "and " + DayNightCycle.StateIndex);
         }
