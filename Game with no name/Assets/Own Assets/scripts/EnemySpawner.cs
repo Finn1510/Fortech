@@ -50,7 +50,7 @@ public class EnemySpawner : MonoBehaviour
         if (Random.Range(0, CrazyEyeSpawnChance) == 0)
         {
             Spawnpos = new Vector3(Random.Range(WorldBorderLeft, WorldBorderRight), CrazyEyeSpawnHeight, 0);
-            Instantiate(Zombie, Spawnpos, Quaternion.identity);
+            Instantiate(CrazyEye, Spawnpos, Quaternion.identity);
 
             Debug.Log("Spawned CrazyEye at " + Spawnpos + "and " + DayNightCycle.StateIndex);
         }

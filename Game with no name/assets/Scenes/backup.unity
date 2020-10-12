@@ -18906,9 +18906,9 @@ MonoBehaviour:
   spawntickrate: 2
   WorldBorderLeft: -130
   WorldBorderRight: 130
-  ZombieSpawnChance: 10
+  ZombieSpawnChance: 15
   ZombieSpawnHeight: 7
-  CrazyEyeSpawnChance: 3
+  CrazyEyeSpawnChance: 25
   CrazyEyeSpawnHeight: 9
 --- !u!4 &1885008874
 Transform:
