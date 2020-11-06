@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Microsoft.VisualBasic;
 
+
 namespace FortechAdminUtilityTool
 {
     static class Program
@@ -17,7 +18,7 @@ namespace FortechAdminUtilityTool
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1());
+            Application.Run(new form());
         }
     }
 }

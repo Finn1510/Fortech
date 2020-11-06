@@ -26,9 +26,9 @@ C:\Unity projects\Fortech\FortechAdminUtilityTool\FortechAdminUtilityTool\Fortec
 C:\Unity projects\Fortech\FortechAdminUtilityTool\FortechAdminUtilityTool\FortechAdminUtilityTool\bin\Debug\System.Numerics.Vectors.xml
 C:\Unity projects\Fortech\FortechAdminUtilityTool\FortechAdminUtilityTool\FortechAdminUtilityTool\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
 C:\Unity projects\Fortech\FortechAdminUtilityTool\FortechAdminUtilityTool\FortechAdminUtilityTool\obj\Debug\FortechAdminUtilityTool.csprojAssemblyReference.cache
-C:\Unity projects\Fortech\FortechAdminUtilityTool\FortechAdminUtilityTool\FortechAdminUtilityTool\obj\Debug\FortechAdminUtilityTool.Form1.resources
 C:\Unity projects\Fortech\FortechAdminUtilityTool\FortechAdminUtilityTool\FortechAdminUtilityTool\obj\Debug\FortechAdminUtilityTool.Properties.Resources.resources
 C:\Unity projects\Fortech\FortechAdminUtilityTool\FortechAdminUtilityTool\FortechAdminUtilityTool\obj\Debug\FortechAdminUtilityTool.csproj.GenerateResource.cache
 C:\Unity projects\Fortech\FortechAdminUtilityTool\FortechAdminUtilityTool\FortechAdminUtilityTool\obj\Debug\FortechAdminUtilityTool.csproj.CopyComplete
 C:\Unity projects\Fortech\FortechAdminUtilityTool\FortechAdminUtilityTool\FortechAdminUtilityTool\obj\Debug\FortechAdminUtilityTool.exe
 C:\Unity projects\Fortech\FortechAdminUtilityTool\FortechAdminUtilityTool\FortechAdminUtilityTool\obj\Debug\FortechAdminUtilityTool.pdb
+C:\Unity projects\Fortech\FortechAdminUtilityTool\FortechAdminUtilityTool\FortechAdminUtilityTool\obj\Debug\FortechAdminUtilityTool.form.resources
