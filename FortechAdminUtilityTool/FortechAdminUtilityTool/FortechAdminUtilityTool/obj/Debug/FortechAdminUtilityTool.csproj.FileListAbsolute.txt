@@ -31,4 +31,4 @@ C:\Unity projects\Fortech\FortechAdminUtilityTool\FortechAdminUtilityTool\Fortec
 C:\Unity projects\Fortech\FortechAdminUtilityTool\FortechAdminUtilityTool\FortechAdminUtilityTool\obj\Debug\FortechAdminUtilityTool.csproj.CopyComplete
 C:\Unity projects\Fortech\FortechAdminUtilityTool\FortechAdminUtilityTool\FortechAdminUtilityTool\obj\Debug\FortechAdminUtilityTool.exe
 C:\Unity projects\Fortech\FortechAdminUtilityTool\FortechAdminUtilityTool\FortechAdminUtilityTool\obj\Debug\FortechAdminUtilityTool.pdb
-C:\Unity projects\Fortech\FortechAdminUtilityTool\FortechAdminUtilityTool\FortechAdminUtilityTool\obj\Debug\FortechAdminUtilityTool.form.resources
+C:\Unity projects\Fortech\FortechAdminUtilityTool\FortechAdminUtilityTool\FortechAdminUtilityTool\obj\Debug\FortechAdminUtilityTool.mainWindow.resources

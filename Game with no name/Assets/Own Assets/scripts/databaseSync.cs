@@ -7,7 +7,11 @@ using MySql.Data.MySqlClient;
 
 public class databaseSync : MonoBehaviour
 {
-
+    // 0: connecting 1: connection successful 2: logged in 3: connection failed
+    public int SQLconnectionState = 0;
+    
+    MySqlConnection conn;
+    
 
     // Start is called before the first frame update
     void Start()
@@ -20,13 +24,14 @@ public class databaseSync : MonoBehaviour
         //try to connect to database 
         try
         {
-            
+            conn = new MySqlConnection(connparams);
             conn.Open();
-            Debug.Log("Connected to database");
+            SQLconnectionState = 1;
         }
         catch (System.Exception ex)
         {
             Debug.Log(ex.ToString());
+            SQLconnectionState = 2;
         }
 
     } 
@@ -38,6 +43,48 @@ public class databaseSync : MonoBehaviour
 
     void Login(string Username, string Password)
     {
+        if (SQLconnectionState == 1)
+        {
+            //declare it here so we can close the reader even when we get a exeption
+            MySqlDataReader rdr = null;
 
+            //TODO how to tell the User that his password is wrong without showing a raw exeption
+            try
+            {
+                string sql = "SELECT User_name FROM User WHERE User_name = '" + Username + "' AND User_password = " + "'" +  Password + "'";
+                MySqlCommand cmd = new MySqlCommand(sql, conn);
+                rdr = cmd.ExecuteReader();
+                rdr.Read();
+
+
+                Debug.Log(rdr[0]);
+                //this is kinda useless cuz its already checked in the sql command
+                if (rdr[0].ToString() == Username)
+                {
+                    SQLconnectionState = 2;
+                    rdr.Close();
+                }
+                else
+                {
+                    Debug.LogError("User does not exist");
+                    rdr.Close();
+                }
+
+
+            }
+            catch (System.Exception ex)
+            { 
+                Debug.LogError(ex.ToString());
+                rdr.Close();
+                
+            } 
+
+        //TODO sync saveFile
+
+        }
+        else
+        {
+            //can not login when database is not connected
+        }
     }
 }

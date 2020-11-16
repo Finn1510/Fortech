@@ -13,7 +13,7 @@ using System.Runtime;
 
 namespace FortechAdminUtilityTool
 {
-    public partial class form : Form
+    public partial class mainWindow : Form
     {
         string chosenUserName;
         bool userBanned;
@@ -21,7 +21,7 @@ namespace FortechAdminUtilityTool
         MySqlConnection conn;
 
 
-        public form()
+        public mainWindow()
         {
             InitializeComponent();
             
@@ -159,26 +159,7 @@ namespace FortechAdminUtilityTool
 
         }
 
-        private void ConnectionStateText_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void Passwordtext_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void UserIDtext_Click(object sender, EventArgs e)
-        {
-
-        }
-
+       
         private void button1_Click(object sender, EventArgs e)
         {
             if (SQLconnectionState == 1 && chosenUserName != null)

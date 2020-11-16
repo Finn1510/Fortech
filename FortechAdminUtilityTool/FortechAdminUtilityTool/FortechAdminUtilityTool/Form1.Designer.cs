@@ -1,6 +1,6 @@
 ﻿namespace FortechAdminUtilityTool
 {
-    partial class form
+    partial class mainWindow
     {
         /// <summary>
         /// Erforderliche Designervariable.
@@ -72,7 +72,6 @@
             this.UserIDtext.Size = new System.Drawing.Size(77, 23);
             this.UserIDtext.TabIndex = 2;
             this.UserIDtext.Text = "User ID: ";
-            this.UserIDtext.Click += new System.EventHandler(this.UserIDtext_Click);
             // 
             // UserPasswordtext
             // 
@@ -83,7 +82,6 @@
             this.UserPasswordtext.Size = new System.Drawing.Size(94, 23);
             this.UserPasswordtext.TabIndex = 3;
             this.UserPasswordtext.Text = "Password: ";
-            this.UserPasswordtext.Click += new System.EventHandler(this.Passwordtext_Click);
             // 
             // ConnectionStateText
             // 
@@ -96,7 +94,6 @@
             this.ConnectionStateText.Size = new System.Drawing.Size(308, 38);
             this.ConnectionStateText.TabIndex = 4;
             this.ConnectionStateText.Text = "Database connecting ";
-            this.ConnectionStateText.Click += new System.EventHandler(this.ConnectionStateText_Click);
             // 
             // UserStatusText
             // 
@@ -107,7 +104,6 @@
             this.UserStatusText.Size = new System.Drawing.Size(67, 23);
             this.UserStatusText.TabIndex = 5;
             this.UserStatusText.Text = "Status: ";
-            this.UserStatusText.Click += new System.EventHandler(this.label1_Click);
             // 
             // UserBanbutton
             // 
@@ -160,7 +156,7 @@
             this.clearSaveFileButton.UseVisualStyleBackColor = true;
             this.clearSaveFileButton.Click += new System.EventHandler(this.clearSaveFileButton_Click);
             // 
-            // form
+            // mainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -178,7 +174,8 @@
             this.Controls.Add(this.UsernameText);
             this.Font = new System.Drawing.Font("Open Sans", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.MaximizeBox = false;
-            this.Name = "form";
+            this.Name = "mainWindow";
+            this.ShowIcon = false;
             this.Text = "Fortech Admin Utility Tool";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
