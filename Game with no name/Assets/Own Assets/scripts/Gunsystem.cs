@@ -21,6 +21,7 @@ public class Gunsystem : MonoBehaviour
     [SerializeField] GameObject GunfireVFX;
     [SerializeField] AudioSource GunAudio;
     GameObject UI_Inventory;
+    PlayerStats PlayerStats;
     
     bool GunDelayOver = true;
     bool Playerdied = false;
@@ -34,7 +35,7 @@ public class Gunsystem : MonoBehaviour
     private void Start()
     {
         Player = GameObject.FindGameObjectWithTag("Player").transform;
-        
+        PlayerStats = GameObject.FindGameObjectWithTag("PlayerStatBin").GetComponent<PlayerStats>();
     }
 
     // Update is called once per frame
@@ -64,7 +65,11 @@ public class Gunsystem : MonoBehaviour
             //Fade 2d light MuzzleFlash In and out
             DOTween.To(() => LightMuzzleflash.intensity, x => LightMuzzleflash.intensity = x, LightMuzzleFlashIntensity, LightMuzzleFlashDurationSeconds);
             StartCoroutine(MuzzleFlashDelay());
-            
+
+            //Update Player Stats
+            PlayerStats.ShotsFired = PlayerStats.ShotsFired + 1;
+
+            //init Delay Coroutines
             StartCoroutine(GunDelay()); 
             
         }

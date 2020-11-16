@@ -30,19 +30,20 @@ public class player_movement : MonoBehaviour
     [SerializeField] GameObject DiedMenu;
     [SerializeField] UI_Inventory uiInventory;
     [SerializeField] GameObject UI_Inventory;
-    [SerializeField] Transform holdPoint;
+    [SerializeField] Transform holdPoint; 
     AudioSource damageAudio;
     CinemachineImpulseSource ImpulseGEN; 
     Rigidbody2D rigid;
-
     GameObject heldWeapon;
     Item heldItem;
+    PlayerStats PlayerStats;
 
     GameObject WeaponPrefab;
     public float Health = 100;
     bool Jump = false;
     bool Playerdied = false;
     bool DiedMessageSent = false;
+    bool RespawnMessageSent = false;
     bool VignetCoroutineDelayACTIVE = false;
 
     private Inventory inventory;
@@ -80,7 +81,8 @@ public class player_movement : MonoBehaviour
         ImpulseGEN = GetComponent<CinemachineImpulseSource>();
         rigid = GetComponent<Rigidbody2D>();
         damageAudio = GetComponent<AudioSource>();
-        
+        PlayerStats = GameObject.FindGameObjectWithTag("PlayerStatBin").GetComponent<PlayerStats>();
+
         UI_Inventory.SetActive(false);
 
     }
@@ -110,6 +112,7 @@ public class player_movement : MonoBehaviour
         {
             UI_Inventory.SetActive(false);
             Playerdied = true; 
+            
             if(DiedMessageSent == false)
             {
                 GameObject[] gos = (GameObject[])GameObject.FindObjectsOfType(typeof(GameObject));
@@ -123,6 +126,10 @@ public class player_movement : MonoBehaviour
 
                 YouDiedtext.SetActive(true);
                 DiedMenu.SetActive(true);
+
+                PlayerStats.DiedCount = PlayerStats.DiedCount + 1;
+
+                DiedMenu.GetComponent<Animator>().SetTrigger("died");
 
                 DOTween.To(() => Time.timeScale, x => Time.timeScale = x, 0.00001f, 1f);
                 
@@ -314,6 +321,49 @@ public class player_movement : MonoBehaviour
                 
             }
         }
+    }
+
+    public void Respawn()
+    {
+        Debug.Log("Player Respawned");
+        UI_Inventory.SetActive(false);
+        Playerdied = false;
+
+        transform.position = new Vector2(17, 6.5f);
+        changeHealth(maxHealth);
+        
+
+        //TODO figure out a penalty for dying + protect the player during the first few seconds
+
+        if (RespawnMessageSent == false)
+        {
+            GameObject[] gos = (GameObject[])GameObject.FindObjectsOfType(typeof(GameObject));
+            foreach (GameObject go in gos)
+            {
+                if (go && go.transform.parent == null)
+                {
+                    go.gameObject.BroadcastMessage("PlayerRespawned", SendMessageOptions.DontRequireReceiver);
+                }
+            }
+
+            YouDiedtext.SetActive(true);
+            DiedMenu.SetActive(true);
+
+            DOTween.To(() => Time.timeScale, x => Time.timeScale = x, 1f, 1f);
+
+            DOTween.To(() => DiedPostProcess.weight, x => DiedPostProcess.weight = x, 0,1f);
+            DiedMenu.GetComponent<Animator>().SetTrigger("respawned");
+            
+            RespawnMessageSent = true;
+
+        }
+    }
+
+    void changeHealth(float amount)
+    {
+        Health = amount;
+        HealthSlider.value = amount;
+        Healthtext.text = amount.ToString();
     }
 
     void Save()

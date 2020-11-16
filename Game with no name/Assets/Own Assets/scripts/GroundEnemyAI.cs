@@ -9,6 +9,7 @@ public class GroundEnemyAI : MonoBehaviour
     [SerializeField] private Transform raystart;
     [SerializeField] private Transform rayend;
     [SerializeField] private Transform Centerpoint;
+    PlayerStats PlayerStats;
     Renderer ourRenderer;
 
     [Header("Parameters")]
@@ -55,6 +56,7 @@ public class GroundEnemyAI : MonoBehaviour
         Player = GameObject.FindGameObjectWithTag("Player");
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
+        PlayerStats = GameObject.FindGameObjectWithTag("PlayerStatBin").GetComponent<PlayerStats>();
     }
 
     // Update is called once per frame
@@ -159,6 +161,8 @@ public class GroundEnemyAI : MonoBehaviour
 
     void Die()
     {
+        PlayerStats.ZombiesKilled = PlayerStats.ZombiesKilled + 1;
+        
         anim.SetTrigger("Die");
 
         Head.AddComponent<Rigidbody2D>();

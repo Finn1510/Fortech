@@ -9,17 +9,20 @@ public class BulletHandler : MonoBehaviour
     [SerializeField] private GameObject ImpactParticle;
     [SerializeField] private GameObject RedLight;
     [SerializeField] private GameObject hitsound;
-    
+    CinemachineImpulseSource ImpulseCOM;
+    PlayerStats PlayerStats;
+
     [Header("Parameters")]
     [SerializeField] private float BulletDamage = 10f;
 
-    CinemachineImpulseSource ImpulseCOM;
+    
 
 
     // Start is called before the first frame update
     void Start()
     {
         ImpulseCOM = GetComponent<CinemachineImpulseSource>();
+        PlayerStats = GameObject.FindGameObjectWithTag("PlayerStatBin").GetComponent<PlayerStats>();
         StartCoroutine(destroyDelay());    
     }
 
@@ -35,6 +38,9 @@ public class BulletHandler : MonoBehaviour
             Instantiate(ImpactParticle, transform.position, transform.rotation);
             Instantiate(RedLight, transform.position, transform.rotation);
             collision.gameObject.SendMessage("EnemyDamage", BulletDamage, SendMessageOptions.DontRequireReceiver);
+
+            //Update PlayerStats 
+            PlayerStats.DamageDealed = PlayerStats.DamageDealed + BulletDamage;
             
             Destroy(this.gameObject);
         }

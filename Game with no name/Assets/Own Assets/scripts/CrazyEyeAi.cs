@@ -35,6 +35,7 @@ public class CrazyEyeAi : MonoBehaviour
     Seeker seeker;
     Rigidbody2D rb;
     SpriteRenderer ourRenderer;
+    PlayerStats PlayerStats;
 
     private void Awake()
     {
@@ -53,6 +54,7 @@ public class CrazyEyeAi : MonoBehaviour
 
         target = GameObject.FindGameObjectWithTag("CORE");
         Player = GameObject.FindGameObjectWithTag("Player");
+        PlayerStats = GameObject.FindGameObjectWithTag("PlayerStatBin").GetComponent<PlayerStats>();
 
         InvokeRepeating("UpdatePath", 0f, PathUpdateDelay);
     }
@@ -158,6 +160,8 @@ public class CrazyEyeAi : MonoBehaviour
   
     void Die()
     {
+        PlayerStats.CrazyEyesKilled = PlayerStats.CrazyEyesKilled + 1;
+
         DeadStarted = true;
         anim.SetTrigger("Die");
 
