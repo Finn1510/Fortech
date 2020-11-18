@@ -37,18 +37,16 @@ public class CrazyEyeAi : MonoBehaviour
     SpriteRenderer ourRenderer;
     PlayerStats PlayerStats;
 
-    private void Awake()
+    
+    // Start is called before the first frame update
+    void Start()
     {
         ourRenderer = GetComponent<SpriteRenderer>();
         if (ourRenderer.isVisible == true)
         {
             Destroy(gameObject);
         }
-    }
 
-    // Start is called before the first frame update
-    void Start()
-    {
         seeker = GetComponent<Seeker>();
         rb = GetComponent<Rigidbody2D>();
 
@@ -190,7 +188,7 @@ public class CrazyEyeAi : MonoBehaviour
     {
         if(Vector2.Distance(transform.position,target.transform.position) <= maxDamageDistance)
         {
-            Debug.Log("We're allowed to damage someone");
+            
 
             if (target.tag == "Player")
             {

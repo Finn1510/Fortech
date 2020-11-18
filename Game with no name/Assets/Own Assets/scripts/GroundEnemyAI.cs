@@ -39,20 +39,17 @@ public class GroundEnemyAI : MonoBehaviour
     bool LEFT;
 
     bool delay = false;
-
-    private void Awake()
+    
+    // Start is called before the first frame update
+    void Start()
     {
         transform.rotation = Quaternion.Euler(0, 0, -270);
-        ourRenderer = GetComponent<SpriteRenderer>(); 
+        ourRenderer = GetComponent<SpriteRenderer>();
         if (ourRenderer.isVisible == true)
         {
             Destroy(gameObject);
         }
-    }
 
-    // Start is called before the first frame update
-    void Start()
-    {
         Player = GameObject.FindGameObjectWithTag("Player");
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();

@@ -105,4 +105,9 @@ public class Gunsystem : MonoBehaviour
     {
         Playerdied = true;
     }
+
+    public void PlayerRespawned()
+    {
+        Playerdied = false;
+    }
 }
