@@ -297,7 +297,7 @@ public class player_movement : MonoBehaviour
         
         if(item.itemType != heldItem.itemType)
         {
-            
+            Debug.Log("removedItem was not helditem's type");
             return;
         }
         else
@@ -309,7 +309,7 @@ public class player_movement : MonoBehaviour
                 if (inventoryItem.itemType == heldItem.itemType)
                 {
                     heldWeaponstillinInventory = true;
-                   
+                    Debug.Log("an item with same itemType as heldItem is still in inventory");
                     
                 }
             } 
@@ -317,6 +317,8 @@ public class player_movement : MonoBehaviour
             if(heldWeaponstillinInventory == false)
             {
                 //destroy held weapon
+                Debug.Log("no item with the same itemType as heldItem is in the inventory... deleting helditem...");
+                heldItem = null;
                 Destroy(heldWeapon);
                 
             }
@@ -369,10 +371,8 @@ public class player_movement : MonoBehaviour
     void Save()
     {
         ES3.Save<List<Item>>("inventoryList", inventory.GetItemList());
-        if (heldItem != null)
-        {
-            ES3.Save<Item>("heldItemType", heldItem);
-        }
+        ES3.Save<Item>("heldItemType", heldItem);
+        
         ES3.Save<float>("PlayerHealth", Health);
     }
 
@@ -380,10 +380,12 @@ public class player_movement : MonoBehaviour
     {
         Health = ES3.Load<float>("PlayerHealth");
 
+        Item TestHeldItem = ES3.Load<Item>("heldItemType");
+
         //Equip weapon again
-        if(ES3.KeyExists("heldItemType") == true)
+        if (ES3.KeyExists("heldItemType") == true)
         {
-            if(heldItem != null)
+            if(TestHeldItem != null)
             {
                 heldItem = ES3.Load<Item>("heldItemType");
                 UseItem(heldItem);
