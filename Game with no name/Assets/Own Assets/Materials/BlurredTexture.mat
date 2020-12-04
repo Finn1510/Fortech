@@ -21,7 +21,7 @@ Material:
     m_TexEnvs:
     - _BlurTex:
         m_Texture: {fileID: 8400000, guid: af7ba87aa4503b6499fb718baa468986, type: 2}
-        m_Scale: {x: 0.1, y: 1}
+        m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
         m_Texture: {fileID: 0}
@@ -36,9 +36,9 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
-    - _ColorMask: 15
-    - _Jump: 0.005
-    - _Radius: 64
+    - _ColorMask: 19.59
+    - _Jump: 0.0005
+    - _Radius: 200
     - _Stencil: 0
     - _StencilComp: 8
     - _StencilOp: 0
@@ -47,4 +47,4 @@ Material:
     - _Step: 10
     - _UseUIAlphaClip: 1
     m_Colors:
-    - _Color: {r: 0.8962264, g: 0.8962264, b: 0.8962264, a: 1}
+    - _Color: {r: 0.8773585, g: 0.8773585, b: 0.8773585, a: 1}

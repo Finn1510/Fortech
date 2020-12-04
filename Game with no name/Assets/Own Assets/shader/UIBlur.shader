@@ -4,8 +4,8 @@ Shader "Custom/UIBlur"
     Properties
     {
         // Blur properties
-        [IntRange] _Radius("Blur Radius", Range(0, 64)) = 1
-        [IntRange] _Step("Step Size", Range(3, 10)) = 4
+        [IntRange] _Radius("Blur Radius", Range(0, 200)) = 1
+        [IntRange] _Step("Step Size", Range(3, 20)) = 4
         _Jump("Jump Size", Range(0.0001,0.3)) = 0.1
         _BlurTex ("Blurred Texture", 2D) = "white" {}
 
