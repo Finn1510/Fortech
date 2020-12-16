@@ -3,10 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.Animations;
+using TMPro;
 
 public class AccountPanelManager : MonoBehaviour
 {
     [Header("References")]
+    [SerializeField] databaseSync DatabaseSystem;
+    [Space]
+    [SerializeField] TMP_InputField UsernameInputfield;
+    [SerializeField] TMP_InputField PasswordInputfield;
     [SerializeField] Animator PanelAnimator;
     [SerializeField] AudioSource PanelAudioSource;
     [Space]
@@ -23,6 +28,14 @@ public class AccountPanelManager : MonoBehaviour
     //This is a terrible way of doing this but I couldn't think of anything diffrent because the panel 
     //always thought it has to close when the pointer is over a button and not over a panel
 
+    public void LoginButtoClicked()
+    {
+        string Username = UsernameInputfield.text;
+        string Password = PasswordInputfield.text;
+
+        DatabaseSystem.Login(Username, Password);
+    }
+    
     private void Update()
     {
         if(MouseOverPanel == true)

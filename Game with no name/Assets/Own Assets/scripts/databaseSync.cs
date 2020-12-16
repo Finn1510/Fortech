@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using MySql.Data;
-using MySql.Data.MySqlClient; 
+using MySql.Data.MySqlClient;
 
 
 public class databaseSync : MonoBehaviour
@@ -11,7 +11,7 @@ public class databaseSync : MonoBehaviour
     public int SQLconnectionState = 0;
     
     MySqlConnection conn;
-    
+
 
     // Start is called before the first frame update
     void Start()
@@ -19,8 +19,8 @@ public class databaseSync : MonoBehaviour
         //connection parameters
         string connparams = "server=johnny.heliohost.org;user=finn15_FortechUser;database=finn15_InformatikProjekt;port=3306;password=averystrongpassword";
 
-        MySqlConnection conn = new MySqlConnection(connparams);
-        
+        conn = new MySqlConnection(connparams);
+
         //try to connect to database 
         try
         {
@@ -28,6 +28,7 @@ public class databaseSync : MonoBehaviour
             conn.Open();
             Debug.Log("Database connected");
             SQLconnectionState = 1;
+
         }
         catch (System.Exception ex)
         {
@@ -35,26 +36,24 @@ public class databaseSync : MonoBehaviour
             SQLconnectionState = 2;
         }
 
-    } 
+    }   
 
-    void CreateAccount(string Username, string Password)
-    {
-
-    } 
-
-    void Login(string Username, string Password)
+    public void Login(string Username, string Password)
     {
         string UserID;
+        string LocalLastTimeSaved = null;
+        string OnlineLastTimeSaved = null;
 
         if (SQLconnectionState == 1)
         {
             //declare it here so we can close the reader even when we get a exeption
             MySqlDataReader rdr = null;
 
+
             //TODO how to tell the User that his password is wrong without showing a raw exeption
             try
             {
-                string sql = "SELECT User_name FROM User WHERE User_name = '" + Username + "' AND User_password = " + "'" +  Password + "'";
+                string sql = "SELECT User_name FROM User WHERE User_name = '" + Username + "' AND User_password = " + "'" + Password + "'";
                 MySqlCommand cmd = new MySqlCommand(sql, conn);
                 rdr = cmd.ExecuteReader();
                 rdr.Read();
@@ -66,6 +65,7 @@ public class databaseSync : MonoBehaviour
                 {
                     SQLconnectionState = 2;
                     rdr.Close();
+                    Debug.Log("User doess exist");
                 }
                 else
                 {
@@ -73,13 +73,11 @@ public class databaseSync : MonoBehaviour
                     rdr.Close();
                 }
 
-
             }
+
             catch (System.Exception ex)
-            { 
+            {
                 Debug.LogError(ex.ToString());
-                rdr.Close();
-                
             }
 
             try
@@ -87,7 +85,8 @@ public class databaseSync : MonoBehaviour
                 // _sync saveFile_
 
                 //Get local SaveFile DateTime
-                string LastTimeSaved = ES3.Load<string>("LastSaved");
+                LocalLastTimeSaved = ES3.Load<string>("LastSaved");
+                Debug.Log("Local last Saved: " + LocalLastTimeSaved);
 
                 //Get Online SaveFile DateTime
 
@@ -99,6 +98,7 @@ public class databaseSync : MonoBehaviour
                 rdr2.Read();
                 UserID = rdr2[0].ToString();
                 Debug.Log(UserID);
+                rdr2.Close();
 
                 //Get SaveFile TimeDate
                 MySqlDataReader rdr3 = null;
@@ -106,17 +106,19 @@ public class databaseSync : MonoBehaviour
                 MySqlCommand cmd3 = new MySqlCommand(sql3, conn);
                 rdr3 = cmd3.ExecuteReader();
                 rdr3.Read();
-                string OnlineLastTimeSaved = rdr3[0].ToString();
+                OnlineLastTimeSaved = rdr3[0].ToString();
                 Debug.Log(OnlineLastTimeSaved);
+                rdr3.Close();
 
                 //Get SaveFile Data
                 MySqlDataReader rdr4 = null;
                 string sql4 = "SELECT SaveFile_file FROM SaveFiles WHERE SaveFile_id = '" + UserID + "'";
-                MySqlCommand cmd4 = new MySqlCommand(sql3, conn);
+                MySqlCommand cmd4 = new MySqlCommand(sql4, conn);
                 rdr4 = cmd4.ExecuteReader();
                 rdr4.Read();
                 string SaveFileData = rdr4[0].ToString();
                 Debug.Log(SaveFileData);
+                rdr4.Close();
             }
 
             catch (System.Exception ex)
@@ -124,7 +126,26 @@ public class databaseSync : MonoBehaviour
                 Debug.LogError(ex.ToString());
             }
 
+            System.DateTime convertedLocalSaveFileTime = System.DateTime.Parse(LocalLastTimeSaved);
+            Debug.Log("Converted LocalTime: " + convertedLocalSaveFileTime);
+            System.DateTime convertedOnlineSaveFile = System.DateTime.Parse(OnlineLastTimeSaved);
+            Debug.Log("Converted OnlineTime: " + convertedOnlineSaveFile);
 
+            //check which SaveFile is newer 
+            int result = System.DateTime.Compare(convertedLocalSaveFileTime, convertedOnlineSaveFile); 
+
+            if(result < 0)
+            {
+                Debug.Log("Online saveFile is newer than local SaveFile");
+            } 
+            else if (result == 0)
+            {
+                Debug.Log("Both SaveFile are equally old"); 
+            }
+            else
+            {
+                Debug.Log("Online SaveFile is older than local SaveFile");
+            }
 
         }
         else
