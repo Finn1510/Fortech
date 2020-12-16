@@ -26,6 +26,7 @@ public class databaseSync : MonoBehaviour
         {
             conn = new MySqlConnection(connparams);
             conn.Open();
+            Debug.Log("Database connected");
             SQLconnectionState = 1;
         }
         catch (System.Exception ex)
@@ -43,6 +44,8 @@ public class databaseSync : MonoBehaviour
 
     void Login(string Username, string Password)
     {
+        string UserID;
+
         if (SQLconnectionState == 1)
         {
             //declare it here so we can close the reader even when we get a exeption
@@ -77,9 +80,51 @@ public class databaseSync : MonoBehaviour
                 Debug.LogError(ex.ToString());
                 rdr.Close();
                 
-            } 
+            }
 
-        //TODO sync saveFile
+            try
+            {
+                // _sync saveFile_
+
+                //Get local SaveFile DateTime
+                string LastTimeSaved = ES3.Load<string>("LastSaved");
+
+                //Get Online SaveFile DateTime
+
+                //Get UserID
+                MySqlDataReader rdr2 = null;
+                string sql2 = "SELECT User_id FROM User WHERE User_name = '" + Username + "' AND User_password = " + "'" + Password + "'";
+                MySqlCommand cmd2 = new MySqlCommand(sql2, conn);
+                rdr2 = cmd2.ExecuteReader();
+                rdr2.Read();
+                UserID = rdr2[0].ToString();
+                Debug.Log(UserID);
+
+                //Get SaveFile TimeDate
+                MySqlDataReader rdr3 = null;
+                string sql3 = "SELECT SaveFile_datum FROM SaveFiles WHERE SaveFile_id = '" + UserID + "'";
+                MySqlCommand cmd3 = new MySqlCommand(sql3, conn);
+                rdr3 = cmd3.ExecuteReader();
+                rdr3.Read();
+                string OnlineLastTimeSaved = rdr3[0].ToString();
+                Debug.Log(OnlineLastTimeSaved);
+
+                //Get SaveFile Data
+                MySqlDataReader rdr4 = null;
+                string sql4 = "SELECT SaveFile_file FROM SaveFiles WHERE SaveFile_id = '" + UserID + "'";
+                MySqlCommand cmd4 = new MySqlCommand(sql3, conn);
+                rdr4 = cmd4.ExecuteReader();
+                rdr4.Read();
+                string SaveFileData = rdr4[0].ToString();
+                Debug.Log(SaveFileData);
+            }
+
+            catch (System.Exception ex)
+            {
+                Debug.LogError(ex.ToString());
+            }
+
+
 
         }
         else

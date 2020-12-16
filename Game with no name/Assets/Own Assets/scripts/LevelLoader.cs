@@ -10,8 +10,8 @@ public class LevelLoader : MonoBehaviour
     public Animator transition;
     public float transitionTime = 1f;
     public int LevelIndex = 1;
-    
 
+     
     public void LoadGame()
     {
         StartCoroutine(LoadGameCorut(LevelIndex));
