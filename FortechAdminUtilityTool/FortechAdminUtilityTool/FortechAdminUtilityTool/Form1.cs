@@ -154,7 +154,7 @@ namespace FortechAdminUtilityTool
             MySqlCommand cmd5 = new MySqlCommand(sql5, conn);
             MySqlDataReader rdr5 = cmd5.ExecuteReader();
             rdr5.Read();
-            SaveFileDataTextBox.Text = rdr5[0].ToString();
+            SaveFileDataTextBox.Text = Base64Decode(rdr5[0].ToString());
             rdr5.Close();
 
         }
@@ -252,7 +252,7 @@ namespace FortechAdminUtilityTool
 
         private void UpdateSaveFileButton_Click(object sender, EventArgs e)
         {
-            string sql = "UPDATE SaveFiles SET SaveFile_file = " + "'" + SaveFileDataTextBox.Text + "'" + " WHERE SaveFile_id = " + GetUserID();
+            string sql = "UPDATE SaveFiles SET SaveFile_file = " + "'" + Base64Encode(SaveFileDataTextBox.Text) + "'" + " WHERE SaveFile_id = " + GetUserID();
             MySqlCommand cmd = new MySqlCommand(sql, conn);
             MySqlDataReader rdr = cmd.ExecuteReader();
             rdr.Close();
@@ -260,6 +260,18 @@ namespace FortechAdminUtilityTool
             string message = "Successfully updated SaveFile";
             string title = "Updated SaveFile";
             MessageBox.Show(message, title);
+        }
+
+        string Base64Encode(string plainText)
+        {
+            var plainTextBytes = System.Text.Encoding.UTF8.GetBytes(plainText);
+            return System.Convert.ToBase64String(plainTextBytes);
+        }
+
+        string Base64Decode(string base64EncodedData)
+        {
+            var base64EncodedBytes = System.Convert.FromBase64String(base64EncodedData);
+            return System.Text.Encoding.UTF8.GetString(base64EncodedBytes);
         }
     }
 }

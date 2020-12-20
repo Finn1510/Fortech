@@ -4425,6 +4425,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SQLconnectionState: 0
+  SaveFileName: SaveData.es3
 --- !u!4 &1206034940
 Transform:
   m_ObjectHideFlags: 0

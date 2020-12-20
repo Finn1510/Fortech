@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using MySql.Data;
 using MySql.Data.MySqlClient;
+using System.IO;
 
 
 public class databaseSync : MonoBehaviour
 {
     // 0: connecting 1: connection successful 2: logged in 3: connection failed
-    public int SQLconnectionState = 0;
+    public int SQLconnectionState = 0; 
+    [SerializeField] string SaveFileName = "SaveData.es3";
     
     MySqlConnection conn;
 
@@ -40,9 +42,11 @@ public class databaseSync : MonoBehaviour
 
     public void Login(string Username, string Password)
     {
-        string UserID;
+        //for some reason the compiler wants me to assign these local variable when I am trying to use it 
         string LocalLastTimeSaved = null;
         string OnlineLastTimeSaved = null;
+        string OnlineSaveFileData = null;
+        string UserID = null;
 
         if (SQLconnectionState == 1)
         {
@@ -116,8 +120,8 @@ public class databaseSync : MonoBehaviour
                 MySqlCommand cmd4 = new MySqlCommand(sql4, conn);
                 rdr4 = cmd4.ExecuteReader();
                 rdr4.Read();
-                string SaveFileData = rdr4[0].ToString();
-                Debug.Log(SaveFileData);
+                OnlineSaveFileData = rdr4[0].ToString();
+                Debug.Log(OnlineSaveFileData);
                 rdr4.Close();
             }
 
@@ -132,19 +136,43 @@ public class databaseSync : MonoBehaviour
             Debug.Log("Converted OnlineTime: " + convertedOnlineSaveFile);
 
             //check which SaveFile is newer 
-            int result = System.DateTime.Compare(convertedLocalSaveFileTime, convertedOnlineSaveFile); 
+            int result = System.DateTime.Compare(convertedLocalSaveFileTime, convertedOnlineSaveFile);
 
-            if(result < 0)
+            string LocalSaveFilePath = Application.persistentDataPath + "/" + SaveFileName;
+
+            //Online saveFile is newer than local SaveFile
+            if (result < 0)
             {
                 Debug.Log("Online saveFile is newer than local SaveFile");
-            } 
+
+                //replace local Savefile data with Online SaveFile Data 
+                File.WriteAllText(LocalSaveFilePath, Base64Decode(OnlineSaveFileData));
+
+                //update LocalLast Saved DateTime
+                ES3.Save<string>("LastSaved", OnlineLastTimeSaved);
+
+            }
+            
+            //Both SaveFile are equally old
             else if (result == 0)
             {
                 Debug.Log("Both SaveFile are equally old"); 
             }
+
+            //Online SaveFile is older than local SaveFile
             else
             {
                 Debug.Log("Online SaveFile is older than local SaveFile");
+
+                //Update Online SaveFiles (we have to encode the SaveFile into Base64 format because the " symbols in the SaveFile confuse MySQL)
+                string sql5 = "UPDATE SaveFiles SET SaveFile_file = '" + Base64Encode(ES3.LoadRawString(SaveFileName)) + "' WHERE SaveFile_id = '" + UserID + "'";
+                MySqlCommand cmd5 = new MySqlCommand(sql5, conn);
+                cmd5.ExecuteNonQuery();
+
+                //Update Online SaveFile date
+                string sql6 = "UPDATE SaveFiles SET SaveFile_datum = '" + LocalLastTimeSaved + "' WHERE SaveFile_id = '" + UserID + "'";
+                MySqlCommand cmd6 = new MySqlCommand(sql6, conn);
+                cmd6.ExecuteNonQuery();
             }
 
         }
@@ -152,5 +180,17 @@ public class databaseSync : MonoBehaviour
         {
             //can not login when database is not connected
         }
+    }
+
+    string Base64Encode(string plainText)
+    {
+        var plainTextBytes = System.Text.Encoding.UTF8.GetBytes(plainText);
+        return System.Convert.ToBase64String(plainTextBytes);
+    }
+
+    string Base64Decode(string base64EncodedData)
+    {
+        var base64EncodedBytes = System.Convert.FromBase64String(base64EncodedData);
+        return System.Text.Encoding.UTF8.GetString(base64EncodedBytes);
     }
 }
