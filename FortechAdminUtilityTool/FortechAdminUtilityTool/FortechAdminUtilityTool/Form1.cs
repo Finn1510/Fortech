@@ -95,8 +95,9 @@ namespace FortechAdminUtilityTool
                         Console.WriteLine("User does not exist");
                         rdr.Close();
                         string message = "The User" + chosenUserName + " does not exist";
-                        string title = "User does not exist";
+                        string title = "User does not exist"; 
                         MessageBox.Show(message, title);
+                        chosenUserName = null;
                     }
 
                     
@@ -108,6 +109,7 @@ namespace FortechAdminUtilityTool
                     string message = "The User " + chosenUserName + " does not exist";
                     string title = "User does not exist";
                     MessageBox.Show(message, title);
+                    chosenUserName = null;
                 }
                 
             }
@@ -157,6 +159,13 @@ namespace FortechAdminUtilityTool
             SaveFileDataTextBox.Text = Base64Decode(rdr5[0].ToString());
             rdr5.Close();
 
+            string sql6 = "SELECT SaveFile_datum FROM SaveFiles WHERE SaveFile_id = '" + GetUserID() + "'";
+            MySqlCommand cmd6 = new MySqlCommand(sql6, conn);
+            MySqlDataReader rdr6 = cmd6.ExecuteReader();
+            rdr6.Read();
+            SaveFileTimeDateText.Text = "TimeDate: " + rdr6[0].ToString();
+            rdr6.Close();
+
         }
 
        
@@ -198,7 +207,7 @@ namespace FortechAdminUtilityTool
             
             else
             {
-                string message = "Can't ban user: make sure you connect to the database and select a User first";
+                string message = "Can't ban user: make sure you connect to the database and select a valid User first";
                 string title = "Can't ban user";
                 MessageBox.Show(message, title);
             }
@@ -230,7 +239,7 @@ namespace FortechAdminUtilityTool
             }
             else
             {
-                string message = "Can't clear SaveFile: make sure you connect to the database and select a User first";
+                string message = "Can't clear SaveFile: make sure you connect to the database and select a valid User first";
                 string title = "Can't clear SaveFile";
                 MessageBox.Show(message, title);
             }
@@ -252,14 +261,24 @@ namespace FortechAdminUtilityTool
 
         private void UpdateSaveFileButton_Click(object sender, EventArgs e)
         {
-            string sql = "UPDATE SaveFiles SET SaveFile_file = " + "'" + Base64Encode(SaveFileDataTextBox.Text) + "'" + " WHERE SaveFile_id = " + GetUserID();
-            MySqlCommand cmd = new MySqlCommand(sql, conn);
-            MySqlDataReader rdr = cmd.ExecuteReader();
-            rdr.Close();
+            if(SQLconnectionState == 1 && chosenUserName != null)
+            {
+                string sql = "UPDATE SaveFiles SET SaveFile_file = " + "'" + Base64Encode(SaveFileDataTextBox.Text) + "'" + " WHERE SaveFile_id = " + GetUserID();
+                MySqlCommand cmd = new MySqlCommand(sql, conn);
+                MySqlDataReader rdr = cmd.ExecuteReader();
+                rdr.Close();
 
-            string message = "Successfully updated SaveFile";
-            string title = "Updated SaveFile";
-            MessageBox.Show(message, title);
+                string message = "Successfully updated SaveFile";
+                string title = "Updated SaveFile";
+                MessageBox.Show(message, title);
+            }
+            else
+            {
+                string message = "Can't update SaveFile: make sure you connect to the database and select a valid User first";
+                string title = "Can't update SaveFile";
+                MessageBox.Show(message, title);
+            }
+
         }
 
         string Base64Encode(string plainText)
@@ -272,6 +291,29 @@ namespace FortechAdminUtilityTool
         {
             var base64EncodedBytes = System.Convert.FromBase64String(base64EncodedData);
             return System.Text.Encoding.UTF8.GetString(base64EncodedBytes);
+        }
+
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+            if (SQLconnectionState == 1 && chosenUserName != null)
+            {
+                string UpdatedDate = System.DateTime.Now.ToString("yyyy/MM/dd hh:mm:ss");
+                string sql = "UPDATE SaveFiles SET SaveFile_datum = '" + UpdatedDate + "' WHERE SaveFile_id = '" + GetUserID() + "'";
+                MySqlCommand cmd = new MySqlCommand(sql, conn);
+                cmd.ExecuteNonQuery();
+
+                SaveFileTimeDateText.Text = "TimeDate: " + UpdatedDate;
+
+                string message = "Successfully updated TimeDate to " + UpdatedDate;
+                string title = "Updated TimeDate";
+                MessageBox.Show(message, title);
+            }
+            else
+            {
+                string message = "Can't set DateTime: make sure you connect to the database and select a valid User first";
+                string title = "Can't set DateTime";
+                MessageBox.Show(message, title);
+            }
         }
     }
 }
