@@ -11,6 +11,18 @@ public class databaseSync : MonoBehaviour
     // 0: connecting 1: connection successful 2: logged in 3: connection failed
     public int SQLconnectionState = 0; 
     [SerializeField] string SaveFileName = "SaveData.es3";
+    [SerializeField] MessageBoxManager msgBox;
+
+    [Space]
+    [Header("Messages")]
+    [SerializeField] MessageBoxScriptableObject failedToConnectToDatabase;
+    [SerializeField] MessageBoxScriptableObject LoginSuccessfully;
+    [SerializeField] MessageBoxScriptableObject PasswordInvalid; 
+    [SerializeField] MessageBoxScriptableObject RegisteredSuccessfully;
+    [SerializeField] MessageBoxScriptableObject UserDoesNotExist;
+    [SerializeField] MessageBoxScriptableObject UsernameAlreadyTaken;
+    [SerializeField] MessageBoxScriptableObject UsernameTooShort;
+    [SerializeField] MessageBoxScriptableObject SaveFileSyncedSuccessfully;
     
     MySqlConnection conn;
 
@@ -69,12 +81,14 @@ public class databaseSync : MonoBehaviour
                 {
                     SQLconnectionState = 2;
                     rdr.Close();
-                    Debug.Log("User doess exist");
+                    Debug.Log("User does exist");
+                    msgBox.MessageBox(LoginSuccessfully);
                 }
                 else
                 {
                     Debug.LogError("User does not exist");
                     rdr.Close();
+                    msgBox.ErrorMessageBox(UserDoesNotExist);
                 }
 
             }
@@ -82,6 +96,7 @@ public class databaseSync : MonoBehaviour
             catch (System.Exception ex)
             {
                 Debug.LogError(ex.ToString());
+                msgBox.ErrorMessageBox(UserDoesNotExist);
             }
 
             try
@@ -156,7 +171,7 @@ public class databaseSync : MonoBehaviour
             //Both SaveFile are equally old
             else if (result == 0)
             {
-                Debug.Log("Both SaveFile are equally old"); 
+                Debug.Log("Both SaveFiles are equally old"); 
             }
 
             //Online SaveFile is older than local SaveFile
@@ -178,9 +193,89 @@ public class databaseSync : MonoBehaviour
         }
         else
         {
-            //can not login when database is not connected
+            //can not login when database is not connected 
+            msgBox.ErrorMessageBox(failedToConnectToDatabase);
+            return;
         }
+
+        //We can put this back in when the login process is moved to another thread
+        //msgBox.MessageBox(SaveFileSyncedSuccessfully);
     }
+    
+    public void Register (string Username, string Password)
+    {
+        //TODO Check if username is valid 
+        
+        if(Username.Length > 2)
+        {
+            //Username lengh OK
+        }
+        else
+        {
+            //Username too short 
+            msgBox.ErrorMessageBox(UsernameTooShort);
+            return;
+        }
+
+        MySqlDataReader rdr = null;
+        try
+        {
+            string sql = "SELECT User_name FROM User WHERE User_name = '" + Username + "' ";
+            MySqlCommand cmd = new MySqlCommand(sql, conn);
+            rdr = cmd.ExecuteReader();
+            rdr.Read();
+
+            if (Username == rdr[0].ToString())
+            {
+                //Username already taken  
+                msgBox.ErrorMessageBox(UsernameAlreadyTaken);
+                return;
+            }
+            else
+            {
+                //Username available (it always throws an exeption when query output is Null so this is kinda pointless)
+            }
+            rdr.Close();
+        }
+        catch(System.Exception ex)
+        {
+            Debug.LogError(ex);
+            rdr.Close();
+        }
+        
+
+        //Check if Password has Upper- and Lowercase letters + digits
+        bool hasUpper = false; bool hasLower = false; bool hasDigit = false;
+        for (int i = 0; i < Password.Length && !(hasUpper && hasLower && hasDigit); i++)
+        {
+            char c = Password[i];
+            if (!hasUpper) hasUpper = char.IsUpper(c);
+            if (!hasLower) hasLower = char.IsLower(c);
+            if (!hasDigit) hasDigit = char.IsDigit(c);
+        }
+
+        //Check if password is valid 
+        if (Password.Length >= 4 && hasUpper == true && hasLower == true && hasDigit == true)
+        {
+            //Password is alright
+        }
+        else
+        {
+            //Password is not valid 
+            msgBox.ErrorMessageBox(PasswordInvalid);
+            return;
+        }
+
+
+        //Create new account
+        string sql2 = "INSERT INTO User (User_name, User_password, User_banned) VALUES ('" + Username + "', '" + Password + "', '0')";
+        MySqlCommand cmd2 = new MySqlCommand(sql2, conn);
+        cmd2.ExecuteNonQuery();
+        msgBox.MessageBox(RegisteredSuccessfully); 
+
+        //TODO handle SaveFile Table
+    }
+    
 
     string Base64Encode(string plainText)
     {

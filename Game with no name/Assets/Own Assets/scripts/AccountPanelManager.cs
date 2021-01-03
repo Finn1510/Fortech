@@ -28,14 +28,22 @@ public class AccountPanelManager : MonoBehaviour
     //This is a terrible way of doing this but I couldn't think of anything diffrent because the panel 
     //always thought it has to close when the pointer is over a button and not over a panel
 
-    public void LoginButtoClicked()
+    public void LoginButtonClicked()
     {
         string Username = UsernameInputfield.text;
         string Password = PasswordInputfield.text;
 
         DatabaseSystem.Login(Username, Password);
     }
-    
+
+    public void RegisterButtonClicked()
+    {
+        string Username = UsernameInputfield.text;
+        string Password = PasswordInputfield.text;
+
+        DatabaseSystem.Register(Username, Password);
+    }
+
     private void Update()
     {
         if(MouseOverPanel == true)
