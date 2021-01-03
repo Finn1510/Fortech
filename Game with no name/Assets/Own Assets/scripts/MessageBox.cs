@@ -21,8 +21,15 @@ public class MessageBox : MonoBehaviour
 
     public void ExitButtonClick()
     {
-        MessageBoxAnimator.SetTrigger("MessageBoxExit");       
+        MessageBoxAnimator.SetTrigger("MessageBoxExit");
+        StartCoroutine(DestroyDelay());
     }
 
-    
+    //delete Popup window after 5 seconds
+    IEnumerator DestroyDelay()
+    {
+        yield return new WaitForSeconds(5);
+        Destroy(gameObject);
+    }
+
 }
