@@ -4,6 +4,8 @@ using UnityEngine;
 using MySql.Data;
 using MySql.Data.MySqlClient;
 using System.IO;
+using System.Threading;
+using System;
 
 
 public class databaseSync : MonoBehaviour
@@ -26,15 +28,35 @@ public class databaseSync : MonoBehaviour
     
     MySqlConnection conn;
 
+    string TempUsername;
+    string TempPassword;
+    bool LoginButtonClicked = false;
+    bool RegisterButtonClicked = false;
+    string LocalLastTimeSaved;
+    string LocalSaveFilePath;
+    string LocalSaveFileData;
 
     // Start is called before the first frame update
     void Start()
+    {
+        LocalLastTimeSaved = ES3.Load<string>("LastSaved");
+        LocalSaveFilePath = Application.persistentDataPath + "/" + SaveFileName;
+        LocalSaveFileData = ES3.LoadRawString(SaveFileName);
+
+
+        ThreadStart ThreadRef = new ThreadStart(ConnectToDatabase);
+        Thread ConnectThread = new Thread(ThreadRef);
+        ConnectThread.Start();
+
+    }   
+
+    void ConnectToDatabase()
     {
         //connection parameters
         string connparams = "server=johnny.heliohost.org;user=finn15_FortechUser;database=finn15_InformatikProjekt;port=3306;password=averystrongpassword";
 
         conn = new MySqlConnection(connparams);
-
+    
         //try to connect to database 
         try
         {
@@ -48,25 +70,38 @@ public class databaseSync : MonoBehaviour
         {
             Debug.Log(ex.ToString());
             SQLconnectionState = 2;
-        }
+        } 
+    }
+    
+    
 
-    }   
+    public void ExecuteLogin(string Username, string Password)
+    {
+        ThreadStart ThreadRef = new ThreadStart(() => Login(Username, Password));
+        Thread LoginThread = new Thread(ThreadRef);
+        LoginThread.Start();
+    }
+
+    public void ExecuteRegister(string Username, string Password)
+    {
+        ThreadStart ThreadRef = new ThreadStart(() => Register(Username, Password));
+        Thread RegisterThread = new Thread(ThreadRef);
+        RegisterThread.Start();
+    }
 
     public void Login(string Username, string Password)
     {
-        //for some reason the compiler wants me to assign these local variable when I am trying to use it 
-        string LocalLastTimeSaved = null;
+        //for some reason the compiler wants me to assign these local variables when I am trying to use it 
         string OnlineLastTimeSaved = null;
         string OnlineSaveFileData = null;
         string UserID = null;
-
+        
         if (SQLconnectionState == 1)
         {
             //declare it here so we can close the reader even when we get a exeption
             MySqlDataReader rdr = null;
 
 
-            //TODO how to tell the User that his password is wrong without showing a raw exeption
             try
             {
                 string sql = "SELECT User_name FROM User WHERE User_name = '" + Username + "' AND User_password = " + "'" + Password + "'";
@@ -82,13 +117,14 @@ public class databaseSync : MonoBehaviour
                     SQLconnectionState = 2;
                     rdr.Close();
                     Debug.Log("User does exist");
-                    msgBox.MessageBox(LoginSuccessfully);
+                    Dispatcher.RunOnMainThread(() => PopUpWindow(LoginSuccessfully));
+
                 }
                 else
                 {
                     Debug.LogError("User does not exist");
                     rdr.Close();
-                    msgBox.ErrorMessageBox(UserDoesNotExist);
+                    Dispatcher.RunOnMainThread(() => PopUpWindow(UserDoesNotExist));
                 }
 
             }
@@ -96,7 +132,8 @@ public class databaseSync : MonoBehaviour
             catch (System.Exception ex)
             {
                 Debug.LogError(ex.ToString());
-                msgBox.ErrorMessageBox(UserDoesNotExist);
+                Dispatcher.RunOnMainThread(() => PopUpWindow(UserDoesNotExist));
+
             }
 
             try
@@ -104,7 +141,6 @@ public class databaseSync : MonoBehaviour
                 // _sync saveFile_
 
                 //Get local SaveFile DateTime
-                LocalLastTimeSaved = ES3.Load<string>("LastSaved");
                 Debug.Log("Local last Saved: " + LocalLastTimeSaved);
 
                 //Get Online SaveFile DateTime
@@ -153,8 +189,6 @@ public class databaseSync : MonoBehaviour
             //check which SaveFile is newer 
             int result = System.DateTime.Compare(convertedLocalSaveFileTime, convertedOnlineSaveFile);
 
-            string LocalSaveFilePath = Application.persistentDataPath + "/" + SaveFileName;
-
             //Online saveFile is newer than local SaveFile
             if (result < 0)
             {
@@ -164,7 +198,7 @@ public class databaseSync : MonoBehaviour
                 File.WriteAllText(LocalSaveFilePath, Base64Decode(OnlineSaveFileData));
 
                 //update LocalLast Saved DateTime
-                ES3.Save<string>("LastSaved", OnlineLastTimeSaved);
+                Dispatcher.RunOnMainThread(() => ES3.Save<string>("LastSaved", OnlineLastTimeSaved));
 
             }
             
@@ -180,7 +214,7 @@ public class databaseSync : MonoBehaviour
                 Debug.Log("Online SaveFile is older than local SaveFile");
 
                 //Update Online SaveFiles (we have to encode the SaveFile into Base64 format because the " symbols in the SaveFile confuse MySQL)
-                string sql5 = "UPDATE SaveFiles SET SaveFile_file = '" + Base64Encode(ES3.LoadRawString(SaveFileName)) + "' WHERE SaveFile_id = '" + UserID + "'";
+                string sql5 = "UPDATE SaveFiles SET SaveFile_file = '" + Base64Encode(LocalSaveFileData) + "' WHERE SaveFile_id = '" + UserID + "'";
                 MySqlCommand cmd5 = new MySqlCommand(sql5, conn);
                 cmd5.ExecuteNonQuery();
 
@@ -194,14 +228,16 @@ public class databaseSync : MonoBehaviour
         else
         {
             //can not login when database is not connected 
-            msgBox.ErrorMessageBox(failedToConnectToDatabase);
+            Dispatcher.RunOnMainThread(() => PopUpWindow(failedToConnectToDatabase));
+
             return;
         }
 
         //We can put this back in when the login process is moved to another thread
-        //msgBox.MessageBox(SaveFileSyncedSuccessfully);
+        Dispatcher.RunOnMainThread(() => PopUpWindow(SaveFileSyncedSuccessfully));
+
     }
-    
+
     public void Register (string Username, string Password)
     {
         //TODO Check if username is valid 
@@ -275,7 +311,12 @@ public class databaseSync : MonoBehaviour
 
         //TODO handle SaveFile Table
     }
+
     
+    void PopUpWindow(MessageBoxScriptableObject msg)
+    {
+        msgBox.ErrorMessageBox(msg);
+    }
 
     string Base64Encode(string plainText)
     {

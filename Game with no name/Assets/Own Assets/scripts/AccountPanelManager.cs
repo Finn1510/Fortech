@@ -33,7 +33,7 @@ public class AccountPanelManager : MonoBehaviour
         string Username = UsernameInputfield.text;
         string Password = PasswordInputfield.text;
 
-        DatabaseSystem.Login(Username, Password);
+        DatabaseSystem.ExecuteLogin(Username, Password);
     }
 
     public void RegisterButtonClicked()
@@ -41,7 +41,7 @@ public class AccountPanelManager : MonoBehaviour
         string Username = UsernameInputfield.text;
         string Password = PasswordInputfield.text;
 
-        DatabaseSystem.Register(Username, Password);
+        DatabaseSystem.ExecuteRegister(Username, Password);
     }
 
     private void Update()
