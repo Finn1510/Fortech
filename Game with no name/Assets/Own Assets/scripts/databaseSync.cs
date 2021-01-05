@@ -249,7 +249,7 @@ public class databaseSync : MonoBehaviour
         else
         {
             //Username too short 
-            msgBox.ErrorMessageBox(UsernameTooShort);
+            Dispatcher.RunOnMainThread(() => PopUpWindow(UsernameTooShort));
             return;
         }
 
@@ -264,7 +264,7 @@ public class databaseSync : MonoBehaviour
             if (Username == rdr[0].ToString())
             {
                 //Username already taken  
-                msgBox.ErrorMessageBox(UsernameAlreadyTaken);
+                Dispatcher.RunOnMainThread(() => PopUpWindow(UsernameAlreadyTaken));
                 return;
             }
             else
@@ -298,7 +298,7 @@ public class databaseSync : MonoBehaviour
         else
         {
             //Password is not valid 
-            msgBox.ErrorMessageBox(PasswordInvalid);
+            Dispatcher.RunOnMainThread(() => PopUpWindow(PasswordInvalid));
             return;
         }
 
@@ -307,7 +307,7 @@ public class databaseSync : MonoBehaviour
         string sql2 = "INSERT INTO User (User_name, User_password, User_banned) VALUES ('" + Username + "', '" + Password + "', '0')";
         MySqlCommand cmd2 = new MySqlCommand(sql2, conn);
         cmd2.ExecuteNonQuery();
-        msgBox.MessageBox(RegisteredSuccessfully); 
+        Dispatcher.RunOnMainThread(() => PopUpWindow(RegisteredSuccessfully));
 
         //TODO handle SaveFile Table
     }
