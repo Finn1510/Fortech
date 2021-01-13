@@ -6,7 +6,7 @@ using MySql.Data.MySqlClient;
 using System.IO;
 using System.Threading;
 using System;
-
+using System.Drawing;
 
 public class databaseSync : MonoBehaviour
 {
@@ -35,6 +35,9 @@ public class databaseSync : MonoBehaviour
     string LocalLastTimeSaved;
     string LocalSaveFilePath;
     string LocalSaveFileData;
+    
+    //0=connecting to Database 1=Connected to database 2=Loggin in 3=Logged 4= Syncing 5=Synced in 6=Registering 7=Registered
+    public int StatusID = 0;
 
     // Start is called before the first frame update
     void Start()
@@ -64,6 +67,7 @@ public class databaseSync : MonoBehaviour
             conn.Open();
             Debug.Log("Database connected");
             SQLconnectionState = 1;
+            StatusID = 1;
 
         }
         catch (System.Exception ex)
@@ -100,7 +104,7 @@ public class databaseSync : MonoBehaviour
         {
             //declare it here so we can close the reader even when we get a exeption
             MySqlDataReader rdr = null;
-
+            StatusID = 2;
 
             try
             {
@@ -118,6 +122,7 @@ public class databaseSync : MonoBehaviour
                     rdr.Close();
                     Debug.Log("User does exist");
                     Dispatcher.RunOnMainThread(() => PopUpWindow(LoginSuccessfully));
+                    StatusID = 3;
 
                 }
                 else
@@ -139,6 +144,7 @@ public class databaseSync : MonoBehaviour
             try
             {
                 // _sync saveFile_
+                StatusID = 4;
 
                 //Get local SaveFile DateTime
                 Debug.Log("Local last Saved: " + LocalLastTimeSaved);
@@ -235,13 +241,15 @@ public class databaseSync : MonoBehaviour
 
         //We can put this back in when the login process is moved to another thread
         Dispatcher.RunOnMainThread(() => PopUpWindow(SaveFileSyncedSuccessfully));
+        StatusID = 5;
 
     }
 
     public void Register (string Username, string Password)
     {
         //TODO Check if username is valid 
-        
+        StatusID = 6;
+
         if(Username.Length > 2)
         {
             //Username lengh OK
@@ -308,6 +316,7 @@ public class databaseSync : MonoBehaviour
         MySqlCommand cmd2 = new MySqlCommand(sql2, conn);
         cmd2.ExecuteNonQuery();
         Dispatcher.RunOnMainThread(() => PopUpWindow(RegisteredSuccessfully));
+        StatusID = 7;
 
         //TODO handle SaveFile Table
     }
