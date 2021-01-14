@@ -120,12 +120,13 @@ public class databaseSync : MonoBehaviour
                     SQLconnectionState = 2;
                     rdr.Close();
                     Debug.Log("User does exist");
-                    StatusID = 3;
+                    StatusID = 1;
 
                 }
                 else
                 {
                     Debug.LogError("User does not exist");
+                    StatusID = 1;
                     rdr.Close();
                     Dispatcher.RunOnMainThread(() => PopUpWindow(UserDoesNotExist));
                 }
@@ -183,6 +184,7 @@ public class databaseSync : MonoBehaviour
             catch (System.Exception ex)
             {
                 Debug.LogError(ex.ToString());
+                StatusID = 1;
             }
 
             System.DateTime convertedLocalSaveFileTime = System.DateTime.Parse(LocalLastTimeSaved);
@@ -233,11 +235,9 @@ public class databaseSync : MonoBehaviour
         {
             //can not login when database is not connected 
             Dispatcher.RunOnMainThread(() => PopUpWindow(failedToConnectToDatabase));
-
+            StatusID = 1;
             return;
         }
-
-        //We can put this back in when the login process is moved to another thread
         StatusID = 5;
 
     }
@@ -255,6 +255,7 @@ public class databaseSync : MonoBehaviour
         {
             //Username too short 
             Dispatcher.RunOnMainThread(() => PopUpWindow(UsernameTooShort));
+            StatusID = 1;
             return;
         }
 
@@ -270,6 +271,7 @@ public class databaseSync : MonoBehaviour
             {
                 //Username already taken  
                 Dispatcher.RunOnMainThread(() => PopUpWindow(UsernameAlreadyTaken));
+                StatusID = 1;
                 return;
             }
             else
@@ -280,6 +282,7 @@ public class databaseSync : MonoBehaviour
         }
         catch(System.Exception ex)
         {
+            StatusID = 1;
             Debug.LogError(ex);
             rdr.Close();
         }
@@ -304,6 +307,7 @@ public class databaseSync : MonoBehaviour
         {
             //Password is not valid 
             Dispatcher.RunOnMainThread(() => PopUpWindow(PasswordInvalid));
+            StatusID = 1;
             return;
         }
 
