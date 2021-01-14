@@ -12,45 +12,109 @@ public class Statusbar : MonoBehaviour
     [SerializeField] databaseSync Databasesystem;
     [SerializeField] TMP_Text Statustext;
     [SerializeField] Image StatusbarPanel;
-    
+    [SerializeField] Rigidbody2D LoadingBob;
+   
+    //same principle as StatusID this is used to check if we already tweened the color for this statusID
+    int TweenStatus;
+
     // Update is called once per frame
     void Update()
     {
-        //TODO fix having thousands of Tweens cuz its every frame
+        Debug.Log(LoadingBob.angularVelocity);
         switch (Databasesystem.StatusID)
         {
             case 0:
                 Statustext.SetText("Connecting to Database");
-                StatusbarPanel.DOColor(new Color32(231, 207, 0, 255), 2).From();
+                SetLoadingBobRotationVelocity(500);
+                if (TweenStatus != 0)
+                {
+                    //StatusbarPanel.DOColor(new Color32(231, 207, 0, 255), 1).From();
+                    DOTween.To(() => StatusbarPanel.color, x => StatusbarPanel.color = x, new Color32(231, 207, 0, 255), 1);
+                    TweenStatus = 0;
+                }
                 break;
             case 1:
                 Statustext.SetText("Connected to Database");
-                StatusbarPanel.DOColor(new Color32(56, 169, 39, 255), 2).From();
+                if (TweenStatus != 1)
+                {
+                    //StatusbarPanel.DOColor(new Color32(56, 169, 39, 255), 1).From();
+                    DOTween.To(() => StatusbarPanel.color, x => StatusbarPanel.color = x, new Color32(56, 169, 39, 255), 1);
+                    TweenStatus = 1;
+                    StopLoadingBob();
+                }
                 break;
             case 2:
                 Statustext.SetText("logging in");
-                StatusbarPanel.DOColor(new Color32(231, 207, 0, 255), 2).From();
+                SetLoadingBobRotationVelocity(500);
+                if (TweenStatus != 2)
+                {
+                    //StatusbarPanel.DOColor(new Color32(231, 207, 0, 255), 1).From();
+                    DOTween.To(() => StatusbarPanel.color, x => StatusbarPanel.color = x, new Color32(231, 207, 0, 255), 1);
+                    TweenStatus = 2;
+                }
                 break;
             case 3:
                 Statustext.SetText("logged in");
-                StatusbarPanel.DOColor(new Color32(56, 169, 39, 255), 2).From();
+                if (TweenStatus != 3)
+                {
+                    //StatusbarPanel.DOColor(new Color32(56, 169, 39, 255), 1).From();
+                    DOTween.To(() => StatusbarPanel.color, x => StatusbarPanel.color = x, new Color32(56, 169, 39, 255), 1);
+                    TweenStatus = 3;
+                    StopLoadingBob();
+                }
                 break;
             case 4:
                 Statustext.SetText("Syncing");
-                StatusbarPanel.DOColor(new Color32(0, 225, 231, 255), 2).From();
+                SetLoadingBobRotationVelocity(500);
+                if (TweenStatus != 4)
+                {
+                    //StatusbarPanel.DOColor(new Color32(0, 225, 231, 255), 1).From();
+                    DOTween.To(() => StatusbarPanel.color, x => StatusbarPanel.color = x, new Color32(0, 225, 231, 255), 1);
+                    TweenStatus = 4;
+                }
                 break;
             case 5:
                 Statustext.SetText("Synced");
-                StatusbarPanel.DOColor(new Color32(56, 169, 39, 255), 2).From();
+                if (TweenStatus != 5)
+                {
+                    //StatusbarPanel.DOColor(new Color32(56, 169, 39, 255), 1).From();
+                    DOTween.To(() => StatusbarPanel.color, x => StatusbarPanel.color = x, new Color32(56, 169, 39, 255), 1);
+                    TweenStatus = 5;
+                    StopLoadingBob();
+                }
                 break;
             case 6:
                 Statustext.SetText("Registering");
-                StatusbarPanel.DOColor(new Color32(231, 207, 0, 255), 2).From();
+                SetLoadingBobRotationVelocity(500);
+                if (TweenStatus != 6)
+                {
+                    //StatusbarPanel.DOColor(new Color32(231, 207, 0, 255), 1).From();
+                    DOTween.To(() => StatusbarPanel.color, x => StatusbarPanel.color = x, new Color32(231, 207, 0, 255), 1);
+                    TweenStatus = 6;
+                }
                 break;
             case 7:
                 Statustext.SetText("Registered");
-                StatusbarPanel.DOColor(new Color32(56, 169, 39, 255), 2).From();
+                if (TweenStatus != 7)
+                {
+                    //StatusbarPanel.DOColor(new Color32(56, 169, 39, 255), 1).From();
+                    DOTween.To(() => StatusbarPanel.color, x => StatusbarPanel.color = x, new Color32(56, 169, 39, 255), 1);
+                    TweenStatus = 7;
+                    StopLoadingBob();
+                }
                 break;
+        } 
+        
+        void SetLoadingBobRotationVelocity(float amount)
+        {
+            LoadingBob.angularVelocity = amount;
         }
+
+        void StopLoadingBob()
+        {
+            DOTween.To(() => LoadingBob.angularVelocity, x => LoadingBob.angularVelocity = x, 0f, 1);
+        }
+
+        
     }
 }
