@@ -20,7 +20,6 @@ public class Statusbar : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(LoadingBob.angularVelocity);
         switch (Databasesystem.StatusID)
         {
             case 0:

@@ -18,13 +18,11 @@ public class databaseSync : MonoBehaviour
     [Space]
     [Header("Messages")]
     [SerializeField] MessageBoxScriptableObject failedToConnectToDatabase;
-    [SerializeField] MessageBoxScriptableObject LoginSuccessfully;
     [SerializeField] MessageBoxScriptableObject PasswordInvalid; 
     [SerializeField] MessageBoxScriptableObject RegisteredSuccessfully;
     [SerializeField] MessageBoxScriptableObject UserDoesNotExist;
     [SerializeField] MessageBoxScriptableObject UsernameAlreadyTaken;
     [SerializeField] MessageBoxScriptableObject UsernameTooShort;
-    [SerializeField] MessageBoxScriptableObject SaveFileSyncedSuccessfully;
     
     MySqlConnection conn;
 
@@ -73,6 +71,7 @@ public class databaseSync : MonoBehaviour
         catch (System.Exception ex)
         {
             Debug.Log(ex.ToString());
+            Dispatcher.RunOnMainThread(() => PopUpWindow(failedToConnectToDatabase));
             SQLconnectionState = 2;
         } 
     }
@@ -121,7 +120,6 @@ public class databaseSync : MonoBehaviour
                     SQLconnectionState = 2;
                     rdr.Close();
                     Debug.Log("User does exist");
-                    Dispatcher.RunOnMainThread(() => PopUpWindow(LoginSuccessfully));
                     StatusID = 3;
 
                 }
@@ -240,7 +238,6 @@ public class databaseSync : MonoBehaviour
         }
 
         //We can put this back in when the login process is moved to another thread
-        Dispatcher.RunOnMainThread(() => PopUpWindow(SaveFileSyncedSuccessfully));
         StatusID = 5;
 
     }
