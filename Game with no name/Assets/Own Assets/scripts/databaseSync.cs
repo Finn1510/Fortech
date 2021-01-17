@@ -282,7 +282,6 @@ public class databaseSync : MonoBehaviour
         }
         catch(System.Exception ex)
         {
-            StatusID = 1;
             Debug.LogError(ex);
             rdr.Close();
         }
@@ -316,10 +315,23 @@ public class databaseSync : MonoBehaviour
         string sql2 = "INSERT INTO User (User_name, User_password, User_banned) VALUES ('" + Username + "', '" + Password + "', '0')";
         MySqlCommand cmd2 = new MySqlCommand(sql2, conn);
         cmd2.ExecuteNonQuery();
+
+        //get our User ID
+        string sql3 = "SELECT User_id FROM User WHERE User_name = '" + Username + "' ";
+        MySqlCommand cmd3 = new MySqlCommand(sql3, conn);
+        rdr = cmd3.ExecuteReader();
+        rdr.Read();
+        string UserID = rdr[0].ToString();
+        rdr.Close();
+
+        //handle SaveFile Table   (with placeholder DateTime and SaveFile data)
+        string sql4 = "INSERT INTO SaveFiles (SaveFile_id, SaveFile_file, SaveFile_datum) VALUES ('" + UserID + "', 'nothing here yet', '2015-01-01 00:00:00')";
+        MySqlCommand cmd4 = new MySqlCommand(sql4, conn);
+        cmd4.ExecuteNonQuery();
+
+
         Dispatcher.RunOnMainThread(() => PopUpWindow(RegisteredSuccessfully));
         StatusID = 7;
-
-        //TODO handle SaveFile Table
     }
 
     
