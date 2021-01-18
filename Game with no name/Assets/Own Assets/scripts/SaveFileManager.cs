@@ -6,6 +6,10 @@ public class SaveFileManager : MonoBehaviour
 {
     string currentTime;
     [SerializeField] string LastTimeSaved;
+    [SerializeField] int AutoSaveIntervallMinutes;
+    [SerializeField] GameObject[] SaveGameObjects;
+
+    int AutoSaveIntervallSeconds;
 
     private void Start()
     {
@@ -13,17 +17,43 @@ public class SaveFileManager : MonoBehaviour
         {
             LastTimeSaved = ES3.Load<string>("LastSaved");
         }
+
+        AutoSaveIntervallSeconds = AutoSaveIntervallMinutes * 60;
+        AutoSave(AutoSaveIntervallSeconds);
         
     }
 
-    private void OnApplicationQuit()
+
+    void AutoSave(int Delay)
     {
-        Save();
+        SaveEverything();
+        StartCoroutine(AutoSaveDelay(Delay));
     }
 
-    void Save()
+    IEnumerator AutoSaveDelay(int Delay)
+    {
+        yield return new WaitForSeconds(Delay);
+        AutoSave(Delay);
+    }
+    
+    void SaveEverything()
+    {
+        foreach (GameObject GO in SaveGameObjects)
+        {
+            GO.SendMessage("Save");
+        }
+    }
+
+    public void Save()
     {
         currentTime = System.DateTime.Now.ToString("yyyy/MM/dd hh:mm:ss");
         ES3.Save<string>("LastSaved", currentTime);
     }
+
+    private void OnApplicationQuit()
+    {
+        SaveEverything();
+    }
+
+
 }

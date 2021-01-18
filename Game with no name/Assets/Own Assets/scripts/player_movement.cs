@@ -368,12 +368,14 @@ public class player_movement : MonoBehaviour
         Healthtext.text = amount.ToString();
     }
 
-    void Save()
+    public void Save()
     {
         ES3.Save<List<Item>>("inventoryList", inventory.GetItemList());
         ES3.Save<Item>("heldItemType", heldItem);
         
         ES3.Save<float>("PlayerHealth", Health);
+
+        Debug.Log("Player Saved");
     }
 
     void Load()
@@ -394,9 +396,5 @@ public class player_movement : MonoBehaviour
         }
     }
 
-    private void OnApplicationQuit()
-    {
-        Save();
-    }
-
+   
 }

@@ -10,7 +10,7 @@ public class PlayerStats : MonoBehaviour
     public int ZombiesKilled;
     public int CrazyEyesKilled;
 
-    void Save()
+    public void Save()
     {
         ES3.Save<int>("ShotsFired", ShotsFired);
         ES3.Save<float>("DamageDealed", DamageDealed);
@@ -18,6 +18,7 @@ public class PlayerStats : MonoBehaviour
         ES3.Save<int>("ZombiesKilled", ZombiesKilled);
         ES3.Save<int>("CrazyEyesKilled", CrazyEyesKilled);
 
+        Debug.Log("PlayerStats Saved");
     } 
 
     void Load()
@@ -39,8 +40,4 @@ public class PlayerStats : MonoBehaviour
         
     }
 
-    private void OnApplicationQuit()
-    {
-        Save();
-    }
 }

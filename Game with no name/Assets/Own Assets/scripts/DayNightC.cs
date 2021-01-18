@@ -168,15 +168,10 @@ public class DayNightC : MonoBehaviour
         theMethod.Invoke(this, null);
     }  
 
-    void Save()
+    public void Save()
     {
         ES3.Save<int>("currentStateIndex", StateIndex);
+        Debug.Log("DayNightCycle Saved");
     }
-
-    private void OnApplicationQuit()
-    {
-        Save();
-    }
-
 
 }
