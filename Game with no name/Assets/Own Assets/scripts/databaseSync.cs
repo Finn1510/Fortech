@@ -26,6 +26,7 @@ public class databaseSync : MonoBehaviour
     
     MySqlConnection conn;
 
+    ES3File tempfile;
     string TempUsername;
     string TempPassword;
     bool LoginButtonClicked = false;
@@ -44,7 +45,21 @@ public class databaseSync : MonoBehaviour
         LocalSaveFilePath = Application.persistentDataPath + "/" + SaveFileName;
         LocalSaveFileData = ES3.LoadRawString(SaveFileName);
 
-
+        ES3Settings settings = new ES3Settings(ES3.EncryptionType.AES, "!suchStrongPassword!6480324952213159080");
+        
+        if (ES3.FileExists("tempstorage.es3", settings) == false)
+        {
+            Debug.Log("File goin to be Created");
+            File.Create(Application.persistentDataPath + "/tempstorage.es3");
+            Debug.Log("File Created");
+        }
+        else
+        {
+            Debug.Log("File already exists");
+        }
+        //string kek = tempfile.Load<string>("UserID");
+            
+        
         ThreadStart ThreadRef = new ThreadStart(ConnectToDatabase);
         Thread ConnectThread = new Thread(ThreadRef);
         ConnectThread.Start();
@@ -158,6 +173,7 @@ public class databaseSync : MonoBehaviour
                 rdr2.Read();
                 UserID = rdr2[0].ToString();
                 Debug.Log(UserID);
+                Dispatcher.RunOnMainThread(() => tempfile.Save<string>("UserID", UserID));
                 rdr2.Close();
 
                 //Get SaveFile TimeDate
