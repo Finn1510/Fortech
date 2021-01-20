@@ -18,6 +18,7 @@ public class SaveFileManager : MonoBehaviour
     string LocalLastTimeSaved;
     string LocalSaveFilePath;
     string LocalSaveFileData;
+    string UserID;
     
     // 0: connecting 1: connection successful 2: logged in 3: connection failed
     public int SQLconnectionState = 0;
@@ -69,6 +70,8 @@ public class SaveFileManager : MonoBehaviour
     private void OnApplicationQuit()
     {
         SaveEverything();
+        ConnectToDatabase();
+        SaveFileSync();
     }
 
 
@@ -92,13 +95,33 @@ public class SaveFileManager : MonoBehaviour
         catch(System.Exception ex)
         {
             Debug.Log(ex.ToString());
-            SQLconnectionState = 2;
+            SQLconnectionState = 3;
+        }
+
+        if (ES3.FileExists("usr.es3"))
+        {
+            try
+            {
+                
+                UserID = ES3.Load<string>("UserID", "usr.es3");
+                SQLconnectionState = 2;
+            }
+            catch(System.Exception ex)
+            {
+                Debug.Log(ex.ToString());
+                SQLconnectionState = 3;
+            }
+        }
+        else
+        {
+            Debug.Log("User is not logged in");
+            SQLconnectionState = 3;
         }
     }
 
-    void SaveFileSync(string UserID)
+    void SaveFileSync()
     {
-        if(SQLconnectionState == 1)
+        if(SQLconnectionState == 2)
         {
             try
             {
@@ -111,15 +134,17 @@ public class SaveFileManager : MonoBehaviour
                 string sql2 = "UPDATE SaveFiles SET SaveFile_datum = '" + LocalLastTimeSaved + "' WHERE SaveFile_id = '" + UserID + "'";
                 MySqlCommand cmd2 = new MySqlCommand(sql2, conn);
                 cmd2.ExecuteNonQuery();
+                
+                Debug.Log("Synced SaveFile");
             }
             catch (System.Exception ex)
             {
-                Debug.Log(ex.ToString());
+                Debug.LogError(ex.ToString());
             }
         }
         else
         {
-            Debug.Log("Cant Sync SaveFile: we're no logged in");
+            Debug.Log("Cant Sync SaveFile: we're not logged in");
         }
 
     }

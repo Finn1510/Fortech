@@ -26,7 +26,7 @@ public class databaseSync : MonoBehaviour
     
     MySqlConnection conn;
 
-    ES3File tempfile;
+    ES3File usrFile;
     string TempUsername;
     string TempPassword;
     bool LoginButtonClicked = false;
@@ -41,25 +41,37 @@ public class databaseSync : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        //TODO how to deal with first Startup when there is no SaveFile (we're getting an Exeption here)
         LocalLastTimeSaved = ES3.Load<string>("LastSaved");
         LocalSaveFilePath = Application.persistentDataPath + "/" + SaveFileName;
         LocalSaveFileData = ES3.LoadRawString(SaveFileName);
 
-        ES3Settings settings = new ES3Settings(ES3.EncryptionType.AES, "!suchStrongPassword!6480324952213159080");
         
-        if (ES3.FileExists("tempstorage.es3", settings) == false)
+        if (ES3.FileExists("usr.es3") == false)
         {
-            Debug.Log("File goin to be Created");
-            File.Create(Application.persistentDataPath + "/tempstorage.es3");
-            Debug.Log("File Created");
+            /*
+            // Create a file and write a default Json profile
+            using (StreamWriter sw = File.CreateText(Application.persistentDataPath + "/usr.es3"))
+            {
+                sw.WriteLine("{}");
+                sw.Close();
+            }
+            */
+            //File.Create(Application.persistentDataPath + "/usr.es3");
+
+            Debug.Log("File Created"); 
+            
         }
         else
         {
             Debug.Log("File already exists");
         }
-        //string kek = tempfile.Load<string>("UserID");
-            
         
+        usrFile = new ES3File("usr.es3");
+        usrFile.Clear();
+
+        
+
         ThreadStart ThreadRef = new ThreadStart(ConnectToDatabase);
         Thread ConnectThread = new Thread(ThreadRef);
         ConnectThread.Start();
@@ -173,7 +185,7 @@ public class databaseSync : MonoBehaviour
                 rdr2.Read();
                 UserID = rdr2[0].ToString();
                 Debug.Log(UserID);
-                Dispatcher.RunOnMainThread(() => tempfile.Save<string>("UserID", UserID));
+                Dispatcher.RunOnMainThread(() => ES3.Save<string>("UserID", UserID, "usr.es3"));
                 rdr2.Close();
 
                 //Get SaveFile TimeDate
