@@ -102,7 +102,6 @@ public class SaveFileManager : MonoBehaviour
         {
             try
             {
-                
                 UserID = ES3.Load<string>("UserID", "usr.es3");
                 SQLconnectionState = 2;
             }

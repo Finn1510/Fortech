@@ -34,6 +34,8 @@ public class databaseSync : MonoBehaviour
     string LocalLastTimeSaved;
     string LocalSaveFilePath;
     string LocalSaveFileData;
+    bool StartUpWithoutLocalSaveFile = false;
+    bool StartUpWithoutOnlineSaveFile = false;
     
     //0=connecting to Database 1=Connected to database 2=Loggin in 3=Logged 4= Syncing 5=Synced in 6=Registering 7=Registered
     public int StatusID = 0;
@@ -42,23 +44,29 @@ public class databaseSync : MonoBehaviour
     void Start()
     {
         //TODO how to deal with first Startup when there is no SaveFile (we're getting an Exeption here)
-        LocalLastTimeSaved = ES3.Load<string>("LastSaved");
-        LocalSaveFilePath = Application.persistentDataPath + "/" + SaveFileName;
-        LocalSaveFileData = ES3.LoadRawString(SaveFileName);
+        if (ES3.FileExists("usr.es3"))
+        {
+            LocalLastTimeSaved = ES3.Load<string>("LastSaved");
+            LocalSaveFilePath = Application.persistentDataPath + "/" + SaveFileName;
+            LocalSaveFileData = ES3.LoadRawString(SaveFileName);
+        }
+        else
+        {
+            StartUpWithoutLocalSaveFile = true;
+        }
+        
 
         
         if (ES3.FileExists("usr.es3") == false)
         {
-            /*
+            
             // Create a file and write a default Json profile
             using (StreamWriter sw = File.CreateText(Application.persistentDataPath + "/usr.es3"))
             {
                 sw.WriteLine("{}");
                 sw.Close();
             }
-            */
-            //File.Create(Application.persistentDataPath + "/usr.es3");
-
+            
             Debug.Log("File Created"); 
             
         }
@@ -67,11 +75,6 @@ public class databaseSync : MonoBehaviour
             Debug.Log("File already exists");
         }
         
-        usrFile = new ES3File("usr.es3");
-        usrFile.Clear();
-
-        
-
         ThreadStart ThreadRef = new ThreadStart(ConnectToDatabase);
         Thread ConnectThread = new Thread(ThreadRef);
         ConnectThread.Start();
@@ -172,8 +175,7 @@ public class databaseSync : MonoBehaviour
                 // _sync saveFile_
                 StatusID = 4;
 
-                //Get local SaveFile DateTime
-                Debug.Log("Local last Saved: " + LocalLastTimeSaved);
+
 
                 //Get Online SaveFile DateTime
 
@@ -215,25 +217,47 @@ public class databaseSync : MonoBehaviour
                 StatusID = 1;
             }
 
-            System.DateTime convertedLocalSaveFileTime = System.DateTime.Parse(LocalLastTimeSaved);
-            Debug.Log("Converted LocalTime: " + convertedLocalSaveFileTime);
-            System.DateTime convertedOnlineSaveFile = System.DateTime.Parse(OnlineLastTimeSaved);
-            Debug.Log("Converted OnlineTime: " + convertedOnlineSaveFile);
+            int result;
+            if (StartUpWithoutLocalSaveFile == true)
+            {
+                result = -1;
+                System.DateTime convertedOnlineSaveFile = System.DateTime.Parse(OnlineLastTimeSaved);
+                Debug.Log("Converted OnlineTime: " + convertedOnlineSaveFile);
+            }
+            else
+            {
+                //Get local SaveFile DateTime
+                Debug.Log("Local last Saved: " + LocalLastTimeSaved);
+                System.DateTime convertedLocalSaveFileTime = System.DateTime.Parse(LocalLastTimeSaved);
+                Debug.Log("Converted LocalTime: " + convertedLocalSaveFileTime);
+                System.DateTime convertedOnlineSaveFile = System.DateTime.Parse(OnlineLastTimeSaved);
+                Debug.Log("Converted OnlineTime: " + convertedOnlineSaveFile);
 
-            //check which SaveFile is newer 
-            int result = System.DateTime.Compare(convertedLocalSaveFileTime, convertedOnlineSaveFile);
-
+                //check which SaveFile is newer 
+                result = System.DateTime.Compare(convertedLocalSaveFileTime, convertedOnlineSaveFile);
+            }
+            
             //Online saveFile is newer than local SaveFile
             if (result < 0)
             {
                 Debug.Log("Online saveFile is newer than local SaveFile");
 
-                //replace local Savefile data with Online SaveFile Data 
-                File.WriteAllText(LocalSaveFilePath, Base64Decode(OnlineSaveFileData));
 
-                //update LocalLast Saved DateTime
-                Dispatcher.RunOnMainThread(() => ES3.Save<string>("LastSaved", OnlineLastTimeSaved));
+                //Check if the Online SaveFile has Content
+                if (Base64Decode(OnlineSaveFileData) == "nothing here yet")
+                {
+                    StartUpWithoutOnlineSaveFile = true;
+                }
 
+                
+                if(StartUpWithoutOnlineSaveFile == false)
+                {
+                    //replace local Savefile data with Online SaveFile Data 
+                    File.WriteAllText(LocalSaveFilePath, Base64Decode(OnlineSaveFileData));
+
+                    //update LocalLast Saved DateTime
+                    Dispatcher.RunOnMainThread(() => ES3.Save<string>("LastSaved", OnlineLastTimeSaved));
+                }
             }
             
             //Both SaveFile are equally old
@@ -310,7 +334,8 @@ public class databaseSync : MonoBehaviour
         }
         catch(System.Exception ex)
         {
-            Debug.LogError(ex);
+            //Username available (it always throws an exeption when query output is Null)
+            Debug.Log(ex);
             rdr.Close();
         }
         
