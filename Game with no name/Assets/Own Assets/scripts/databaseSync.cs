@@ -378,7 +378,7 @@ public class databaseSync : MonoBehaviour
         rdr.Close();
 
         //handle SaveFile Table   (with placeholder DateTime and SaveFile data)
-        string sql4 = "INSERT INTO SaveFiles (SaveFile_id, SaveFile_file, SaveFile_datum) VALUES ('" + UserID + "', 'nothing here yet', '2015-01-01 00:00:00')";
+        string sql4 = "INSERT INTO SaveFiles (SaveFile_id, SaveFile_file, SaveFile_datum) VALUES ('" + UserID + "', '" + Base64Encode("nothing here yet") + "', '2015-01-01 00:00:00')";
         MySqlCommand cmd4 = new MySqlCommand(sql4, conn);
         cmd4.ExecuteNonQuery();
 
