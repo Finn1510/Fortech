@@ -15,6 +15,7 @@ public class player_movement : MonoBehaviour
     [SerializeField] float VignetteIntensity = 0.25f;
     [SerializeField] float VignetDuration = 0.2f;
     [SerializeField] KeyCode InventoryKey = KeyCode.I;
+    [SerializeField] KeyCode altInventoryCloseKey = KeyCode.Escape;
     float Horizontalmove = 0f;
     float MouseXpos;
 
@@ -140,19 +141,23 @@ public class player_movement : MonoBehaviour
 
         } 
 
-        if(Input.GetKeyDown(InventoryKey) == true)
+        if(Input.GetKeyDown(InventoryKey) == true && Playerdied == false)
         {
-            if(Playerdied == false)
+            if (UI_Inventory.active == false)
             {
-                if (UI_Inventory.active == false)
-                {
-                    UI_Inventory.SetActive(true);
-                }
-                else
-                {
-                    UI_Inventory.SetActive(false);
-                }
+                UI_Inventory.SetActive(true);
+            }
+            else
+            {
+                UI_Inventory.SetActive(false);
+            }
+        }
 
+        if (Input.GetKeyDown(altInventoryCloseKey) == true && Playerdied == false)
+        {
+            if (UI_Inventory.active == true)
+            {
+                UI_Inventory.SetActive(false);
             }
         }
     }
