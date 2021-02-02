@@ -23,6 +23,7 @@ public class databaseSync : MonoBehaviour
     [SerializeField] MessageBoxScriptableObject UserDoesNotExist;
     [SerializeField] MessageBoxScriptableObject UsernameAlreadyTaken;
     [SerializeField] MessageBoxScriptableObject UsernameTooShort;
+    [SerializeField] MessageBoxScriptableObject UserBanned;
     
     MySqlConnection conn;
 
@@ -36,6 +37,7 @@ public class databaseSync : MonoBehaviour
     string LocalSaveFileData;
     bool StartUpWithoutLocalSaveFile = false;
     bool StartUpWithoutOnlineSaveFile = false;
+    bool Userbanned;
     
     //0=connecting to Database 1=Connected to database 2=Loggin in 3=Logged 4= Syncing 5=Synced in 6=Registering 7=Registered
     public int StatusID = 0;
@@ -190,25 +192,64 @@ public class databaseSync : MonoBehaviour
                 Dispatcher.RunOnMainThread(() => ES3.Save<string>("UserID", UserID, "usr.es3"));
                 rdr2.Close();
 
-                //Get SaveFile TimeDate
+
+                //Get User Banned status
+                Debug.Log("Getting User Banned Status");
                 MySqlDataReader rdr3 = null;
-                string sql3 = "SELECT SaveFile_datum FROM SaveFiles WHERE SaveFile_id = '" + UserID + "'";
+                string sql3 = "SELECT User_banned FROM User WHERE User_id = '" + UserID + "'";
                 MySqlCommand cmd3 = new MySqlCommand(sql3, conn);
                 rdr3 = cmd3.ExecuteReader();
                 rdr3.Read();
-                OnlineLastTimeSaved = rdr3[0].ToString();
-                Debug.Log(OnlineLastTimeSaved);
+                Userbanned = Convert.ToBoolean(rdr3[0]);
+                Debug.Log("Raw Query output is: " + rdr3[0] + "Converted Query Output is: " + UserBanned);
                 rdr3.Close();
+                //Debug.Log("UserBanned Status: " + UserBanned);
+                //Debug.Log("Checking User Banned Status...");
 
-                //Get SaveFile Data
+                if (UserBanned == true)
+                {
+                    //User is banned
+                    SQLconnectionState = 1;
+                    StatusID = 1;
+
+                    //Wipe UserID from temp File so the main game doesnt try to Sync
+                    Dispatcher.RunOnMainThread(() => ES3.Save<string>("UserID", "", "usr.es3"));
+
+                    Dispatcher.RunOnMainThread(() => PopUpWindow(UserBanned));
+                    return;
+                }
+                if (UserBanned == false)
+                {
+                    //User is not banned
+                    Debug.Log("User is not Banned");
+                }
+                else
+                {
+                    //Query resesult is likely null: we have a problem
+                    Debug.Log("Userbanned Query Result: " + Userbanned);
+                }
+
+
+
+                //Get SaveFile TimeDate
                 MySqlDataReader rdr4 = null;
-                string sql4 = "SELECT SaveFile_file FROM SaveFiles WHERE SaveFile_id = '" + UserID + "'";
+                string sql4 = "SELECT SaveFile_datum FROM SaveFiles WHERE SaveFile_id = '" + UserID + "'";
                 MySqlCommand cmd4 = new MySqlCommand(sql4, conn);
                 rdr4 = cmd4.ExecuteReader();
                 rdr4.Read();
-                OnlineSaveFileData = rdr4[0].ToString();
-                Debug.Log(OnlineSaveFileData);
+                OnlineLastTimeSaved = rdr4[0].ToString();
+                Debug.Log(OnlineLastTimeSaved);
                 rdr4.Close();
+
+                //Get SaveFile Data
+                MySqlDataReader rdr5 = null;
+                string sql5 = "SELECT SaveFile_file FROM SaveFiles WHERE SaveFile_id = '" + UserID + "'";
+                MySqlCommand cmd5 = new MySqlCommand(sql5, conn);
+                rdr5 = cmd5.ExecuteReader();
+                rdr5.Read();
+                OnlineSaveFileData = rdr5[0].ToString();
+                Debug.Log(OnlineSaveFileData);
+                rdr5.Close();
             }
 
             catch (System.Exception ex)
