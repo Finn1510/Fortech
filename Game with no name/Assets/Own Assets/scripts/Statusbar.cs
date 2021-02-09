@@ -13,7 +13,19 @@ public class Statusbar : MonoBehaviour
     [SerializeField] TMP_Text Statustext;
     [SerializeField] Image StatusbarPanel;
     [SerializeField] Rigidbody2D LoadingBob;
-   
+    [Space]
+
+    [Header("Colors")]
+    [SerializeField] Color32 ConnectingToDatabaseColor = new Color32(231, 207, 0, 255);
+    [SerializeField] Color32 ConnectedToDatabaseColor = new Color32(56, 169, 39, 255);
+    [SerializeField] Color32 LoggingInColor = new Color32(231, 207, 0, 255);
+    [SerializeField] Color32 LoggedInColor = new Color32(56, 169, 39, 255);
+    [SerializeField] Color32 SyncingColor = new Color32(0, 225, 231, 255);
+    [SerializeField] Color32 SyncedColor = new Color32(56, 169, 39, 255);
+    [SerializeField] Color32 RegisteringColor = new Color32(231, 207, 0, 255);
+    [SerializeField] Color32 RegisteredColor = new Color32(56, 169, 39, 255);
+
+
     //same principle as StatusID this is used to check if we already tweened the color for this statusID
     int TweenStatus;
 
@@ -28,7 +40,7 @@ public class Statusbar : MonoBehaviour
                 if (TweenStatus != 0)
                 {
                     //StatusbarPanel.DOColor(new Color32(231, 207, 0, 255), 1).From();
-                    DOTween.To(() => StatusbarPanel.color, x => StatusbarPanel.color = x, new Color32(231, 207, 0, 255), 1);
+                    DOTween.To(() => StatusbarPanel.color, x => StatusbarPanel.color = x, ConnectingToDatabaseColor, 1);
                     TweenStatus = 0;
                 }
                 break;
@@ -37,7 +49,7 @@ public class Statusbar : MonoBehaviour
                 if (TweenStatus != 1)
                 {
                     //StatusbarPanel.DOColor(new Color32(56, 169, 39, 255), 1).From();
-                    DOTween.To(() => StatusbarPanel.color, x => StatusbarPanel.color = x, new Color32(56, 169, 39, 255), 1);
+                    DOTween.To(() => StatusbarPanel.color, x => StatusbarPanel.color = x, ConnectedToDatabaseColor, 1);
                     TweenStatus = 1;
                     StopLoadingBob();
                 }
@@ -48,7 +60,7 @@ public class Statusbar : MonoBehaviour
                 if (TweenStatus != 2)
                 {
                     //StatusbarPanel.DOColor(new Color32(231, 207, 0, 255), 1).From();
-                    DOTween.To(() => StatusbarPanel.color, x => StatusbarPanel.color = x, new Color32(231, 207, 0, 255), 1);
+                    DOTween.To(() => StatusbarPanel.color, x => StatusbarPanel.color = x, LoggingInColor, 1);
                     TweenStatus = 2;
                 }
                 break;
@@ -57,7 +69,7 @@ public class Statusbar : MonoBehaviour
                 if (TweenStatus != 3)
                 {
                     //StatusbarPanel.DOColor(new Color32(56, 169, 39, 255), 1).From();
-                    DOTween.To(() => StatusbarPanel.color, x => StatusbarPanel.color = x, new Color32(56, 169, 39, 255), 1);
+                    DOTween.To(() => StatusbarPanel.color, x => StatusbarPanel.color = x, LoggedInColor, 1);
                     TweenStatus = 3;
                     StopLoadingBob();
                 }
@@ -68,7 +80,7 @@ public class Statusbar : MonoBehaviour
                 if (TweenStatus != 4)
                 {
                     //StatusbarPanel.DOColor(new Color32(0, 225, 231, 255), 1).From();
-                    DOTween.To(() => StatusbarPanel.color, x => StatusbarPanel.color = x, new Color32(0, 225, 231, 255), 1);
+                    DOTween.To(() => StatusbarPanel.color, x => StatusbarPanel.color = x, SyncingColor, 1);
                     TweenStatus = 4;
                 }
                 break;
@@ -77,7 +89,7 @@ public class Statusbar : MonoBehaviour
                 if (TweenStatus != 5)
                 {
                     //StatusbarPanel.DOColor(new Color32(56, 169, 39, 255), 1).From();
-                    DOTween.To(() => StatusbarPanel.color, x => StatusbarPanel.color = x, new Color32(56, 169, 39, 255), 1);
+                    DOTween.To(() => StatusbarPanel.color, x => StatusbarPanel.color = x, SyncedColor, 1);
                     TweenStatus = 5;
                     StopLoadingBob();
                 }
@@ -88,7 +100,7 @@ public class Statusbar : MonoBehaviour
                 if (TweenStatus != 6)
                 {
                     //StatusbarPanel.DOColor(new Color32(231, 207, 0, 255), 1).From();
-                    DOTween.To(() => StatusbarPanel.color, x => StatusbarPanel.color = x, new Color32(231, 207, 0, 255), 1);
+                    DOTween.To(() => StatusbarPanel.color, x => StatusbarPanel.color = x, RegisteringColor, 1);
                     TweenStatus = 6;
                 }
                 break;
@@ -97,7 +109,7 @@ public class Statusbar : MonoBehaviour
                 if (TweenStatus != 7)
                 {
                     //StatusbarPanel.DOColor(new Color32(56, 169, 39, 255), 1).From();
-                    DOTween.To(() => StatusbarPanel.color, x => StatusbarPanel.color = x, new Color32(56, 169, 39, 255), 1);
+                    DOTween.To(() => StatusbarPanel.color, x => StatusbarPanel.color = x, RegisteredColor, 1);
                     TweenStatus = 7;
                     StopLoadingBob();
                 }

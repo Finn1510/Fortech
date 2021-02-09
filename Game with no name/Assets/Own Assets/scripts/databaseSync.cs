@@ -200,13 +200,14 @@ public class databaseSync : MonoBehaviour
                 MySqlCommand cmd3 = new MySqlCommand(sql3, conn);
                 rdr3 = cmd3.ExecuteReader();
                 rdr3.Read();
-                Userbanned = Convert.ToBoolean(rdr3[0]);
-                Debug.Log("Raw Query output is: " + rdr3[0] + "Converted Query Output is: " + UserBanned);
-                rdr3.Close();
-                //Debug.Log("UserBanned Status: " + UserBanned);
-                //Debug.Log("Checking User Banned Status...");
-
-                if (UserBanned == true)
+                
+                //MySQL uses TinyInts as booleans
+                if (Convert.ToInt32(rdr3[0]) == 0)
+                {
+                    //User is not banned
+                    Debug.Log("User is not Banned");
+                }
+                if (Convert.ToInt32(rdr3[0]) > 0)
                 {
                     //User is banned
                     SQLconnectionState = 1;
@@ -216,20 +217,12 @@ public class databaseSync : MonoBehaviour
                     Dispatcher.RunOnMainThread(() => ES3.Save<string>("UserID", "", "usr.es3"));
 
                     Dispatcher.RunOnMainThread(() => PopUpWindow(UserBanned));
+                    
+                    //Close the reader here as well because we're returning out of this function
+                    rdr3.Close();
                     return;
                 }
-                if (UserBanned == false)
-                {
-                    //User is not banned
-                    Debug.Log("User is not Banned");
-                }
-                else
-                {
-                    //Query resesult is likely null: we have a problem
-                    Debug.Log("Userbanned Query Result: " + Userbanned);
-                }
-
-
+                rdr3.Close();
 
                 //Get SaveFile TimeDate
                 MySqlDataReader rdr4 = null;
