@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.Animations;
 using TMPro;
+using UnityEngine.UI;
 
 public class AccountPanelManager : MonoBehaviour
 {
@@ -17,6 +18,9 @@ public class AccountPanelManager : MonoBehaviour
     [Space]
     [SerializeField] AudioClip PanelEntryAudio;
     [SerializeField] AudioClip PanelExitAudio;
+    [Space]
+    [SerializeField] Button LoginButton;
+    [SerializeField] Button RegisterButton;
     
     private bool MouseOverPanel = false;
     private bool MouseOverUsernameInputfield = false;
@@ -46,6 +50,22 @@ public class AccountPanelManager : MonoBehaviour
 
     private void Update()
     {
+        if(UsernameInputfield.text == "")
+        {
+            LoginButton.interactable = false;
+            RegisterButton.interactable = false;
+        }
+        else if(PasswordInputfield.text == "")
+        {
+            LoginButton.interactable = false;
+            RegisterButton.interactable = false;
+        }
+        else
+        {
+            LoginButton.interactable = true;
+            RegisterButton.interactable = true;
+        }
+        
         if(MouseOverPanel == true)
         {
             PanelAnimator.SetBool("MouseOverPanel", true);

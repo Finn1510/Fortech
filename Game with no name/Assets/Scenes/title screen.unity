@@ -3772,6 +3772,8 @@ MonoBehaviour:
   PanelAudioSource: {fileID: 879804347}
   PanelEntryAudio: {fileID: 8300000, guid: 8e8fa161f2e676b40896d7aa6bde7df9, type: 3}
   PanelExitAudio: {fileID: 8300000, guid: fe3b44a11c196054a978aa19b9ef0022, type: 3}
+  LoginButton: {fileID: 997351322}
+  RegisterButton: {fileID: 895176945}
 --- !u!82 &879804347
 AudioSource:
   m_ObjectHideFlags: 0
