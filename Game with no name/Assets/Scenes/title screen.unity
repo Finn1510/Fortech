@@ -347,9 +347,9 @@ MonoBehaviour:
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
   m_Colors:
-    m_NormalColor: {r: 1, g: 0.59714955, b: 0, a: 1}
-    m_HighlightedColor: {r: 1, g: 0.53394955, b: 0, a: 1}
-    m_PressedColor: {r: 0.7924528, g: 0.40057287, b: 0, a: 1}
+    m_NormalColor: {r: 0.98039216, g: 0.5921569, b: 0.3137255, a: 1}
+    m_HighlightedColor: {r: 0.8117647, g: 0.49803922, b: 0.27058825, a: 1}
+    m_PressedColor: {r: 0.7924528, g: 0.4392157, b: 0.18431373, a: 1}
     m_SelectedColor: {r: 1, g: 0.4032709, b: 0, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
@@ -2888,8 +2888,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 12800000, guid: e43a9d0c5f17f4ca0a0496df70c569e4, type: 3}
-    m_FontSize: 25
+    m_Font: {fileID: 12800000, guid: e3265ab4bf004d28a9537516768c1c75, type: 3}
+    m_FontSize: 30
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 0
@@ -2900,7 +2900,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Play  game
+  m_Text: Play game
 --- !u!222 &611616092
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3286,9 +3286,9 @@ MonoBehaviour:
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
   m_Colors:
-    m_NormalColor: {r: 1, g: 0.59714955, b: 0, a: 1}
-    m_HighlightedColor: {r: 1, g: 0.53394955, b: 0, a: 1}
-    m_PressedColor: {r: 0.7924528, g: 0.40057287, b: 0, a: 1}
+    m_NormalColor: {r: 0.98039216, g: 0.5921569, b: 0.3137255, a: 1}
+    m_HighlightedColor: {r: 0.8117647, g: 0.49803922, b: 0.27058825, a: 1}
+    m_PressedColor: {r: 0.7924528, g: 0.4392157, b: 0.18431373, a: 1}
     m_SelectedColor: {r: 1, g: 0.4032709, b: 0, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
@@ -3481,8 +3481,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 12800000, guid: e43a9d0c5f17f4ca0a0496df70c569e4, type: 3}
-    m_FontSize: 25
+    m_Font: {fileID: 12800000, guid: e3265ab4bf004d28a9537516768c1c75, type: 3}
+    m_FontSize: 30
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 2
@@ -6130,8 +6130,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 12800000, guid: e43a9d0c5f17f4ca0a0496df70c569e4, type: 3}
-    m_FontSize: 25
+    m_Font: {fileID: 12800000, guid: e3265ab4bf004d28a9537516768c1c75, type: 3}
+    m_FontSize: 30
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 2
@@ -6338,11 +6338,11 @@ MonoBehaviour:
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
   m_Colors:
-    m_NormalColor: {r: 1, g: 0.59714955, b: 0, a: 1}
-    m_HighlightedColor: {r: 1, g: 0.53394955, b: 0, a: 1}
-    m_PressedColor: {r: 0.7924528, g: 0.40057287, b: 0, a: 1}
+    m_NormalColor: {r: 0.98039216, g: 0.5921569, b: 0.3137255, a: 1}
+    m_HighlightedColor: {r: 0.8117647, g: 0.49803922, b: 0.27058825, a: 1}
+    m_PressedColor: {r: 0.7924528, g: 0.4392157, b: 0.18431373, a: 1}
     m_SelectedColor: {r: 1, g: 0.4032709, b: 0, a: 1}
-    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_DisabledColor: {r: 0.83137256, g: 0.6666667, b: 0.5529412, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
@@ -8397,7 +8397,7 @@ MonoBehaviour:
     rgba: 4280789304
   SyncingColor:
     serializedVersion: 2
-    rgba: 4293386496
+    rgba: 4294958192
   SyncedColor:
     serializedVersion: 2
     rgba: 4280789304
