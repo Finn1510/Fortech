@@ -24,12 +24,14 @@ public class SaveFileConflictPanelManager : MonoBehaviour
     public void CloudSaveButtonClicked()
     {
         Anim.SetTrigger("ButtonClicked");
+        GameObject.FindGameObjectWithTag("DatabaseManager").GetComponent<databaseSync>().SendMessage("ExecuteSaveFileConflict", 1);
         //something
     }
 
     public void LocalSaveButtonClicked()
     {
         Anim.SetTrigger("ButtonClicked");
+        GameObject.FindGameObjectWithTag("DatabaseManager").GetComponent<databaseSync>().SendMessage("ExecuteSaveFileConflict", 2);
         //something
     }
 }

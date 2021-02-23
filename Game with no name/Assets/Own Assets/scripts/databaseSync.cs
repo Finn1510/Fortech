@@ -7,6 +7,7 @@ using System.IO;
 using System.Threading;
 using System;
 using System.Drawing;
+using UnityEngine.UI;
 
 public class databaseSync : MonoBehaviour
 {
@@ -15,6 +16,9 @@ public class databaseSync : MonoBehaviour
     [SerializeField] string SaveFileName = "SaveData.es3";
     [SerializeField] MessageBoxManager msgBox;
     [SerializeField] GameObject OnlineLocalSavePanel;
+    [SerializeField] Button PlayButton;
+    [SerializeField] Button ExitButton;
+
 
     [Space]
     [Header("Messages")]
@@ -25,6 +29,7 @@ public class databaseSync : MonoBehaviour
     [SerializeField] MessageBoxScriptableObject UsernameAlreadyTaken;
     [SerializeField] MessageBoxScriptableObject UsernameTooShort;
     [SerializeField] MessageBoxScriptableObject UserBanned;
+    [SerializeField] MessageBoxScriptableObject noOnlineSaveFile;
     
     MySqlConnection conn;
 
@@ -42,6 +47,7 @@ public class databaseSync : MonoBehaviour
     bool FirstLogin = true;
     System.DateTime convertedLocalSaveFileTime;
     System.DateTime convertedOnlineSaveFile;
+    int SaveFileConflictDecision = 0;
 
     //0=connecting to Database 1=Connected to database 2=Loggin in 3=Logged 4= Syncing 5=Synced in 6=Registering 7=Registered
     public int StatusID = 0;
@@ -140,7 +146,11 @@ public class databaseSync : MonoBehaviour
         string OnlineLastTimeSaved = null;
         string OnlineSaveFileData = null;
         string UserID = null;
-        
+
+        //Disable Play and Login Buttons so the User can't interrupt the Login process
+        Dispatcher.RunOnMainThread(() => PlayButton.interactable = false);
+        Dispatcher.RunOnMainThread(() => ExitButton.interactable = false);
+
         if (SQLconnectionState == 1)
         {
             //declare it here so we can close the reader even when we get a exeption
@@ -171,6 +181,10 @@ public class databaseSync : MonoBehaviour
                     StatusID = 1;
                     rdr.Close();
                     Dispatcher.RunOnMainThread(() => PopUpWindow(UserDoesNotExist));
+                    
+                    //reenable Play and Exit Button again 
+                    Dispatcher.RunOnMainThread(() => PlayButton.interactable = true);
+                    Dispatcher.RunOnMainThread(() => ExitButton.interactable = true);
                 }
 
             }
@@ -179,6 +193,10 @@ public class databaseSync : MonoBehaviour
             {
                 Debug.LogError(ex.ToString());
                 Dispatcher.RunOnMainThread(() => PopUpWindow(UserDoesNotExist));
+
+                //reenable Play and Exit Button again 
+                Dispatcher.RunOnMainThread(() => PlayButton.interactable = true);
+                Dispatcher.RunOnMainThread(() => ExitButton.interactable = true);
 
             }
 
@@ -257,6 +275,10 @@ public class databaseSync : MonoBehaviour
             {
                 Debug.LogError(ex.ToString());
                 StatusID = 1;
+
+                //reenable Play and Exit Button again 
+                Dispatcher.RunOnMainThread(() => PlayButton.interactable = true);
+                Dispatcher.RunOnMainThread(() => ExitButton.interactable = true);
             }
 
             int result;
@@ -279,7 +301,7 @@ public class databaseSync : MonoBehaviour
                 result = System.DateTime.Compare(convertedLocalSaveFileTime, convertedOnlineSaveFile);
             }
             
-            if(FirstLogin == true)
+            if(FirstLogin == true && StartUpWithoutLocalSaveFile == false && StartUpWithoutOnlineSaveFile == false)
             {
                 Debug.Log("First Login is true... summoning Panel");
                 //Open GUI Panel  
@@ -292,10 +314,65 @@ public class databaseSync : MonoBehaviour
                 Data[1] = convertedOnlineSaveFile.ToString();
 
                 Dispatcher.RunOnMainThread(() => OnlineLocalSavePanel.SendMessage("EntryInformation" ,Data));
+
+                while (SaveFileConflictDecision == 0)
+                {
+                    Debug.Log("User hasn't clicked on one of the buttons yet");
+                    Thread.Sleep(500);
+                }
+                
+                if(SaveFileConflictDecision == 1)
+                {
+                    //User wants to Use the Cloud-Saved SaveFile (replacing Local SaveFile with the online SaveFile) 
+                    Debug.Log("User wants the Cloud SaveFile");
+
+                    //Check if the Online SaveFile has Content
+                    if (Base64Decode(OnlineSaveFileData) == "nothing here yet")
+                    {
+                        StartUpWithoutOnlineSaveFile = true;
+                    }
+
+                       
+                    if (StartUpWithoutOnlineSaveFile == false)
+                    {
+                        //replace local Savefile data with Online SaveFile Data 
+                        File.WriteAllText(LocalSaveFilePath, Base64Decode(OnlineSaveFileData));
+
+                        //update LocalLast Saved DateTime
+                        Dispatcher.RunOnMainThread(() => ES3.Save<string>("LastSaved", OnlineLastTimeSaved));
+                    }
+                    else
+                    {
+                        Dispatcher.RunOnMainThread(() => PopUpWindow(noOnlineSaveFile));
+                    }
+                }
+                
+                if(SaveFileConflictDecision == 2)
+                {
+                    //User wants to keep his localy-Saved SaveFile (replacing online SaveFile with the local SaveFile)
+                    Debug.Log("User wants the Local SaveFile");
+
+                    //Update Online SaveFiles (we have to encode the SaveFile into Base64 format because the " symbols in the SaveFile confuse MySQL)
+                    string sql1 = "UPDATE SaveFiles SET SaveFile_file = '" + Base64Encode(LocalSaveFileData) + "' WHERE SaveFile_id = '" + UserID + "'";
+                    MySqlCommand cmd1 = new MySqlCommand(sql1, conn);
+                    cmd1.ExecuteNonQuery();
+
+                    //Update Online SaveFile date
+                    string sql2 = "UPDATE SaveFiles SET SaveFile_datum = '" + LocalLastTimeSaved + "' WHERE SaveFile_id = '" + UserID + "'";
+                    MySqlCommand cmd2 = new MySqlCommand(sql2, conn);
+                    cmd2.ExecuteNonQuery();
+
+                }
             }
+            else
+            {
+                // Yes, this can happen at the first Login but if there is no Online SaveFile or no Local SaveFile there is no point in choosing between the two
+                FirstLogin = false;
+            }
+
             
             //Online saveFile is newer than local SaveFile
-            if (result < 0)
+            if (result < 0 && FirstLogin != true)
             {
                 Debug.Log("Online saveFile is newer than local SaveFile");
 
@@ -317,14 +394,14 @@ public class databaseSync : MonoBehaviour
                 }
             }
             
-            //Both SaveFile are equally old
-            else if (result == 0)
+            //Both SaveFiles are equally old
+            else if (result == 0 && FirstLogin != true)
             {
                 Debug.Log("Both SaveFiles are equally old"); 
             }
 
             //Online SaveFile is older than local SaveFile
-            else
+            else if(FirstLogin != true)
             {
                 Debug.Log("Online SaveFile is older than local SaveFile");
 
@@ -339,22 +416,28 @@ public class databaseSync : MonoBehaviour
                 cmd6.ExecuteNonQuery();
             }
 
-            /*
+            
             if (FirstLogin == true)
             {
                 FirstLogin = false;
                 Dispatcher.RunOnMainThread(() => ES3.Save<bool>("FirstLogin", FirstLogin));
             }
 
-            */
-
+            //reenable Play and Exit Button again 
+            Dispatcher.RunOnMainThread(() => PlayButton.interactable = true);
+            Dispatcher.RunOnMainThread(() => ExitButton.interactable = true);
 
         }
-        else
+        else if(FirstLogin != true)
         {
             //can not login when database is not connected 
             Dispatcher.RunOnMainThread(() => PopUpWindow(failedToConnectToDatabase));
             StatusID = 1;
+            
+            //reenable Play and Exit Button again 
+            Dispatcher.RunOnMainThread(() => PlayButton.interactable = true);
+            Dispatcher.RunOnMainThread(() => ExitButton.interactable = true);
+
             return;
         }
         StatusID = 5;
@@ -363,10 +446,14 @@ public class databaseSync : MonoBehaviour
 
     public void Register (string Username, string Password)
     {
-        //TODO Check if username is valid 
         StatusID = 6;
 
-        if(Username.Length > 2)
+        //Disable Play and Login Buttons so the User can't interrupt the Registering process
+        Dispatcher.RunOnMainThread(() => PlayButton.interactable = false);
+        Dispatcher.RunOnMainThread(() => ExitButton.interactable = false);
+
+        //Check if Username is valid
+        if (Username.Length > 2)
         {
             //Username lengh OK
         }
@@ -391,11 +478,16 @@ public class databaseSync : MonoBehaviour
                 //Username already taken  
                 Dispatcher.RunOnMainThread(() => PopUpWindow(UsernameAlreadyTaken));
                 StatusID = 1;
+
+                //reenable Play and Exit Button again 
+                Dispatcher.RunOnMainThread(() => PlayButton.interactable = true);
+                Dispatcher.RunOnMainThread(() => ExitButton.interactable = true);
+
                 return;
             }
             else
             {
-                //Username available (it always throws an exeption when query output is Null so this is kinda pointless)
+                //Username available (it always throws an exeption when query output is null so this is kinda pointless)
             }
             rdr.Close();
         }
@@ -427,6 +519,11 @@ public class databaseSync : MonoBehaviour
             //Password is not valid 
             Dispatcher.RunOnMainThread(() => PopUpWindow(PasswordInvalid));
             StatusID = 1;
+
+            //reenable Play and Exit Button again 
+            Dispatcher.RunOnMainThread(() => PlayButton.interactable = true);
+            Dispatcher.RunOnMainThread(() => ExitButton.interactable = true);
+
             return;
         }
 
@@ -451,10 +548,21 @@ public class databaseSync : MonoBehaviour
 
 
         Dispatcher.RunOnMainThread(() => PopUpWindow(RegisteredSuccessfully));
+
+        //reenable Play and Exit Button again 
+        Dispatcher.RunOnMainThread(() => PlayButton.interactable = true);
+        Dispatcher.RunOnMainThread(() => ExitButton.interactable = true);
+
         StatusID = 7;
     }
 
     
+    public void ExecuteSaveFileConflict(int decision)
+    {
+        // 1 = User decided to use the Online SaveFile   2 = User decided to use the Local SaveFile   0 = default Value (no choice made yet)
+        SaveFileConflictDecision = decision;
+    }
+
     void PopUpWindow(MessageBoxScriptableObject msg)
     {
         msgBox.ErrorMessageBox(msg);

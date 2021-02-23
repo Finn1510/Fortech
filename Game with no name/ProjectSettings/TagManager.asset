@@ -15,6 +15,7 @@ TagManager:
   - ALTAR
   - UI_Inventory
   - PlayerStatBin
+  - DatabaseManager
   layers:
   - Default
   - TransparentFX
