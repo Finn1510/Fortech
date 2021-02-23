@@ -14,6 +14,7 @@ public class databaseSync : MonoBehaviour
     public int SQLconnectionState = 0; 
     [SerializeField] string SaveFileName = "SaveData.es3";
     [SerializeField] MessageBoxManager msgBox;
+    [SerializeField] GameObject OnlineLocalSavePanel;
 
     [Space]
     [Header("Messages")]
@@ -38,7 +39,10 @@ public class databaseSync : MonoBehaviour
     bool StartUpWithoutLocalSaveFile = false;
     bool StartUpWithoutOnlineSaveFile = false;
     bool Userbanned;
-    
+    bool FirstLogin = true;
+    System.DateTime convertedLocalSaveFileTime;
+    System.DateTime convertedOnlineSaveFile;
+
     //0=connecting to Database 1=Connected to database 2=Loggin in 3=Logged 4= Syncing 5=Synced in 6=Registering 7=Registered
     public int StatusID = 0;
 
@@ -56,7 +60,11 @@ public class databaseSync : MonoBehaviour
         {
             StartUpWithoutLocalSaveFile = true;
         }
-        
+
+        if (ES3.KeyExists("FirstLogin"))
+        {
+            FirstLogin = ES3.Load<bool>("FirstLogin");
+        }
 
         
         if (ES3.FileExists("usr.es3") == false)
@@ -76,7 +84,9 @@ public class databaseSync : MonoBehaviour
         {
             Debug.Log("File already exists");
         }
-        
+
+        OnlineLocalSavePanel.SetActive(false);
+
         ThreadStart ThreadRef = new ThreadStart(ConnectToDatabase);
         Thread ConnectThread = new Thread(ThreadRef);
         ConnectThread.Start();
@@ -177,8 +187,6 @@ public class databaseSync : MonoBehaviour
                 // _sync saveFile_
                 StatusID = 4;
 
-
-
                 //Get Online SaveFile DateTime
 
                 //Get UserID
@@ -262,13 +270,28 @@ public class databaseSync : MonoBehaviour
             {
                 //Get local SaveFile DateTime
                 Debug.Log("Local last Saved: " + LocalLastTimeSaved);
-                System.DateTime convertedLocalSaveFileTime = System.DateTime.Parse(LocalLastTimeSaved);
+                convertedLocalSaveFileTime = System.DateTime.Parse(LocalLastTimeSaved);
                 Debug.Log("Converted LocalTime: " + convertedLocalSaveFileTime);
-                System.DateTime convertedOnlineSaveFile = System.DateTime.Parse(OnlineLastTimeSaved);
+                convertedOnlineSaveFile = System.DateTime.Parse(OnlineLastTimeSaved);
                 Debug.Log("Converted OnlineTime: " + convertedOnlineSaveFile);
 
                 //check which SaveFile is newer 
                 result = System.DateTime.Compare(convertedLocalSaveFileTime, convertedOnlineSaveFile);
+            }
+            
+            if(FirstLogin == true)
+            {
+                Debug.Log("First Login is true... summoning Panel");
+                //Open GUI Panel  
+                Dispatcher.RunOnMainThread(() => OnlineLocalSavePanel.SetActive(true));
+
+
+                //set up an Array so we can send multiple parameters to the other script
+                string[] Data = new string[2];
+                Data[0] = convertedLocalSaveFileTime.ToString();
+                Data[1] = convertedOnlineSaveFile.ToString();
+
+                Dispatcher.RunOnMainThread(() => OnlineLocalSavePanel.SendMessage("EntryInformation" ,Data));
             }
             
             //Online saveFile is newer than local SaveFile
@@ -315,6 +338,16 @@ public class databaseSync : MonoBehaviour
                 MySqlCommand cmd6 = new MySqlCommand(sql6, conn);
                 cmd6.ExecuteNonQuery();
             }
+
+            /*
+            if (FirstLogin == true)
+            {
+                FirstLogin = false;
+                Dispatcher.RunOnMainThread(() => ES3.Save<bool>("FirstLogin", FirstLogin));
+            }
+
+            */
+
 
         }
         else
