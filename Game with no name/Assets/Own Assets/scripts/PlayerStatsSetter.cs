@@ -6,24 +6,44 @@ using TMPro;
 
 public class PlayerStatsSetter : MonoBehaviour
 {
+    [Header("References")]
     [SerializeField] TMP_Text CrazyEyesKilledText;
     [SerializeField] TMP_Text ZombiesKilledText;
     [SerializeField] TMP_Text DeathsText;
     [SerializeField] TMP_Text DamageDealt;
     [SerializeField] TMP_Text ShotsFired;
 
-    PlayerStats PlayerStatsData;
+    [Header("Parameters")]
+    [SerializeField] float UpdateDelaySeconds = 4;
 
-    // Start is called before the first frame update
-    void Start()
+    PlayerStats PlayerStatsData;
+    bool timerfinished = true;
+
+    void updatePlayerStats()
     {
         PlayerStatsData = GetComponent<PlayerStats>();
-
+        Debug.Log("Updating PlayerStat text...");
         CrazyEyesKilledText.text = "CrazyEyes: " + PlayerStatsData.CrazyEyesKilled.ToString();
         ZombiesKilledText.text = "Zombies: " + PlayerStatsData.ZombiesKilled.ToString();
         DeathsText.text = "Deaths: " + PlayerStatsData.DiedCount.ToString();
         DamageDealt.text = "Damage dealt: " + PlayerStatsData.DamageDealed.ToString();
         ShotsFired.text = "Shots fired: " + PlayerStatsData.ShotsFired.ToString();
+    }
+
+    void Update()
+    {
+        if(timerfinished == true)
+        {
+            StartCoroutine(Wait(UpdateDelaySeconds));
+            updatePlayerStats();
+        }  
+    }
+
+    IEnumerator Wait(float time)
+    {
+        timerfinished = false;
+        yield return new WaitForSeconds(time);
+        timerfinished = true;
     }
 
     

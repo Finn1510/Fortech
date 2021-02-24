@@ -64,6 +64,7 @@ public class SaveFileManager : MonoBehaviour
     public void Save()
     {
         currentTime = System.DateTime.Now.ToString("yyyy/MM/dd hh:mm:ss");
+        Debug.Log("Current time is: " + currentTime);
         ES3.Save<string>("LastSaved", currentTime);
     }
 
