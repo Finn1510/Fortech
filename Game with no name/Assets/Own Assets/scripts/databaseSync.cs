@@ -166,7 +166,7 @@ public class databaseSync : MonoBehaviour
 
 
                 Debug.Log(rdr[0]);
-                //this is kinda useless cuz its already checked in the sql command
+                //this is kinda useless c its already checked in the sql query
                 if (rdr[0].ToString() == Username)
                 {
                     SQLconnectionState = 2;
@@ -177,6 +177,8 @@ public class databaseSync : MonoBehaviour
                 }
                 else
                 {
+                    //This actually never gets called because it always throws an exeption when the query output is null
+
                     Debug.LogError("User does not exist");
                     StatusID = 1;
                     rdr.Close();
@@ -191,12 +193,16 @@ public class databaseSync : MonoBehaviour
 
             catch (System.Exception ex)
             {
+                StatusID = 1;
                 Debug.LogError(ex.ToString());
+                rdr.Close();
+
                 Dispatcher.RunOnMainThread(() => PopUpWindow(UserDoesNotExist));
 
                 //reenable Play and Exit Button again 
                 Dispatcher.RunOnMainThread(() => PlayButton.interactable = true);
                 Dispatcher.RunOnMainThread(() => ExitButton.interactable = true);
+                return;
 
             }
 
