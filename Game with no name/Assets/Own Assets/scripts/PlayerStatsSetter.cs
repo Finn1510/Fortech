@@ -22,7 +22,7 @@ public class PlayerStatsSetter : MonoBehaviour
     void updatePlayerStats()
     {
         PlayerStatsData = GetComponent<PlayerStats>();
-        Debug.Log("Updating PlayerStat text...");
+        
         CrazyEyesKilledText.text = "CrazyEyes: " + PlayerStatsData.CrazyEyesKilled.ToString();
         ZombiesKilledText.text = "Zombies: " + PlayerStatsData.ZombiesKilled.ToString();
         DeathsText.text = "Deaths: " + PlayerStatsData.DiedCount.ToString();

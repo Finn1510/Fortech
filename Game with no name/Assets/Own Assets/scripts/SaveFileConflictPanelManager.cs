@@ -2,13 +2,23 @@
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
 
 public class SaveFileConflictPanelManager : MonoBehaviour
 {
     [Header("References")]
     [SerializeField] TMP_Text CloudSaveDateText;
     [SerializeField] TMP_Text LocalSaveDateText;
+    [SerializeField] Button CloudSaveFileButton;
+    [SerializeField] Button LocalSaveFileButton;
+
     [SerializeField] Animator Anim;
+
+    //Enables the Butoons again when the GameObject gets enabled again
+    void OnEnable()
+    {
+        changeButtons(true);  
+    }
 
     //gets called by the databaseSync script to forward the lastSaved Date information for both SaveFiles (online and local)
     public void EntryInformation(string[] Data)
@@ -20,18 +30,26 @@ public class SaveFileConflictPanelManager : MonoBehaviour
         CloudSaveDateText.SetText(CloudsaveDate);
         LocalSaveDateText.SetText(LocalSaveDate);
     }
-
+    
     public void CloudSaveButtonClicked()
     {
+        changeButtons(false);
         Anim.SetTrigger("ButtonClicked");
         GameObject.FindGameObjectWithTag("DatabaseManager").GetComponent<databaseSync>().SendMessage("ExecuteSaveFileConflict", 1);
-        //something
     }
 
     public void LocalSaveButtonClicked()
     {
+        changeButtons(false);
         Anim.SetTrigger("ButtonClicked");
         GameObject.FindGameObjectWithTag("DatabaseManager").GetComponent<databaseSync>().SendMessage("ExecuteSaveFileConflict", 2);
-        //something
     }
+
+    //Enables/Disables Buttons to prevent them from beeing clicked (even tho they are like 1pixel wide after the animation)
+    void changeButtons(bool change)
+    {
+        CloudSaveFileButton.interactable = change;
+        LocalSaveFileButton.interactable = change;
+    }
+
 }

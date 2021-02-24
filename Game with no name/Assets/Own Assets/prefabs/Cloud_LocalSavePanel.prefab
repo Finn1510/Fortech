@@ -991,6 +991,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CloudSaveDateText: {fileID: 8638267813248417785}
   LocalSaveDateText: {fileID: 3776882552389797311}
+  CloudSaveFileButton: {fileID: 9157555817448062985}
+  LocalSaveFileButton: {fileID: 9157555817271883050}
   Anim: {fileID: 9157555817424541028}
 --- !u!95 &9157555817424541028
 Animator:

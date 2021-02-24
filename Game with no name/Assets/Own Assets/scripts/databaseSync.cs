@@ -49,13 +49,16 @@ public class databaseSync : MonoBehaviour
     System.DateTime convertedOnlineSaveFile;
     int SaveFileConflictDecision = 0;
 
+    //This var kinda tells us to whom a local SaveFile belongs to
+    string AssociatedUserID;
+    
+
     //0=connecting to Database 1=Connected to database 2=Loggin in 3=Logged 4= Syncing 5=Synced in 6=Registering 7=Registered
     public int StatusID = 0;
 
     // Start is called before the first frame update
     void Start()
     {
-        //TODO how to deal with first Startup when there is no SaveFile (we're getting an Exeption here)
         if (ES3.FileExists("usr.es3"))
         {
             LocalLastTimeSaved = ES3.Load<string>("LastSaved");
@@ -66,6 +69,14 @@ public class databaseSync : MonoBehaviour
         {
             StartUpWithoutLocalSaveFile = true;
         }
+
+        //We're Checking for a Key again because User can play the game and create a local SaveFile without logging in
+        if (ES3.KeyExists("SaveFileAssociatedUserID"))
+        {
+            AssociatedUserID = ES3.Load<string>("SaveFileAssociatedUserID");
+            Debug.Log("SaveFile already has a UserID associated with it " + AssociatedUserID);
+        }
+
 
         if (ES3.KeyExists("FirstLogin"))
         {
@@ -125,7 +136,7 @@ public class databaseSync : MonoBehaviour
     }
     
     
-
+    //This is just a public method that can be called from elsewhere to start a Login on another thread
     public void ExecuteLogin(string Username, string Password)
     {
         ThreadStart ThreadRef = new ThreadStart(() => Login(Username, Password));
@@ -133,6 +144,7 @@ public class databaseSync : MonoBehaviour
         LoginThread.Start();
     }
 
+    //This is just a public method that can be called from elsewhere to start the Register function on another thread
     public void ExecuteRegister(string Username, string Password)
     {
         ThreadStart ThreadRef = new ThreadStart(() => Register(Username, Password));
@@ -275,6 +287,7 @@ public class databaseSync : MonoBehaviour
                 OnlineSaveFileData = rdr5[0].ToString();
                 Debug.Log(OnlineSaveFileData);
                 rdr5.Close();
+
             }
 
             catch (System.Exception ex)
@@ -288,12 +301,15 @@ public class databaseSync : MonoBehaviour
             }
 
             int result;
+            //If we dont have a local SaveFile there is no point in comparing them
             if (StartUpWithoutLocalSaveFile == true)
             {
                 result = -1;
                 System.DateTime convertedOnlineSaveFile = System.DateTime.Parse(OnlineLastTimeSaved);
                 Debug.Log("Converted OnlineTime: " + convertedOnlineSaveFile);
             }
+            
+            //Compare Online SaveFile and Local SaveFile lastsaved Date with each other
             else
             {
                 //Get local SaveFile DateTime
@@ -306,10 +322,13 @@ public class databaseSync : MonoBehaviour
                 //check which SaveFile is newer 
                 result = System.DateTime.Compare(convertedLocalSaveFileTime, convertedOnlineSaveFile);
             }
+
+            //DEBUG SHIT DELETE AFTERWARDS
+            Debug.Log("Logged in UserID:" + UserID + " SaveFile Associated UserID:" + AssociatedUserID);
             
-            if(FirstLogin == true && StartUpWithoutLocalSaveFile == false && StartUpWithoutOnlineSaveFile == false)
+            //This will be execute when the User logs in for the first time and has a Local and a Online Saved OR the local SaveFile on disk doesnt belong to the Account which is trying to log in
+            if((FirstLogin == true && StartUpWithoutLocalSaveFile == false && StartUpWithoutOnlineSaveFile == false) || UserID != AssociatedUserID)
             {
-                Debug.Log("First Login is true... summoning Panel");
                 //Open GUI Panel  
                 Dispatcher.RunOnMainThread(() => OnlineLocalSavePanel.SetActive(true));
 
@@ -369,6 +388,23 @@ public class databaseSync : MonoBehaviour
                     cmd2.ExecuteNonQuery();
 
                 }
+
+                StatusID = 5;
+
+                AssociatedUserID = UserID;
+                Dispatcher.RunOnMainThread(() => ES3.Save<string>("SaveFileAssociatedUserID", AssociatedUserID));
+                if (FirstLogin == true)
+                {
+                    FirstLogin = false;
+                    Dispatcher.RunOnMainThread(() => ES3.Save<bool>("FirstLogin", FirstLogin));
+                }
+
+                //reenable Play and Exit Button again 
+                Dispatcher.RunOnMainThread(() => PlayButton.interactable = true);
+                Dispatcher.RunOnMainThread(() => ExitButton.interactable = true);
+                
+                return;
+
             }
             else
             {
@@ -422,6 +458,8 @@ public class databaseSync : MonoBehaviour
                 cmd6.ExecuteNonQuery();
             }
 
+            AssociatedUserID = UserID;
+            Dispatcher.RunOnMainThread(() => ES3.Save<string>("SaveFileAssociatedUserID", AssociatedUserID));
             
             if (FirstLogin == true)
             {

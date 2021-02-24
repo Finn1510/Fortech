@@ -34,7 +34,8 @@ public class SaveFileManager : MonoBehaviour
 
         AutoSaveIntervallSeconds = AutoSaveIntervallMinutes * 60;
         AutoSave(AutoSaveIntervallSeconds);
-    }
+
+     }
 
 
     void AutoSave(int Delay)
@@ -131,7 +132,7 @@ public class SaveFileManager : MonoBehaviour
                 cmd.ExecuteNonQuery();
 
                 //Update Online SaveFile date
-                string sql2 = "UPDATE SaveFiles SET SaveFile_datum = '" + LocalLastTimeSaved + "' WHERE SaveFile_id = '" + UserID + "'";
+                string sql2 = "UPDATE SaveFiles SET SaveFile_datum = '" + currentTime + "' WHERE SaveFile_id = '" + UserID + "'";
                 MySqlCommand cmd2 = new MySqlCommand(sql2, conn);
                 cmd2.ExecuteNonQuery();
                 

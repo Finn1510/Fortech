@@ -12,5 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83207e870de95cf4ca57118611403fa1, type: 3}
   m_Name: failed to connect to Database
   m_EditorClassIdentifier: 
-  Title: failed to connect to Database
-  messageText: please ensure that you are connected to the Internet
+  Title: Error
+  messageText: 'failed to connect to Database: please ensure that you are connected
+    to the Internet'
