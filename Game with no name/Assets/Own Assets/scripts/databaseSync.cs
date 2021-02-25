@@ -288,6 +288,14 @@ public class databaseSync : MonoBehaviour
                 Debug.Log(OnlineSaveFileData);
                 rdr5.Close();
 
+                //Check if the Online SaveFile has Content
+                if (Base64Decode(OnlineSaveFileData) == "nothing here yet")
+                {
+                    StartUpWithoutOnlineSaveFile = true;
+                    Debug.Log("User doesn't have a valid Online SaveFile yet");
+                }
+
+
             }
 
             catch (System.Exception ex)
@@ -323,11 +331,12 @@ public class databaseSync : MonoBehaviour
                 result = System.DateTime.Compare(convertedLocalSaveFileTime, convertedOnlineSaveFile);
             }
 
-            //DEBUG SHIT DELETE AFTERWARDS
+            //DEBUG 
             Debug.Log("Logged in UserID:" + UserID + " SaveFile Associated UserID:" + AssociatedUserID);
+            Debug.Log("FirstLogin: "+ FirstLogin + " NoLocalSaveFile: " + StartUpWithoutLocalSaveFile + " NoOnlineSaveFile: " +  StartUpWithoutOnlineSaveFile);
             
             //This will be execute when the User logs in for the first time and has a Local and a Online Saved OR the local SaveFile on disk doesnt belong to the Account which is trying to log in
-            if((FirstLogin == true && StartUpWithoutLocalSaveFile == false && StartUpWithoutOnlineSaveFile == false) || UserID != AssociatedUserID)
+            if((FirstLogin == true && StartUpWithoutLocalSaveFile == false && StartUpWithoutOnlineSaveFile == false) || (UserID != AssociatedUserID && StartUpWithoutLocalSaveFile == false && StartUpWithoutOnlineSaveFile == false))
             {
                 //Open GUI Panel  
                 Dispatcher.RunOnMainThread(() => OnlineLocalSavePanel.SetActive(true));
@@ -419,12 +428,7 @@ public class databaseSync : MonoBehaviour
                 Debug.Log("Online saveFile is newer than local SaveFile");
 
 
-                //Check if the Online SaveFile has Content
-                if (Base64Decode(OnlineSaveFileData) == "nothing here yet")
-                {
-                    StartUpWithoutOnlineSaveFile = true;
-                }
-
+                
                 
                 if(StartUpWithoutOnlineSaveFile == false)
                 {
