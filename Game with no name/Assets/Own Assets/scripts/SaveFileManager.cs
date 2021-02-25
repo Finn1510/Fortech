@@ -15,9 +15,8 @@ public class SaveFileManager : MonoBehaviour
     int AutoSaveIntervallSeconds;
     
     MySqlConnection conn;
-    string LocalLastTimeSaved;
+    
     string LocalSaveFilePath;
-    string LocalSaveFileData;
     string UserID;
     
     // 0: connecting 1: connection successful 2: logged in 3: connection failed
@@ -40,10 +39,6 @@ public class SaveFileManager : MonoBehaviour
 
     void AutoSave(int Delay)
     {
-        //We have to do this here because SaveFileSync runs on another Thread
-        LocalLastTimeSaved = ES3.Load<string>("LastSaved");
-        LocalSaveFileData = ES3.LoadRawString(SaveFileName);
-
         SaveEverything();
         StartCoroutine(AutoSaveDelay(Delay));
     }
@@ -54,6 +49,7 @@ public class SaveFileManager : MonoBehaviour
         AutoSave(Delay);
     }
     
+    //Sends the "Save" message to all GameObjects in the array
     void SaveEverything()
     {
         foreach (GameObject GO in SaveGameObjects)
@@ -127,7 +123,7 @@ public class SaveFileManager : MonoBehaviour
         {
             try
             {
-                //Update Online SaveFile date    We Update the Date first so the other GameObjects have time to save their values so we dont upload an old SaveFile to the Database
+                //Update Online SaveFile date We Update the Date first so the other GameObjects have time to save their values so we dont upload an old SaveFile to the Database
                 string sql2 = "UPDATE SaveFiles SET SaveFile_datum = '" + currentTime + "' WHERE SaveFile_id = '" + UserID + "'";
                 MySqlCommand cmd2 = new MySqlCommand(sql2, conn);
                 cmd2.ExecuteNonQuery();
