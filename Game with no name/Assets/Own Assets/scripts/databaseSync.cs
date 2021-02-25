@@ -31,9 +31,9 @@ public class databaseSync : MonoBehaviour
     [SerializeField] MessageBoxScriptableObject UserBanned;
     [SerializeField] MessageBoxScriptableObject noOnlineSaveFile;
     
+    //MySQL connection variable
     MySqlConnection conn;
 
-    ES3File usrFile;
     string TempUsername;
     string TempPassword;
     bool LoginButtonClicked = false;
@@ -49,16 +49,19 @@ public class databaseSync : MonoBehaviour
     System.DateTime convertedOnlineSaveFile;
     int SaveFileConflictDecision = 0;
 
-    //This var kinda tells us to whom a local SaveFile belongs to
+    //This variable tells us to whom a local SaveFile belongs to
     string AssociatedUserID;
     
-
     //0=connecting to Database 1=Connected to database 2=Loggin in 3=Logged 4= Syncing 5=Synced in 6=Registering 7=Registered
     public int StatusID = 0;
 
     // Start is called before the first frame update
     void Start()
     {
+        //Disable the SaveFile Conflict Panel (just in case)
+        OnlineLocalSavePanel.SetActive(false);
+
+        //Check if We're starting the game with a local SaveFile + loading important parameters 
         if (ES3.FileExists("usr.es3"))
         {
             LocalLastTimeSaved = ES3.Load<string>("LastSaved");
@@ -77,13 +80,13 @@ public class databaseSync : MonoBehaviour
             Debug.Log("SaveFile already has a UserID associated with it " + AssociatedUserID);
         }
 
-
+        //Load the FirstLogin Var 
         if (ES3.KeyExists("FirstLogin"))
         {
             FirstLogin = ES3.Load<bool>("FirstLogin");
         }
 
-        
+        //Create the Usr SaveFile (where we store the last UserID we use to sync the SaveFile when the User closes the game) if it doesnt exists
         if (ES3.FileExists("usr.es3") == false)
         {
             
@@ -102,14 +105,14 @@ public class databaseSync : MonoBehaviour
             Debug.Log("File already exists");
         }
 
-        OnlineLocalSavePanel.SetActive(false);
-
+        //start the ConnectToDatabase function from another Thread
         ThreadStart ThreadRef = new ThreadStart(ConnectToDatabase);
         Thread ConnectThread = new Thread(ThreadRef);
         ConnectThread.Start();
 
     }   
 
+    //Connects to the Database
     void ConnectToDatabase()
     {
         //connection parameters
@@ -136,7 +139,7 @@ public class databaseSync : MonoBehaviour
     }
     
     
-    //This is just a public method that can be called from elsewhere to start a Login on another thread
+    //just a public method that can be called from elsewhere to start a Login on another thread
     public void ExecuteLogin(string Username, string Password)
     {
         ThreadStart ThreadRef = new ThreadStart(() => Login(Username, Password));
@@ -144,7 +147,7 @@ public class databaseSync : MonoBehaviour
         LoginThread.Start();
     }
 
-    //This is just a public method that can be called from elsewhere to start the Register function on another thread
+    //just a public method that can be called from elsewhere to start the Register function on another thread
     public void ExecuteRegister(string Username, string Password)
     {
         ThreadStart ThreadRef = new ThreadStart(() => Register(Username, Password));
@@ -152,6 +155,7 @@ public class databaseSync : MonoBehaviour
         RegisterThread.Start();
     }
 
+    //Logs in User and Syncs his SaveFile
     public void Login(string Username, string Password)
     {
         //for some reason the compiler wants me to assign these local variables when I am trying to use it 
@@ -178,7 +182,7 @@ public class databaseSync : MonoBehaviour
 
 
                 Debug.Log(rdr[0]);
-                //this is kinda useless c its already checked in the sql query
+                //this is kinda useless because its already checked in the sql query
                 if (rdr[0].ToString() == Username)
                 {
                     SQLconnectionState = 2;
@@ -190,7 +194,6 @@ public class databaseSync : MonoBehaviour
                 else
                 {
                     //This actually never gets called because it always throws an exeption when the query output is null
-
                     Debug.LogError("User does not exist");
                     StatusID = 1;
                     rdr.Close();
@@ -209,6 +212,7 @@ public class databaseSync : MonoBehaviour
                 Debug.LogError(ex.ToString());
                 rdr.Close();
 
+                //Open Error PopUp
                 Dispatcher.RunOnMainThread(() => PopUpWindow(UserDoesNotExist));
 
                 //reenable Play and Exit Button again 
@@ -492,6 +496,7 @@ public class databaseSync : MonoBehaviour
 
     }
 
+    //adds a new User account with valid parameters
     public void Register (string Username, string Password)
     {
         StatusID = 6;
@@ -604,24 +609,28 @@ public class databaseSync : MonoBehaviour
         StatusID = 7;
     }
 
-    
-    public void ExecuteSaveFileConflict(int decision)
+    //Gets called from the SaveFileConflictPanelManager script to inform this script what button has been clicked 
+    //(We dont want to call this directly from the buttons because we're on a diffrent thread)
+    public void SetSaveFileConflictDecision(int decision)
     {
         // 1 = User decided to use the Online SaveFile   2 = User decided to use the Local SaveFile   0 = default Value (no choice made yet)
         SaveFileConflictDecision = decision;
     }
+
 
     void PopUpWindow(MessageBoxScriptableObject msg)
     {
         msgBox.ErrorMessageBox(msg);
     }
 
+    //Function for encoding plain text into base64 format
     string Base64Encode(string plainText)
     {
         var plainTextBytes = System.Text.Encoding.UTF8.GetBytes(plainText);
         return System.Convert.ToBase64String(plainTextBytes);
     }
 
+    //Function for decoding base64 data into plain text
     string Base64Decode(string base64EncodedData)
     {
         var base64EncodedBytes = System.Convert.FromBase64String(base64EncodedData);

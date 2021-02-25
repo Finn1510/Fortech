@@ -33,12 +33,14 @@ public class Statusbar : MonoBehaviour
 
     void Start()
     {
+        //Makes the Checkmark disapear
         Checkmark.transform.localScale = new Vector3(0, 0, 0);
     }
 
     // Update is called once per frame
     void Update()
     {
+        //Changes the behaviour of the Statusbar based on the current status
         switch (Databasesystem.StatusID)
         {
             case 0:
@@ -46,7 +48,6 @@ public class Statusbar : MonoBehaviour
                 SetLoadingBobRotationVelocity(500);
                 if (TweenStatus != 0)
                 {
-                    //StatusbarPanel.DOColor(new Color32(231, 207, 0, 255), 1).From();
                     SwitchToLoadingBob();
                     DOTween.To(() => StatusbarPanel.color, x => StatusbarPanel.color = x, ConnectingToDatabaseColor, 1);
                     TweenStatus = 0;
@@ -56,7 +57,6 @@ public class Statusbar : MonoBehaviour
                 Statustext.SetText("Connected to Database");
                 if (TweenStatus != 1)
                 {
-                    //StatusbarPanel.DOColor(new Color32(56, 169, 39, 255), 1).From();
                     SwitchToCheckmark();
                     DOTween.To(() => StatusbarPanel.color, x => StatusbarPanel.color = x, ConnectedToDatabaseColor, 1);
                     TweenStatus = 1;
@@ -68,7 +68,6 @@ public class Statusbar : MonoBehaviour
                 SetLoadingBobRotationVelocity(500);
                 if (TweenStatus != 2)
                 {
-                    //StatusbarPanel.DOColor(new Color32(231, 207, 0, 255), 1).From();
                     SwitchToLoadingBob();
                     DOTween.To(() => StatusbarPanel.color, x => StatusbarPanel.color = x, LoggingInColor, 1);
                     TweenStatus = 2;
@@ -78,7 +77,6 @@ public class Statusbar : MonoBehaviour
                 Statustext.SetText("logged in");
                 if (TweenStatus != 3)
                 {
-                    //StatusbarPanel.DOColor(new Color32(56, 169, 39, 255), 1).From();
                     SwitchToCheckmark();
                     DOTween.To(() => StatusbarPanel.color, x => StatusbarPanel.color = x, LoggedInColor, 1);
                     TweenStatus = 3;
@@ -90,7 +88,6 @@ public class Statusbar : MonoBehaviour
                 SetLoadingBobRotationVelocity(500);
                 if (TweenStatus != 4)
                 {
-                    //StatusbarPanel.DOColor(new Color32(0, 225, 231, 255), 1).From();
                     SwitchToLoadingBob();
                     DOTween.To(() => StatusbarPanel.color, x => StatusbarPanel.color = x, SyncingColor, 1);
                     TweenStatus = 4;
@@ -100,7 +97,6 @@ public class Statusbar : MonoBehaviour
                 Statustext.SetText("Synced");
                 if (TweenStatus != 5)
                 {
-                    //StatusbarPanel.DOColor(new Color32(56, 169, 39, 255), 1).From();
                     SwitchToCheckmark();
                     DOTween.To(() => StatusbarPanel.color, x => StatusbarPanel.color = x, SyncedColor, 1);
                     TweenStatus = 5;
@@ -112,7 +108,6 @@ public class Statusbar : MonoBehaviour
                 SetLoadingBobRotationVelocity(500);
                 if (TweenStatus != 6)
                 {
-                    //StatusbarPanel.DOColor(new Color32(231, 207, 0, 255), 1).From();
                     SwitchToLoadingBob();
                     DOTween.To(() => StatusbarPanel.color, x => StatusbarPanel.color = x, RegisteringColor, 1);
                     TweenStatus = 6;
@@ -122,7 +117,6 @@ public class Statusbar : MonoBehaviour
                 Statustext.SetText("Registered");
                 if (TweenStatus != 7)
                 {
-                    //StatusbarPanel.DOColor(new Color32(56, 169, 39, 255), 1).From();
                     SwitchToCheckmark();
                     DOTween.To(() => StatusbarPanel.color, x => StatusbarPanel.color = x, RegisteredColor, 1);
                     TweenStatus = 7;
@@ -131,16 +125,19 @@ public class Statusbar : MonoBehaviour
                 break;
         } 
         
+        //Sets the LoadingBob angular velocity to a specific amount so it rotates
         void SetLoadingBobRotationVelocity(float amount)
         {
             LoadingBob.angularVelocity = amount;
         }
 
+        //stops the LoadingBob smoothly with tweening
         void StopLoadingBob()
         {
             DOTween.To(() => LoadingBob.angularVelocity, x => LoadingBob.angularVelocity = x, 0f, 1);
         }
 
+        //makes the LoadingBob disappear and shows the Checkmark (both smooth using tweening)
         void SwitchToCheckmark()
         {
             if(Checkmark.localScale == Vector3.zero)
@@ -150,6 +147,7 @@ public class Statusbar : MonoBehaviour
             }
         }
 
+        //makes the Checkmark disappear and shows the Loadingbob (both smooth using tweening)
         void SwitchToLoadingBob()
         {
             if (Checkmark.localScale != Vector3.zero)

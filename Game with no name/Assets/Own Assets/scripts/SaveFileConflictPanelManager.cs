@@ -31,18 +31,20 @@ public class SaveFileConflictPanelManager : MonoBehaviour
         LocalSaveDateText.SetText(LocalSaveDate);
     }
     
+    //gets called when the cloud save button has been clicked
     public void CloudSaveButtonClicked()
     {
         changeButtons(false);
         Anim.SetTrigger("ButtonClicked");
-        GameObject.FindGameObjectWithTag("DatabaseManager").GetComponent<databaseSync>().SendMessage("ExecuteSaveFileConflict", 1);
+        GameObject.FindGameObjectWithTag("DatabaseManager").GetComponent<databaseSync>().SendMessage("SetSaveFileConflictDecision", 1);
     }
 
+    //gets called when the local save button has been clicked
     public void LocalSaveButtonClicked()
     {
         changeButtons(false);
         Anim.SetTrigger("ButtonClicked");
-        GameObject.FindGameObjectWithTag("DatabaseManager").GetComponent<databaseSync>().SendMessage("ExecuteSaveFileConflict", 2);
+        GameObject.FindGameObjectWithTag("DatabaseManager").GetComponent<databaseSync>().SendMessage("SetSaveFileConflictDecision", 2);
     }
 
     //Enables/Disables Buttons to prevent them from beeing clicked (even tho they are like 1pixel wide after the animation)

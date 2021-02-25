@@ -76,7 +76,7 @@ public class SaveFileManager : MonoBehaviour
         SaveFileSync();
     }
 
-
+    //Connects to the Database
     void ConnectToDatabase()
     {
         //connection parameters
@@ -120,22 +120,23 @@ public class SaveFileManager : MonoBehaviour
         }
     }
 
+    //Syncs the SaveFile
     void SaveFileSync()
     {
         if(SQLconnectionState == 2)
         {
             try
             {
-                //Update Online SaveFiles (we have to encode the SaveFile into Base64 format because the " symbols in the SaveFile confuse MySQL)
-                string sql = "UPDATE SaveFiles SET SaveFile_file = '" + Base64Encode(LocalSaveFileData) + "' WHERE SaveFile_id = '" + UserID + "'";
-                MySqlCommand cmd = new MySqlCommand(sql, conn);
-                cmd.ExecuteNonQuery();
-
-                //Update Online SaveFile date
+                //Update Online SaveFile date    We Update the Date first so the other GameObjects have time to save their values so we dont upload an old SaveFile to the Database
                 string sql2 = "UPDATE SaveFiles SET SaveFile_datum = '" + currentTime + "' WHERE SaveFile_id = '" + UserID + "'";
                 MySqlCommand cmd2 = new MySqlCommand(sql2, conn);
                 cmd2.ExecuteNonQuery();
-                
+
+                //Update Online SaveFiles (we have to encode the SaveFile into Base64 format because the " symbols in the SaveFile confuse MySQL)
+                string sql = "UPDATE SaveFiles SET SaveFile_file = '" + Base64Encode(ES3.LoadRawString(SaveFileName)) + "' WHERE SaveFile_id = '" + UserID + "'";
+                MySqlCommand cmd = new MySqlCommand(sql, conn);
+                cmd.ExecuteNonQuery();
+
                 Debug.Log("Synced SaveFile");
             }
             catch (System.Exception ex)
@@ -150,12 +151,14 @@ public class SaveFileManager : MonoBehaviour
 
     }
 
+    //Function for encoding plain text into base64 format
     string Base64Encode(string plainText)
     {
         var plainTextBytes = System.Text.Encoding.UTF8.GetBytes(plainText);
         return System.Convert.ToBase64String(plainTextBytes);
     }
 
+    //Function for decoding base64 data into plain text
     string Base64Decode(string base64EncodedData)
     {
         var base64EncodedBytes = System.Convert.FromBase64String(base64EncodedData);
