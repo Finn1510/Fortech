@@ -25,6 +25,7 @@ public class Gunsystem : MonoBehaviour
     
     bool GunDelayOver = true;
     bool Playerdied = false;
+    bool GamePaused = false;
     Transform Player;
 
     private void Awake()
@@ -42,13 +43,13 @@ public class Gunsystem : MonoBehaviour
     void Update()
     {
         
-        if (Playerdied != true)
+        if (Playerdied != true && GamePaused == false)
         {
             aimtwrdsmouse();
             flipLikePlayer();
         }  
         
-        if(Input.GetKey(FireKey) == true && GunDelayOver == true && Playerdied == false && UI_Inventory.active == false)
+        if(Input.GetKey(FireKey) == true && GunDelayOver == true && Playerdied == false && UI_Inventory.active == false && GamePaused == false)
         {
             GunDelayOver = false;
             
@@ -109,5 +110,15 @@ public class Gunsystem : MonoBehaviour
     public void PlayerRespawned()
     {
         Playerdied = false;
+    }
+
+    public void GamePause()
+    {
+        GamePaused = true;
+    }
+
+    public void GameResume()
+    {
+        GamePaused = false;
     }
 }

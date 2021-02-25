@@ -46,6 +46,7 @@ public class player_movement : MonoBehaviour
     bool DiedMessageSent = false;
     bool RespawnMessageSent = false;
     bool VignetCoroutineDelayACTIVE = false;
+    bool GamePaused = false;
 
     private Inventory inventory;
     
@@ -100,11 +101,11 @@ public class player_movement : MonoBehaviour
 
         //Flip player according mouse position
         MouseXpos = Input.mousePosition.x / Screen.width;
-        if (MouseXpos < 0.5)
+        if (MouseXpos < 0.5 && GamePaused == false && Playerdied == false)
         {
             transform.localScale = new Vector3(-1, transform.localScale.y, transform.localScale.z);
         }
-        else if(MouseXpos > 0.5)
+        else if(MouseXpos > 0.5 && GamePaused == false && Playerdied == false)
         {
             transform.localScale = new Vector3(1, transform.localScale.y, transform.localScale.z);
         }
@@ -141,7 +142,7 @@ public class player_movement : MonoBehaviour
 
         } 
 
-        if(Input.GetKeyDown(InventoryKey) == true && Playerdied == false)
+        if(Input.GetKeyDown(InventoryKey) == true && Playerdied == false && GamePaused == false)
         {
             if (UI_Inventory.active == false)
             {
@@ -153,7 +154,7 @@ public class player_movement : MonoBehaviour
             }
         }
 
-        if (Input.GetKeyDown(altInventoryCloseKey) == true && Playerdied == false)
+        if (Input.GetKeyDown(altInventoryCloseKey) == true && Playerdied == false && GamePaused == false)
         {
             if (UI_Inventory.active == true)
             {
@@ -371,6 +372,16 @@ public class player_movement : MonoBehaviour
         Health = amount;
         HealthSlider.value = amount;
         Healthtext.text = amount.ToString();
+    }
+
+    public void GamePause()
+    {
+        GamePaused = true;
+    }
+
+    public void GameResume()
+    {
+        GamePaused = false;
     }
 
     public void Save()

@@ -50,7 +50,11 @@ public class DebugMenuHandler : MonoBehaviour
 
     void TimeControll()
     {
-        TimeMultipliertNumberText.SetText(Time.timeScale.ToString());
-        Time.timeScale = TimeMultiplierSlider.value;
+        if(DebugMenuActivated == true)
+        {
+            TimeMultipliertNumberText.SetText(Time.timeScale.ToString());
+            Time.timeScale = TimeMultiplierSlider.value;
+        }
+        
     }
 }

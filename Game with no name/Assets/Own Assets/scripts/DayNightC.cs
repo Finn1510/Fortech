@@ -5,7 +5,6 @@ using UnityEngine.Experimental.Rendering.LWRP;
 using DG.Tweening;
 using UnityEngine.Rendering;
 using System.Reflection;
-//using UnityEditorInternal;
 using System;
 
 public class DayNightC : MonoBehaviour
