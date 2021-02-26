@@ -19,6 +19,7 @@ public class PlayerStatsSetter : MonoBehaviour
     PlayerStats PlayerStatsData;
     bool timerfinished = true;
 
+    //set UI text
     void updatePlayerStats()
     {
         PlayerStatsData = GetComponent<PlayerStats>();
@@ -32,13 +33,15 @@ public class PlayerStatsSetter : MonoBehaviour
 
     void Update()
     {
-        if(timerfinished == true)
+        //Call updatePlayerStats() when timer is finished
+        if (timerfinished == true)
         {
             StartCoroutine(Wait(UpdateDelaySeconds));
             updatePlayerStats();
         }  
     }
 
+    //wait for a specific time
     IEnumerator Wait(float time)
     {
         timerfinished = false;
