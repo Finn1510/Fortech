@@ -390,6 +390,7 @@ public class player_movement : MonoBehaviour
         ES3.Save<Item>("heldItemType", heldItem);
         
         ES3.Save<float>("PlayerHealth", Health);
+        ES3.Save<Vector3>("PlayerPosition", transform.position);
 
         Debug.Log("Player Saved");
     }
@@ -397,6 +398,7 @@ public class player_movement : MonoBehaviour
     void Load()
     {
         Health = ES3.Load<float>("PlayerHealth");
+        transform.position = ES3.Load<Vector3>("PlayerPosition");
 
         Item TestHeldItem = ES3.Load<Item>("heldItemType");
 
