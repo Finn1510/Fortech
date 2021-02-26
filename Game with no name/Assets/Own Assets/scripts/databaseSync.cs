@@ -62,7 +62,7 @@ public class databaseSync : MonoBehaviour
         OnlineLocalSavePanel.SetActive(false);
 
         //Check if We're starting the game with a local SaveFile + loading important parameters 
-        if (ES3.FileExists("usr.es3"))
+        if (ES3.FileExists("SaveData.es3"))
         {
             LocalLastTimeSaved = ES3.Load<string>("LastSaved");
             LocalSaveFilePath = Application.persistentDataPath + "/" + SaveFileName;
@@ -71,6 +71,18 @@ public class databaseSync : MonoBehaviour
         else
         {
             StartUpWithoutLocalSaveFile = true;
+
+            //Create a local SaveFile so we can write our Data to it later
+            
+            // Create a file and write a default Json profile
+            using (StreamWriter sw = File.CreateText(Application.persistentDataPath + "/" + SaveFileName))
+            {
+                sw.WriteLine("{}");
+                sw.Close();
+            }
+            LocalSaveFilePath = Application.persistentDataPath + "/" + SaveFileName;
+            
+            Debug.Log("SaveFile File Created");
         }
 
         //We're Checking for a Key again because User can play the game and create a local SaveFile without logging in
@@ -97,7 +109,7 @@ public class databaseSync : MonoBehaviour
                 sw.Close();
             }
             
-            Debug.Log("File Created"); 
+            Debug.Log("USR File Created"); 
             
         }
         else
