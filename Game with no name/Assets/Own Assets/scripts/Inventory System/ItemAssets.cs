@@ -19,10 +19,12 @@ public class ItemAssets : MonoBehaviour
     public Sprite CoinSprite;
     public Sprite HealthPotionSprite;
     public Sprite LightingHawkSprite;
+    public Sprite RustGunSprite;
 
     public GameObject AcidPrefab;
     public GameObject ThunderboltPrefab;
     public GameObject LightingHawkPrefab;
+    public GameObject RustGunPrefab;
     
 
 }

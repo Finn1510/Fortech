@@ -9,6 +9,7 @@ public class SaveFileManager : MonoBehaviour
     [SerializeField] string LastTimeSaved;
     [SerializeField] int AutoSaveIntervallMinutes;
     [SerializeField] GameObject[] SaveGameObjects;
+    [SerializeField] bool OnlineSync = true;
     [Space]
     [SerializeField] string SaveFileName = "SaveData.es3";
     
@@ -68,8 +69,17 @@ public class SaveFileManager : MonoBehaviour
     private void OnApplicationQuit()
     {
         SaveEverything();
-        ConnectToDatabase();
-        SaveFileSync();
+        
+        if(OnlineSync == true)
+        {
+            ConnectToDatabase();
+            SaveFileSync();
+        }
+        else
+        {
+            Debug.Log("CloudSync has been disabled manually");
+        }
+        
     }
 
     //Connects to the Database

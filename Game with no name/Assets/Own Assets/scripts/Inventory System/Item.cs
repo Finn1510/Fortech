@@ -13,6 +13,7 @@ public class Item
         Thunderbolt, 
         Coin, 
         Lighting_Hawk,
+        RustGun,
     }
 
     public ItemType itemType;
@@ -28,6 +29,7 @@ public class Item
             case ItemType.HealthPotion: return ItemAssets.Instance.HealthPotionSprite;
             case ItemType.Coin: return ItemAssets.Instance.CoinSprite;
             case ItemType.Lighting_Hawk: return ItemAssets.Instance.LightingHawkSprite;
+            case ItemType.RustGun: return ItemAssets.Instance.RustGunSprite;
         }
     } 
 
@@ -39,6 +41,7 @@ public class Item
             case ItemType.Acid:
             case ItemType.Lighting_Hawk:
             case ItemType.Thunderbolt:
+            case ItemType.RustGun:
                 return false;
             case ItemType.Coin:
             case ItemType.HealthPotion:

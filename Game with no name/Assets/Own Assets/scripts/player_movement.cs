@@ -293,6 +293,18 @@ public class player_movement : MonoBehaviour
 
                 heldWeapon = Instantiate(WeaponPrefab, holdPoint.position, Quaternion.identity, holdPoint);
                 UI_Inventory.SetActive(false);
+                break;
+            case Item.ItemType.RustGun:
+                if (heldWeapon != null)
+                {
+                    Destroy(heldWeapon);
+                }
+
+                WeaponPrefab = ItemAssets.Instance.RustGunPrefab;
+                heldItem = item;
+
+                heldWeapon = Instantiate(WeaponPrefab, holdPoint.position, Quaternion.identity, holdPoint);
+                UI_Inventory.SetActive(false);
 
                 break;
 
