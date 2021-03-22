@@ -112,10 +112,14 @@ public class player_movement : MonoBehaviour
         
         if (Health <= 0f)
         {
+            Debug.Log("Health is <= 0 player ist dead");
             UI_Inventory.SetActive(false);
-            Playerdied = true; 
-            
-            if(DiedMessageSent == false)
+            Playerdied = true;
+
+            //reset this value here so the player can actually repawn
+            RespawnMessageSent = false;
+
+            if (DiedMessageSent == false)
             {
                 GameObject[] gos = (GameObject[])GameObject.FindObjectsOfType(typeof(GameObject));
                 foreach (GameObject go in gos)
@@ -126,7 +130,6 @@ public class player_movement : MonoBehaviour
                     }
                 }
 
-                YouDiedtext.SetActive(true);
                 DiedMenu.SetActive(true);
 
                 PlayerStats.DiedCount = PlayerStats.DiedCount + 1;
@@ -337,9 +340,13 @@ public class player_movement : MonoBehaviour
         UI_Inventory.SetActive(false);
         Playerdied = false;
 
+        //reset pos
         transform.position = new Vector2(17, 6.5f);
-        changeHealth(maxHealth);
         
+        //change Health + Healthbar values to max possible health
+        changeHealth(maxHealth);
+        DOTween.To(() => HealthSlider.value, x => HealthSlider.value = x, maxHealth, 0.2f);
+
 
         //TODO figure out a penalty for dying + protect the player during the first few seconds
 
@@ -354,8 +361,7 @@ public class player_movement : MonoBehaviour
                 }
             }
 
-            YouDiedtext.SetActive(true);
-            DiedMenu.SetActive(true);
+            DiedMenu.SetActive(false);
 
             DOTween.To(() => Time.timeScale, x => Time.timeScale = x, 1f, 1f);
 
@@ -364,13 +370,16 @@ public class player_movement : MonoBehaviour
             
             RespawnMessageSent = true;
 
+            //reset this value here so player can die again after respawning
+            DiedMessageSent = false;
+
         }
     }
 
     void changeHealth(float amount)
     {
         Health = amount;
-        HealthSlider.value = amount;
+        DOTween.To(() => HealthSlider.value, x => HealthSlider.value = x, amount, 0.2f);
         Healthtext.text = amount.ToString();
     }
 
