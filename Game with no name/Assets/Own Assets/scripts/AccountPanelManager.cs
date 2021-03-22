@@ -11,6 +11,9 @@ public class AccountPanelManager : MonoBehaviour
     [Header("References")]
     [SerializeField] databaseSync DatabaseSystem;
     [Space]
+    [SerializeField] GameObject Panel;
+    [SerializeField] Camera InputCamera;
+    [SerializeField] RawImage RawImageOverlay;
     [SerializeField] TMP_InputField UsernameInputfield;
     [SerializeField] TMP_InputField PasswordInputfield;
     [SerializeField] Animator PanelAnimator;
@@ -28,9 +31,25 @@ public class AccountPanelManager : MonoBehaviour
     private bool MouseOverLoginButton = false;
     private bool MouseOverRegisterButton = false;
     private bool pastValue = false;
-    
-    //This is a terrible way of doing this but I couldn't think of anything diffrent because the panel 
-    //always thought it has to close when the pointer is over a button and not over a panel
+
+    private void Start()
+    {
+        AdjustRenderTextureToScreenRes();
+    }
+
+    void AdjustRenderTextureToScreenRes()
+    {
+        if (InputCamera.targetTexture != null)
+        {
+            InputCamera.targetTexture.Release();
+        }
+         
+        RenderTexture adjustedRenderTexture = new RenderTexture(Screen.width, Screen.height, 24);
+        
+        InputCamera.targetTexture = adjustedRenderTexture;
+        Panel.GetComponent<Image>().material.SetTexture("_BlurTex", adjustedRenderTexture);
+        RawImageOverlay.texture = adjustedRenderTexture;
+    }
 
     public void LoginButtonClicked()
     {
@@ -47,6 +66,9 @@ public class AccountPanelManager : MonoBehaviour
 
         DatabaseSystem.ExecuteRegister(Username, Password);
     }
+
+    //This is a terrible way of doing this but I couldn't think of anything diffrent because the panel 
+    //always thought it has to close when the pointer is over a button and not over the panel
 
     private void Update()
     {

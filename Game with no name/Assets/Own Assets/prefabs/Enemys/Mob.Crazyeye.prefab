@@ -371,7 +371,7 @@ MonoBehaviour:
   RightWing: {fileID: 6994437527058546729}
   Eye: {fileID: 6994437525581230987}
   EnemyHealth: 30
-  speed: 1000
+  speed: 2000
   nextWaypointDistance: 2
   PathUpdateDelay: 0.5
   maxDamageDistance: 2
