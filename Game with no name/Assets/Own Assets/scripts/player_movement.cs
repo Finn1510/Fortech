@@ -247,9 +247,6 @@ public class player_movement : MonoBehaviour
         switch (item.itemType)
         {
             case Item.ItemType.HealthPotion:
-                //some VFX
-                Instantiate(ItemAssets.Instance.HealPotionVFXPrefab, holdPoint);
-                
                 //heal player if necesarry
                 if (Health + 20 <= 100)
                 {
@@ -257,6 +254,8 @@ public class player_movement : MonoBehaviour
                     Healthtext.text = Health.ToString();
                     DOTween.To(() => HealthSlider.value, x => HealthSlider.value = x, Health, 0.5f);
                     inventory.RemoveItem(new Item { itemType = Item.ItemType.HealthPotion, amount = 1 });
+                    //some VFX
+                    Instantiate(ItemAssets.Instance.HealPotionVFXPrefab, holdPoint);
                 }
                 break;
             case Item.ItemType.Acid:

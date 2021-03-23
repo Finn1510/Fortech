@@ -16,7 +16,7 @@ public class DayNightC : MonoBehaviour
     [Range(0.1f, 10f)]
     [SerializeField] float stateDurationMinutes = 1f;
     
-
+     
     [SerializeField] float DayLightIntensity = 1;
     [SerializeField] float NightLightIntensity = 0.2f;
     [SerializeField] string WorldStartState = "State3";

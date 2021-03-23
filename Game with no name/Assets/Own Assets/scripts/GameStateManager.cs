@@ -10,13 +10,19 @@ public class GameStateManager : MonoBehaviour
     [SerializeField] Animator PauseMenuAnim;
     [SerializeField] KeyCode PauseKey = KeyCode.Escape;
     [SerializeField] GameObject Ui_Inventory;
+    [SerializeField] DoubleAudioSource AmbientMusic;
+    [SerializeField] DayNightC DayNightCycle;
 
     [Header("Parameters")]
     [SerializeField] float InventoryInputDelaySeconds = 0.25f;
+    [SerializeField] AudioClip DayAmbient;
+    [SerializeField] AudioClip NightAmbient;
 
     bool GamePaused = false;
     bool DelayDone = true;
-    
+    bool IsDay;
+    bool previousValue;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -40,7 +46,29 @@ public class GameStateManager : MonoBehaviour
                 GamePaused = false;
                 ResumeGame();
             }
-        }   
+        } 
+        
+        if(DayNightCycle.StateIndex == 1 || DayNightCycle.StateIndex >= 9)
+        {
+            IsDay = false;
+        }
+        else
+        {
+            IsDay = true;
+        }
+        if(IsDay != previousValue)
+        {
+            if(IsDay == true)
+            {
+                AmbientMusic.CrossFade(DayAmbient, 0.2f, 2);
+            }
+            if(IsDay == false)
+            {
+                AmbientMusic.CrossFade(NightAmbient, 0.2f, 2);
+            }
+        }
+        previousValue = IsDay;
+
     }
 
     public void PauseGame()

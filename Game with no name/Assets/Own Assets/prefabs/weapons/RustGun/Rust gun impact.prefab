@@ -41,7 +41,7 @@ ParticleSystem:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2013205511087582211}
   serializedVersion: 6
-  lengthInSec: 1
+  lengthInSec: 0.5
   simulationSpeed: 1
   stopAction: 0
   cullingMode: 0
@@ -226,8 +226,8 @@ ParticleSystem:
       maxColor: {r: 1, g: 0.07060622, b: 0, a: 1}
       maxGradient:
         serializedVersion: 2
-        key0: {r: 1, g: 0, b: 0, a: 1}
-        key1: {r: 1, g: 0.51263034, b: 0, a: 1}
+        key0: {r: 0.6132076, g: 0, b: 0.09217857, a: 1}
+        key1: {r: 0.6415094, g: 0.060781866, b: 0, a: 1}
         key2: {r: 0, g: 0, b: 0, a: 0}
         key3: {r: 0, g: 0, b: 0, a: 0}
         key4: {r: 0, g: 0, b: 0, a: 0}
@@ -285,7 +285,7 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0.4
+      scalar: 0.2
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -1058,8 +1058,8 @@ ParticleSystem:
           inWeight: 0.33333334
           outWeight: 0.10907296
         - serializedVersion: 3
-          time: 0.33178905
-          value: 0.4736233
+          time: 0.28447154
+          value: 0.168623
           inSlope: -1.1149929
           outSlope: -1.1149929
           tangentMode: 0
@@ -1067,10 +1067,10 @@ ParticleSystem:
           inWeight: 0.42290425
           outWeight: 1
         - serializedVersion: 3
-          time: 1
-          value: 0
-          inSlope: -0.70879304
-          outSlope: -0.70879304
+          time: 0.47634888
+          value: 0.009994507
+          inSlope: -0.8267183
+          outSlope: -0.8267183
           tangentMode: 34
           weightedMode: 0
           inWeight: 0.33333334
