@@ -247,7 +247,10 @@ public class player_movement : MonoBehaviour
         switch (item.itemType)
         {
             case Item.ItemType.HealthPotion:
-                //TODO some VFX 
+                //some VFX
+                Instantiate(ItemAssets.Instance.HealPotionVFXPrefab, holdPoint);
+                
+                //heal player if necesarry
                 if (Health + 20 <= 100)
                 {
                     Health += 20;

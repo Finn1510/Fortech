@@ -25,6 +25,7 @@ public class ItemAssets : MonoBehaviour
     public GameObject ThunderboltPrefab;
     public GameObject LightingHawkPrefab;
     public GameObject RustGunPrefab;
+    public GameObject HealPotionVFXPrefab;
     
 
 }

@@ -9,6 +9,7 @@ public class GameStateManager : MonoBehaviour
     [SerializeField] GameObject PauseMenu;
     [SerializeField] Animator PauseMenuAnim;
     [SerializeField] KeyCode PauseKey = KeyCode.Escape;
+    [SerializeField] GameObject Ui_Inventory;
 
     [Header("Parameters")]
     [SerializeField] float InventoryInputDelaySeconds = 0.25f;
@@ -25,7 +26,7 @@ public class GameStateManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(PauseKey))
+        if (Input.GetKeyDown(PauseKey ) && Ui_Inventory.active == false)
         {
             if (GamePaused == false && DelayDone == true)
             {
