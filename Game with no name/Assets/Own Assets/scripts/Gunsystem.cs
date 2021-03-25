@@ -42,7 +42,6 @@ public class Gunsystem : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
         if (Playerdied != true && GamePaused == false)
         {
             aimtwrdsmouse();
@@ -90,7 +89,7 @@ public class Gunsystem : MonoBehaviour
     
     void aimtwrdsmouse()
     {
-        Vector2 direction = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
+        Vector2 direction = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 10f)) - transform.position;
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
         Quaternion rotation = Quaternion.AngleAxis(angle, Vector3.forward);
         transform.rotation = Quaternion.Slerp(transform.rotation, rotation, rotationSpeed * Time.deltaTime);
@@ -99,7 +98,6 @@ public class Gunsystem : MonoBehaviour
     void flipLikePlayer()
     {
         transform.localScale = new Vector3(Player.localScale.x, Player.localScale.x, transform.localScale.z);
-            
     }
 
     public void PlayerDied()
