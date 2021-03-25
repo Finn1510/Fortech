@@ -10,7 +10,7 @@ using System;
 public class DayNightC : MonoBehaviour
 {
     [Header("References")]
-    [SerializeField] Light2D SunLight;
+    [SerializeField] UnityEngine.Experimental.Rendering.Universal.Light2D SunLight;
 
     [Header("Parameters")]
     [Range(0.1f, 10f)]

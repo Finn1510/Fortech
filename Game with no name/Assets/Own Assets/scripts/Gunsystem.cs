@@ -17,7 +17,7 @@ public class Gunsystem : MonoBehaviour
     [Header("References")]
     [SerializeField] GameObject Bullet;
     [SerializeField] Transform Firepoint;
-    [SerializeField] Light2D LightMuzzleflash;
+    [SerializeField] UnityEngine.Experimental.Rendering.Universal.Light2D LightMuzzleflash;
     [SerializeField] GameObject GunfireVFX;
     [SerializeField] AudioSource GunAudio;
     GameObject UI_Inventory;
