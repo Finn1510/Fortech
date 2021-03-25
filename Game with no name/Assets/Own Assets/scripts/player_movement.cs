@@ -4,8 +4,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using Cinemachine;
-using UnityEngine.Rendering.PostProcessing;
+//using UnityEngine.Rendering.PostProcessing;
 using DG.Tweening;
+using UnityEngine.Rendering.Universal;
+using UnityEngine.Rendering;
 
 public class player_movement : MonoBehaviour
 {
@@ -25,8 +27,7 @@ public class player_movement : MonoBehaviour
     [SerializeField] CharacterController2D controller;
     [SerializeField] Text Healthtext;
     [SerializeField] Slider HealthSlider;
-    [SerializeField] PostProcessVolume DiedPostProcess;
-    [SerializeField] PostProcessVolume PostProcessing;
+    public Volume PostProcessing;
     [SerializeField] GameObject YouDiedtext;
     [SerializeField] GameObject DiedMenu;
     [SerializeField] UI_Inventory uiInventory;
@@ -47,11 +48,11 @@ public class player_movement : MonoBehaviour
     bool RespawnMessageSent = false;
     bool VignetCoroutineDelayACTIVE = false;
     bool GamePaused = false;
-
+    
     private Inventory inventory;
     
     //Post process vars
-    ColorGrading ColorGrade = null;
+    ColorAdjustments ColorAdjust = null;
     Vignette Vignet = null;
 
     
@@ -77,8 +78,12 @@ public class player_movement : MonoBehaviour
         HealthSlider.maxValue = maxHealth;
         HealthSlider.value = Health;
 
-        DiedPostProcess.sharedProfile.TryGetSettings<ColorGrading>(out ColorGrade);
-        PostProcessing.sharedProfile.TryGetSettings<Vignette>(out Vignet);
+        PostProcessing.sharedProfile.TryGet(out Vignet);
+        PostProcessing.sharedProfile.TryGet(out ColorAdjust);
+        
+        Vignet.intensity.value = 0;
+        ColorAdjust.colorFilter.value = Color.white;
+
 
         ImpulseGEN = GetComponent<CinemachineImpulseSource>();
         rigid = GetComponent<Rigidbody2D>();
@@ -138,7 +143,8 @@ public class player_movement : MonoBehaviour
 
                 DOTween.To(() => Time.timeScale, x => Time.timeScale = x, 0.00001f, 1f);
                 
-                DOTween.To(() => DiedPostProcess.weight, x => DiedPostProcess.weight = x, 1, 0.5f);
+                //DOTween.To(() => DiedPostProcess.weight, x => DiedPostProcess.weight = x, 1, 0.5f);
+                DOTween.To(() => ColorAdjust.colorFilter.value, x => ColorAdjust.colorFilter.value = x, Color.red, 0.5f);
                 DiedMessageSent = true;
 
             }
@@ -379,7 +385,8 @@ public class player_movement : MonoBehaviour
 
             DOTween.To(() => Time.timeScale, x => Time.timeScale = x, 1f, 1f);
 
-            DOTween.To(() => DiedPostProcess.weight, x => DiedPostProcess.weight = x, 0,1f);
+            //DOTween.To(() => DiedPostProcess.weight, x => DiedPostProcess.weight = x, 0,1f);
+            DOTween.To(() => ColorAdjust.colorFilter.value, x => ColorAdjust.colorFilter.value = x, Color.white, 0.5f);
             DiedMenu.GetComponent<Animator>().SetTrigger("respawned");
             
             RespawnMessageSent = true;
@@ -437,5 +444,12 @@ public class player_movement : MonoBehaviour
         }
     }
 
-   
+    private void OnApplicationQuit()
+    {
+        //reset these here... for some reason they get saved in the editor
+        Vignet.intensity.value = 0;
+        ColorAdjust.colorFilter.value = Color.white;
+    }
+
+
 }
