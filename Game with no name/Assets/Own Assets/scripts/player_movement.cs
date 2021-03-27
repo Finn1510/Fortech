@@ -106,6 +106,7 @@ public class player_movement : MonoBehaviour
 
         //Flip player according mouse position
         MouseXpos = Input.mousePosition.x / Screen.width;
+        
         if (MouseXpos < 0.5 && GamePaused == false && Playerdied == false)
         {
             transform.localScale = new Vector3(-1, transform.localScale.y, transform.localScale.z);
@@ -115,6 +116,7 @@ public class player_movement : MonoBehaviour
             transform.localScale = new Vector3(1, transform.localScale.y, transform.localScale.z);
         }
         
+
         if (Health <= 0f)
         {
             Debug.Log("Health is <= 0 player ist dead");

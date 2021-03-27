@@ -50,6 +50,9 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: BackGroundElements
+    uniqueID: 1273081097
+    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0

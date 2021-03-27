@@ -1,7 +1,13 @@
 fileFormatVersion: 2
-guid: dec81f205ea48464095db77615f985d4
+guid: 83d3bc9e9de5eca4e996f256f7883e85
 TextureImporter:
-  internalIDToNameTable: []
+  internalIDToNameTable:
+  - first:
+      213: -4283727757242640741
+    second: CloudSpriteSheet_0
+  - first:
+      213: 7676072320646340540
+    second: CloudSpriteSheet_1
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -33,7 +39,7 @@ TextureImporter:
   textureSettings:
     serializedVersion: 2
     filterMode: 0
-    aniso: 1
+    aniso: 2
     mipBias: -100
     wrapU: 1
     wrapV: 1
@@ -41,13 +47,13 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 16
-  spriteBorder: {x: 0, y: 11, z: 0, w: 7}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
   alphaIsTransparency: 1
@@ -125,11 +131,53 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: CloudSpriteSheet_0
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 29
+        width: 62
+        height: 33
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b96521b0d442d84c0800000000000000
+      internalID: -4283727757242640741
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CloudSpriteSheet_1
+      rect:
+        serializedVersion: 2
+        x: 17
+        y: 7
+        width: 31
+        height: 14
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cbf55562b13e68a60800000000000000
+      internalID: 7676072320646340540
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 5e97eb03825dee720800000000000000
+    spriteID: fac3ac0e53fe1a04da6ddd0d20d9d194
     internalID: 0
     vertices: []
     indices: 
