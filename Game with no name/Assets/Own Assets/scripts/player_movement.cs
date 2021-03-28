@@ -32,6 +32,8 @@ public class player_movement : MonoBehaviour
     [SerializeField] GameObject DiedMenu;
     [SerializeField] UI_Inventory uiInventory;
     [SerializeField] GameObject UI_Inventory;
+    [SerializeField] GameObject NextWaveButton;
+    [SerializeField] WaveManager waveManager;
     [SerializeField] Transform holdPoint; 
     AudioSource damageAudio;
     CinemachineImpulseSource ImpulseGEN; 
@@ -158,10 +160,21 @@ public class player_movement : MonoBehaviour
             if (UI_Inventory.active == false)
             {
                 UI_Inventory.SetActive(true);
+                NextWaveButton.SetActive(true);
+                
+                if(waveManager.currentWaveFinished == true)
+                {
+                    NextWaveButton.GetComponent<Button>().interactable = true;
+                }
+                else
+                {
+                    NextWaveButton.GetComponent<Button>().interactable = false;
+                }
             }
             else
             {
                 UI_Inventory.SetActive(false);
+                NextWaveButton.SetActive(false);
             }
         }
 
@@ -170,6 +183,7 @@ public class player_movement : MonoBehaviour
             if (UI_Inventory.active == true)
             {
                 UI_Inventory.SetActive(false);
+                NextWaveButton.SetActive(false);
             }
         }
     }
@@ -277,6 +291,7 @@ public class player_movement : MonoBehaviour
 
                 heldWeapon = Instantiate(WeaponPrefab,holdPoint.position,Quaternion.identity, holdPoint);
                 UI_Inventory.SetActive(false);
+                NextWaveButton.SetActive(false);
 
                 break;
             case Item.ItemType.Thunderbolt:
@@ -290,6 +305,7 @@ public class player_movement : MonoBehaviour
 
                 heldWeapon = Instantiate(WeaponPrefab, holdPoint.position, Quaternion.identity, holdPoint);
                 UI_Inventory.SetActive(false);
+                NextWaveButton.SetActive(false);
 
                 break;
             case Item.ItemType.Lighting_Hawk:
@@ -303,6 +319,8 @@ public class player_movement : MonoBehaviour
 
                 heldWeapon = Instantiate(WeaponPrefab, holdPoint.position, Quaternion.identity, holdPoint);
                 UI_Inventory.SetActive(false);
+                NextWaveButton.SetActive(false);
+                
                 break;
             case Item.ItemType.RustGun:
                 if (heldWeapon != null)
@@ -315,6 +333,7 @@ public class player_movement : MonoBehaviour
 
                 heldWeapon = Instantiate(WeaponPrefab, holdPoint.position, Quaternion.identity, holdPoint);
                 UI_Inventory.SetActive(false);
+                NextWaveButton.SetActive(false);
 
                 break;
 

@@ -16,6 +16,7 @@ TagManager:
   - UI_Inventory
   - PlayerStatBin
   - DatabaseManager
+  - Dead
   layers:
   - Default
   - TransparentFX

@@ -46,6 +46,8 @@ TrailRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 0
   m_ReflectionProbeUsage: 0
+  m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -195,6 +197,8 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -325,6 +329,7 @@ MonoBehaviour:
     m_DirectionMode: 0
     m_DissipationMode: 2
     m_DissipationDistance: 1000
+    m_PropagationSpeed: 343
 --- !u!114 &5379982335646206692
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -343,4 +348,4 @@ MonoBehaviour:
     type: 3}
   hitsound: {fileID: 4352443838503712169, guid: 5bebcbd1e61407f4ea6b72a39bb757ab,
     type: 3}
-  BulletDamage: 10
+  BulletDamage: 20

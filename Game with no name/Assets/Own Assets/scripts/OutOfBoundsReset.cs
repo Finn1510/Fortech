@@ -14,15 +14,9 @@ public class OutOfBoundsReset : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log("something went into our net");
         if (collision.tag == "Player")
         {
-            Debug.Log("it was the player");
             Player.transform.position = PlayerResetPosition;
-        }
-        else
-        {
-            Debug.Log("it was not the player");
         }
     }
 

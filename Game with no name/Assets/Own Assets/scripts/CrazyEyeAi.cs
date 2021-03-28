@@ -29,7 +29,7 @@ public class CrazyEyeAi : MonoBehaviour
     GameObject Player;
     int currentWaypoint = 0;
     bool reachedEndofPath = false;
-    bool Dead = false;
+    public bool Dead = false;
     bool DeadStarted = false;
     bool delay;
     Seeker seeker;
@@ -166,20 +166,19 @@ public class CrazyEyeAi : MonoBehaviour
         LeftWing.AddComponent<Rigidbody2D>();
         LeftWing.transform.parent = null;
         LeftWing.GetComponent<PolygonCollider2D>().enabled = true;
-        LeftWing.tag = "Untagged";
+        LeftWing.tag = "Dead";
         
 
         RightWing.AddComponent<Rigidbody2D>();
         RightWing.transform.parent = null;
         RightWing.GetComponent<PolygonCollider2D>().enabled = true;
-        RightWing.tag = "Untagged";
+        RightWing.tag = "Dead";
 
 
         Eye.GetComponent<Rigidbody2D>().gravityScale = 1;
         Eye.GetComponent<Animator>().enabled = false;
-        //Eye.transform.parent = null; Eye IS parent ! ??
         Eye.GetComponent<CircleCollider2D>().enabled = true;
-        Eye.tag = "Untagged";
+        Eye.tag = "Dead";
         Eye.GetComponent<Rigidbody2D>().AddForce(new Vector2(Random.Range(-100, 100), Random.Range(-100, 100))); 
 
     } 
