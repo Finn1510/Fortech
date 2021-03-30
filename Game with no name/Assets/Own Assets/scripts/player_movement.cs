@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using Cinemachine;
-//using UnityEngine.Rendering.PostProcessing;
 using DG.Tweening;
 using UnityEngine.Rendering.Universal;
 using UnityEngine.Rendering;
@@ -70,9 +69,7 @@ public class player_movement : MonoBehaviour
         {
             Load();
         }
-
-        
-    }
+     }
 
     void Start()
     {
@@ -93,6 +90,7 @@ public class player_movement : MonoBehaviour
         PlayerStats = GameObject.FindGameObjectWithTag("PlayerStatBin").GetComponent<PlayerStats>();
 
         UI_Inventory.SetActive(false);
+        Time.timeScale = 1;
 
     }
 
@@ -145,9 +143,8 @@ public class player_movement : MonoBehaviour
 
                 DiedMenu.GetComponent<Animator>().SetTrigger("died");
 
-                DOTween.To(() => Time.timeScale, x => Time.timeScale = x, 0.00001f, 1f);
+                DOTween.To(() => Time.timeScale, x => Time.timeScale = x, 0, 1f);
                 
-                //DOTween.To(() => DiedPostProcess.weight, x => DiedPostProcess.weight = x, 1, 0.5f);
                 DOTween.To(() => ColorAdjust.colorFilter.value, x => ColorAdjust.colorFilter.value = x, Color.red, 0.5f);
                 DiedMessageSent = true;
 

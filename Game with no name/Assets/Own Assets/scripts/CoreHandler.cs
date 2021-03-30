@@ -5,6 +5,10 @@ using Cinemachine;
 using UnityEngine.UI;
 using TMPro;
 using DG.Tweening;
+using UnityEngine.Rendering.Universal;
+using UnityEngine.Rendering;
+using System.IO;
+using UnityEngine.SceneManagement;
 
 public class CoreHandler : MonoBehaviour
 {
@@ -12,12 +16,25 @@ public class CoreHandler : MonoBehaviour
     CinemachineImpulseSource ImpulseGEN; 
     [SerializeField] Slider CoreHealthSlider;
     [SerializeField] TMP_Text CoreHealthText;
+    [SerializeField] CinemachineVirtualCamera Camera;
+    [SerializeField] GameObject CoreDestroyedMenu;
+    [SerializeField] TMP_Text CoreDestroyedMenuWavesFinishedText;
+    [SerializeField] WaveManager waveManager;
+    public Volume PostProcessing;
     AudioSource damageAudio;
     [Header("Parameters")]
     [SerializeField] float maxHealth = 500;
+    [SerializeField] string SaveFileName = "SaveData.es3";
 
     public float Health;
     bool dead = false;
+    bool DiedMessageSent = false;
+    string LocalSaveFilePath;
+
+    ChromaticAberration chromaticA;
+    FilmGrain filmGrain;
+
+    Sequence TimeSequence;
 
     private void Awake()
     {
@@ -32,10 +49,17 @@ public class CoreHandler : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        TimeSequence = DOTween.Sequence();
+
         damageAudio = GetComponent<AudioSource>();
         ImpulseGEN = GetComponent<CinemachineImpulseSource>();
 
+        PostProcessing.sharedProfile.TryGet(out chromaticA);
+        PostProcessing.sharedProfile.TryGet(out filmGrain);
+
         CoreHealthSlider.maxValue = maxHealth;
+
+        LocalSaveFilePath = Application.persistentDataPath + "/" + SaveFileName;
     }
 
     // Update is called once per frame
@@ -68,7 +92,51 @@ public class CoreHandler : MonoBehaviour
 
     void Die()
     {
-        //Do something here
+        if (DiedMessageSent == false)
+        {
+            Camera.Follow = gameObject.transform;
+
+            filmGrain.intensity.value = 0;
+            filmGrain.active = true;
+            DOTween.To(() => filmGrain.intensity.value, x => filmGrain.intensity.value = x, 1, 1f).SetUpdate(true);
+
+            chromaticA.intensity.value = 0;
+            chromaticA.active = true;
+            DOTween.To(() => chromaticA.intensity.value, x => chromaticA.intensity.value = x, 0.7f, 1f).SetUpdate(true);
+
+
+            GameObject[] gos = (GameObject[])GameObject.FindObjectsOfType(typeof(GameObject));
+            foreach (GameObject go in gos)
+            {
+                if (go && go.transform.parent == null)
+                {
+                    go.gameObject.BroadcastMessage("CoreDestroyed", SendMessageOptions.DontRequireReceiver);
+                }
+            }
+
+            CoreDestroyedMenuWavesFinishedText.text = "You survived " + waveManager.lastCompletedWavenumber.ToString() + " Waves";
+
+            CoreDestroyedMenu.SetActive(true);
+
+            TimeSequence.Append(DOTween.To(() => Time.timeScale, x => Time.timeScale = x, 0, 1f));
+
+            DiedMessageSent = true;
+
+        }
+    }
+
+    //restart the game
+    public void RestartGame()
+    {
+        TimeSequence.Kill();
+        DOTween.KillAll();
+
+        //wipe local SaveFile
+        File.WriteAllText(LocalSaveFilePath, "{}");
+        Debug.Log("SaveFile has been wiped... restarting scene");
+        filmGrain.active = false;
+        chromaticA.active = false;
+        SceneManager.LoadScene(SceneManager.GetSceneAt(0).name);
     }
 
     void Load()
@@ -83,6 +151,8 @@ public class CoreHandler : MonoBehaviour
 
     private void OnApplicationQuit()
     {
+        filmGrain.active = false;
+        chromaticA.active = false;
         Save();
     }
 

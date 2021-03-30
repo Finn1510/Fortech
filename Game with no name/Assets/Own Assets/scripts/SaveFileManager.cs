@@ -14,6 +14,7 @@ public class SaveFileManager : MonoBehaviour
     [SerializeField] string SaveFileName = "SaveData.es3";
     
     int AutoSaveIntervallSeconds;
+    bool coreDestroyed = false;
     
     MySqlConnection conn;
     
@@ -53,10 +54,15 @@ public class SaveFileManager : MonoBehaviour
     //Sends the "Save" message to all GameObjects in the array
     void SaveEverything()
     {
-        foreach (GameObject GO in SaveGameObjects)
+        //dont save anything when the player lost the game
+        if(coreDestroyed == false)
         {
-            GO.SendMessage("Save");
+            foreach (GameObject GO in SaveGameObjects)
+            {
+                GO.SendMessage("Save");
+            }
         }
+        
     }
 
     public void Save()
@@ -155,6 +161,11 @@ public class SaveFileManager : MonoBehaviour
             Debug.Log("Cant Sync SaveFile: we're not logged in");
         }
 
+    }
+
+    public void CoreDestroyed()
+    {
+        coreDestroyed = true;
     }
 
     //Function for encoding plain text into base64 format

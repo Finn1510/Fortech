@@ -29,6 +29,7 @@ public class WaveManager : MonoBehaviour
     int WaveRemainingCrazyEyes;
     int WaveRemainingZombies;
     int WaveRemainingEnemies;
+    public int lastCompletedWavenumber;
 
     public bool currentWaveFinished = false;
     public List<GameObject> EnemyPool = new List<GameObject>();
@@ -43,6 +44,7 @@ public class WaveManager : MonoBehaviour
 
     public void NextWave()
     {
+        lastCompletedWavenumber = currentWaveNumber;
         if(currentWaveFinished == true)
         {
             if (currentWaveNumber + 1 == Waves.Length)
@@ -80,11 +82,11 @@ public class WaveManager : MonoBehaviour
     {
         WaveRemainingEnemies = WaveRemainingCrazyEyes + WaveRemainingZombies + EnemyPool.Count;
 
-        if (WaveRemainingEnemies != 1)
+        if (WaveRemainingEnemies != 1 && WaveRemainingEnemies != 0)
         {
             EnemyRemainingText.text = WaveRemainingEnemies.ToString() + " enemies left";
         }
-        if(WaveRemainingEnemies == 0)
+        else if(WaveRemainingEnemies == 0)
         {
             EnemyRemainingText.text = "wave completed";
             currentWaveFinished = true;
