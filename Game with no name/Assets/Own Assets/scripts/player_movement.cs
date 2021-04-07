@@ -33,12 +33,13 @@ public class player_movement : MonoBehaviour
     [SerializeField] GameObject UI_Inventory;
     [SerializeField] GameObject NextWaveButton;
     [SerializeField] WaveManager waveManager;
-    [SerializeField] Transform holdPoint; 
+    [SerializeField] Transform holdPoint;
+    [SerializeField] GameObject BuildSelectPrefab;
     AudioSource damageAudio;
     CinemachineImpulseSource ImpulseGEN; 
     Rigidbody2D rigid;
     GameObject heldWeapon;
-    Item heldItem;
+    public Item heldItem;
     PlayerStats PlayerStats;
 
     GameObject WeaponPrefab;
@@ -333,11 +334,31 @@ public class player_movement : MonoBehaviour
                 NextWaveButton.SetActive(false);
 
                 break;
+            case Item.ItemType.Box:
+                if (heldWeapon != null)
+                {
+                    Destroy(heldWeapon);
+                }
+
+                heldItem = item;
+
+                heldWeapon = Instantiate(BuildSelectPrefab);
+                heldWeapon.GetComponent<BuildDeployable>().ourItem = item;
+                UI_Inventory.SetActive(false);
+                NextWaveButton.SetActive(false);
+
+                break;
 
 
         }
     } 
 
+    public void removeItem(Item item)
+    {
+        inventory.RemoveItem(item);
+    }
+
+    //Gets called after an item has been dropped to ensure that the player doesnt have a item equiped that isnt in the inventory anymore
     public void removedItem(Item item)
     {
         bool heldWeaponstillinInventory = false;
