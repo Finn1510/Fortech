@@ -6,12 +6,14 @@ using UnityEngine.Tilemaps;
 
 public class BuildDeployable : MonoBehaviour
 {
+    [SerializeField] float IconPreviewAlpha;
     [SerializeField] GameObject movepoint;
-    [SerializeField] GameObject Kek;
+    [SerializeField] GameObject Buildpoint;
     [SerializeField] Camera cam;
     [SerializeField] player_movement PlayerObject;
+
+    DeployAbleSaveManager DContainer;
     public Item ourItem;
- 
     bool firstrayhit;
     bool PositionViable = false;
     bool PlacingDeployable = false;
@@ -20,7 +22,10 @@ public class BuildDeployable : MonoBehaviour
     private void Start()
     {
         PlayerObject = GameObject.FindGameObjectWithTag("Player").GetComponent<player_movement>();
-        
+        DContainer = GameObject.FindGameObjectWithTag("DeployableContainer").GetComponent<DeployAbleSaveManager>();
+
+        //Buildpoint.GetComponent<SpriteRenderer>().sprite = GetItemSprite(ourItem); -this doesnt look that good
+
     }
 
     // Update is called once per frame
@@ -36,8 +41,7 @@ public class BuildDeployable : MonoBehaviour
 
                 //Place DeployAble Prefab
                 GameObject spawnprefab = GetItemPrefab(ourItem);
-                Debug.Log("SpawnPrefab is:" + spawnprefab);
-
+                
                 StartCoroutine(SpawnwithDelay(spawnprefab, 0.5f));
 
                 movepoint.transform.parent = null;
@@ -68,17 +72,17 @@ public class BuildDeployable : MonoBehaviour
             {
                 if (hit.collider is TilemapCollider2D)
                 {
-                    Kek.transform.position = hit.point;
+                    Buildpoint.transform.position = hit.point;
                     firstrayhit = true;
                     PositionViable = true;
                     LastVialbePos = hit.point;
-                    Kek.GetComponent<SpriteRenderer>().color = Color.white;
+                    Buildpoint.GetComponent<SpriteRenderer>().color = Color.white;
                 }
                 else
                 {
                     firstrayhit = false;
                     PositionViable = false;
-                    Kek.GetComponent<SpriteRenderer>().color = Color.red;
+                    Buildpoint.GetComponent<SpriteRenderer>().color = Color.red;
                 }
 
                 RaycastHit2D hit2 = Physics2D.Raycast(movepoint.transform.position, Vector2.up, 100f);
@@ -88,7 +92,7 @@ public class BuildDeployable : MonoBehaviour
                     if (firstrayhit == true)
                     {
                         PositionViable = false;
-                        Kek.GetComponent<SpriteRenderer>().color = Color.red;
+                        Buildpoint.GetComponent<SpriteRenderer>().color = Color.red;
                     }
                 }
             }
@@ -98,8 +102,9 @@ public class BuildDeployable : MonoBehaviour
 
     IEnumerator SpawnwithDelay(GameObject go, float duration)
     {
+        DContainer.AddToContainer(ourItem, LastVialbePos);
         yield return new WaitForSeconds(duration);
-        Instantiate(go, LastVialbePos, Quaternion.identity);
+        GameObject SpawnedDeployable = Instantiate(go, LastVialbePos, Quaternion.identity);
         Destroy(gameObject); 
     }
 
@@ -111,6 +116,17 @@ public class BuildDeployable : MonoBehaviour
                 return ItemAssets.Instance.BoxPrefab;
         }
         
+        return null;
+    }
+
+    Sprite GetItemSprite(Item item)
+    {
+        switch (item.itemType)
+        {
+            case Item.ItemType.Box:
+                return ItemAssets.Instance.BoxSprite;
+        }
+
         return null;
     }
 

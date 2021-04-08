@@ -17,6 +17,7 @@ TagManager:
   - PlayerStatBin
   - DatabaseManager
   - Dead
+  - DeployableContainer
   layers:
   - Default
   - TransparentFX

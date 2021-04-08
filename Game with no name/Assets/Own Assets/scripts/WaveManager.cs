@@ -96,8 +96,6 @@ public class WaveManager : MonoBehaviour
             EnemyRemainingText.text = WaveRemainingEnemies.ToString() + " enemy left";
         }
 
-        Debug.Log("Wave " + currentWaveNumber + " finished: " + currentWaveFinished + " CrazyEyesLeft: " + WaveRemainingCrazyEyes + " ZombiesLeft: " + WaveRemainingZombies);
-
         if(WaveRemainingCrazyEyes > 0)
         {
             if(Random.Range(1,100) == 1)

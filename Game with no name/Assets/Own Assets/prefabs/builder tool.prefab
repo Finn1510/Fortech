@@ -128,8 +128,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 502e8c20e333bcb4c974a451e45d2c6f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  IconPreviewAlpha: 0
   movepoint: {fileID: 7194504073093029375}
-  Kek: {fileID: 7194504073948473378}
+  Buildpoint: {fileID: 7194504073948473378}
   cam: {fileID: 0}
   PlayerObject: {fileID: 0}
   ourItem:
@@ -288,7 +289,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 5
+  m_SortingOrder: 6
   m_Sprite: {fileID: 2747690628134850419, guid: a9716c16a44a94eed9b5c90fbf4d9bdd,
     type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}

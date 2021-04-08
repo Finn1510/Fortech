@@ -39,7 +39,6 @@ public class Inventory
                 {
                     inventoryItem.amount += item.amount;
                     itemAlreadyInInventory = true;
-                    Debug.Log("Added Item to Inventory");
                 }
             }
             if (!itemAlreadyInInventory)
@@ -51,7 +50,6 @@ public class Inventory
         else
         {
             itemList.Add(item);
-            Debug.Log("Added new Item to Inventory");
         }
 
         
