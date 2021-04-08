@@ -12,6 +12,7 @@ public class DeployAbleSaveManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        
         if (ES3.KeyExists("ItemContainer"))
         {
             Load();

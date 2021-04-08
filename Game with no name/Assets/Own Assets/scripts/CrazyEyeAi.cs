@@ -179,7 +179,10 @@ public class CrazyEyeAi : MonoBehaviour
         Eye.GetComponent<Animator>().enabled = false;
         Eye.GetComponent<CircleCollider2D>().enabled = true;
         Eye.tag = "Dead";
-        Eye.GetComponent<Rigidbody2D>().AddForce(new Vector2(Random.Range(-100, 100), Random.Range(-100, 100))); 
+        Eye.GetComponent<Rigidbody2D>().AddForce(new Vector2(Random.Range(-100, 100), Random.Range(-100, 100)));
+
+        Destroy(GetComponent<SimpleSmoothModifier>());
+        Destroy(GetComponent<Seeker>());
 
     } 
 

@@ -30,7 +30,7 @@ public class player_movement : MonoBehaviour
     [SerializeField] GameObject YouDiedtext;
     [SerializeField] GameObject DiedMenu;
     [SerializeField] UI_Inventory uiInventory;
-    [SerializeField] GameObject UI_Inventory;
+    public GameObject UI_Inventory;
     [SerializeField] GameObject NextWaveButton;
     [SerializeField] WaveManager waveManager;
     [SerializeField] Transform holdPoint;
@@ -343,7 +343,9 @@ public class player_movement : MonoBehaviour
                 heldItem = item;
 
                 heldWeapon = Instantiate(BuildSelectPrefab);
-                heldWeapon.GetComponent<BuildDeployable>().ourItem = item;
+                Item givenItem = item;
+                givenItem.amount = 1;
+                heldWeapon.GetComponent<BuildDeployable>().ourItem = givenItem;
                 UI_Inventory.SetActive(false);
                 NextWaveButton.SetActive(false);
 

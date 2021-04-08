@@ -24,6 +24,8 @@ public class BuildDeployable : MonoBehaviour
         PlayerObject = GameObject.FindGameObjectWithTag("Player").GetComponent<player_movement>();
         DContainer = GameObject.FindGameObjectWithTag("DeployableContainer").GetComponent<DeployAbleSaveManager>();
 
+        
+
         //Buildpoint.GetComponent<SpriteRenderer>().sprite = GetItemSprite(ourItem); -this doesnt look that good
 
     }
@@ -33,7 +35,7 @@ public class BuildDeployable : MonoBehaviour
     {
         Pickground();
         
-        if(Input.GetMouseButtonDown(0))
+        if(Input.GetMouseButtonDown(0) && PlayerObject.UI_Inventory.active == false)
         {
             if(PositionViable == true)
             {
