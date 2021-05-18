@@ -50,7 +50,9 @@ public class player_movement : MonoBehaviour
     bool RespawnMessageSent = false;
     bool VignetCoroutineDelayACTIVE = false;
     bool GamePaused = false;
-    
+    Item givenItem;
+
+
     private Inventory inventory;
     
     //Post process vars
@@ -343,7 +345,23 @@ public class player_movement : MonoBehaviour
                 heldItem = item;
 
                 heldWeapon = Instantiate(BuildSelectPrefab);
-                Item givenItem = item;
+                givenItem = item;
+                givenItem.amount = 1;
+                heldWeapon.GetComponent<BuildDeployable>().ourItem = givenItem;
+                UI_Inventory.SetActive(false);
+                NextWaveButton.SetActive(false);
+
+                break;
+            case Item.ItemType.MagmaTurret:
+                if (heldWeapon != null)
+                {
+                    Destroy(heldWeapon);
+                }
+
+                heldItem = item;
+
+                heldWeapon = Instantiate(BuildSelectPrefab);
+                givenItem = item;
                 givenItem.amount = 1;
                 heldWeapon.GetComponent<BuildDeployable>().ourItem = givenItem;
                 UI_Inventory.SetActive(false);

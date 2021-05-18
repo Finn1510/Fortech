@@ -15,6 +15,7 @@ public class Item
         Lighting_Hawk,
         RustGun,
         Box,
+        MagmaTurret,
     }
 
     public ItemType itemType;
@@ -32,6 +33,7 @@ public class Item
             case ItemType.Lighting_Hawk: return ItemAssets.Instance.LightingHawkSprite;
             case ItemType.RustGun: return ItemAssets.Instance.RustGunSprite;
             case ItemType.Box: return ItemAssets.Instance.BoxSprite;
+            case ItemType.MagmaTurret: return ItemAssets.Instance.MagmaTurretSprite;
         }
     } 
 
@@ -45,6 +47,7 @@ public class Item
             case ItemType.Thunderbolt:
             case ItemType.RustGun:
             case ItemType.Box:
+            case ItemType.MagmaTurret:
                 return false;
             case ItemType.Coin:
             case ItemType.HealthPotion:

@@ -27,8 +27,6 @@ public class DeployAbleSaveManager : MonoBehaviour
             }
 
         }
-        
-            
     }
 
     public void AddToContainer(Item itemType, Vector3 position)
@@ -43,6 +41,8 @@ public class DeployAbleSaveManager : MonoBehaviour
         {
             case Item.ItemType.Box:
                 return ItemAssets.Instance.BoxPrefab;
+            case Item.ItemType.MagmaTurret:
+                return ItemAssets.Instance.MagamaTurretPrefab;
         }
 
         return null;

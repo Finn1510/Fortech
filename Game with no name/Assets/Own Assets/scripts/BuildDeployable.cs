@@ -116,6 +116,8 @@ public class BuildDeployable : MonoBehaviour
         {
             case Item.ItemType.Box:
                 return ItemAssets.Instance.BoxPrefab;
+            case Item.ItemType.MagmaTurret:
+                return ItemAssets.Instance.MagamaTurretPrefab;
         }
         
         return null;
@@ -127,6 +129,8 @@ public class BuildDeployable : MonoBehaviour
         {
             case Item.ItemType.Box:
                 return ItemAssets.Instance.BoxSprite;
+            case Item.ItemType.MagmaTurret:
+                return ItemAssets.Instance.MagmaTurretSprite;
         }
 
         return null;

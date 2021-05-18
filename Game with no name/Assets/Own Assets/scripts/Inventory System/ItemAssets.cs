@@ -21,6 +21,7 @@ public class ItemAssets : MonoBehaviour
     public Sprite LightingHawkSprite;
     public Sprite RustGunSprite;
     public Sprite BoxSprite;
+    public Sprite MagmaTurretSprite;
 
     public GameObject AcidPrefab;
     public GameObject ThunderboltPrefab;
@@ -28,6 +29,7 @@ public class ItemAssets : MonoBehaviour
     public GameObject RustGunPrefab;
     public GameObject HealPotionVFXPrefab;
     public GameObject BoxPrefab;
+    public GameObject MagamaTurretPrefab;
     
 
 }

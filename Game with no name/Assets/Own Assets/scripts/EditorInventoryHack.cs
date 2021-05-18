@@ -15,7 +15,7 @@ public class EditorInventoryHack : EditorWindow
 
     private void OnGUI()
     {
-        GUILayout.Label("ONLY WORKS IN PLAYMODE", EditorStyles.boldLabel, EditorStyles.label.);
+        GUILayout.Label("ONLY WORKS IN PLAYMODE", EditorStyles.boldLabel);
         GUILayout.Space(10);
         GUILayout.Label("General");
 
