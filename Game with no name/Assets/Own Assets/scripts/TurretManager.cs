@@ -17,6 +17,7 @@ public class TurretManager : MonoBehaviour
     [SerializeField] float HeadRotationspeed = 200;
     [SerializeField] float SpawnFireDelay = 1;
     [SerializeField] float RaycastLengh = 50;
+    [SerializeField] float RangeRadius = 50;
     [SerializeField] float shootDelay = 1;
     [SerializeField] float BulletForce = 1500;
     [SerializeField] float GunKnockbackForce = 2000;
@@ -42,41 +43,50 @@ public class TurretManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //Raycast for spotting the Target
-        AimRay = Physics2D.Raycast(TurretHead.transform.position, GetTowardsTargetRotation() * Vector2.left, RaycastLengh);
-        Debug.DrawRay(TurretHead.transform.position, GetTowardsTargetRotation() * Vector2.left * RaycastLengh, Color.red);
-
-        //Only Aim if the Turret can "see" the Target
-        if (target == AimRay.transform.gameObject)
+        if(target != null)
         {
-            if(delay3 == true)
-            {
-                TurretHead.transform.rotation = Quaternion.Slerp(TurretHead.transform.rotation, GetTowardsTargetRotation(), HeadRotationspeed * Time.deltaTime);
+            //Raycast for spotting the Target
+            AimRay = Physics2D.Raycast(TurretHead.transform.position, GetTowardsTargetRotation() * Vector2.left, RaycastLengh);
+            Debug.DrawRay(TurretHead.transform.position, GetTowardsTargetRotation() * Vector2.left * RaycastLengh, Color.red);
 
-                if(transform.position.x < target.transform.position.x)
+            //Only Aim if the Turret can "see" the Target
+            if (target == AimRay.transform.gameObject)
+            {
+                if (delay3 == true)
                 {
-                    //rotate pole to left
-                    TurretPole.transform.DORotate(new Vector3(0, 0, 40), 1);  
+                    TurretHead.transform.rotation = Quaternion.Slerp(TurretHead.transform.rotation, GetTowardsTargetRotation(), HeadRotationspeed * Time.deltaTime);
+
+                    if (transform.position.x < target.transform.position.x)
+                    {
+                        //rotate pole to left
+                        TurretPole.transform.DORotate(new Vector3(0, 0, 40), 1);
+                    }
+                    else
+                    {
+                        //rotate pole to right
+                        TurretPole.transform.DORotate(new Vector3(0, 0, -40), 1);
+                    }
                 }
-                else
+
+                EnemyInSight = true;
+
+                if (delay == true && delay3 == true)
                 {
-                    //rotate pole to right
-                    TurretPole.transform.DORotate(new Vector3(0, 0, -40), 1);
+                    Shoot();
                 }
             }
-            
-            EnemyInSight = true;
-            
-            if(delay == true && delay3 == true)
+            else
             {
-                Shoot();
+                EnemyInSight = false;
             }
         }
-        else
+        
+        if(target == null || target.tag == "Dead" || Vector2.Distance(transform.position, target.transform.position) >= RangeRadius)
         {
-            EnemyInSight = false;
+            GetNewTarget();
         }
 
+        //return to default Pose if we dont see the Target
         if(EnemyInSight == false && DefaultPoseDelayStarted == false && inDefaultPose == false)
         {
             PoseInterrupted = false;
@@ -131,9 +141,6 @@ public class TurretManager : MonoBehaviour
         //Instanciate Gunfire VFX
         Instantiate(GunfireVFX, Firepoint.position, Quaternion.identity);
 
-        //Apply gun Knockback force
-        //TurretHead.GetComponent<Rigidbody2D>().AddForce(GetTowardsTargetRotation() * Vector2.right * GunKnockbackForce);
-
         StartCoroutine(Delay(shootDelay));
     }
     
@@ -143,6 +150,34 @@ public class TurretManager : MonoBehaviour
         PolePoseSequence = DOTween.Sequence();
         HeadPoseSequence.Append(TurretHead.transform.DORotate(new Vector3(0, 0, -90), 1));
         PolePoseSequence.Append(TurretPole.transform.DORotate(new Vector3(0, 0, 0), 1));
+    }
+
+    void GetNewTarget()
+    {
+        GameObject CurrentchosenTarget = null;
+        float PreviousDistance = 100;
+
+        //Get the nearest Enemy
+        Collider2D[] results = Physics2D.OverlapCircleAll(transform.position, RangeRadius);
+        foreach (Collider2D col in results)
+        {
+            if(col.tag == "Enemy")
+            {
+                if (Vector2.Distance(col.transform.position, transform.position) < PreviousDistance)
+                {
+                    CurrentchosenTarget = col.transform.gameObject;
+                }
+                PreviousDistance = Vector2.Distance(col.transform.position, transform.position);
+            }
+            
+        }
+
+        //Set new Target if we got any
+        if(CurrentchosenTarget != null)
+        {
+            target = CurrentchosenTarget;
+        }
+
     }
 
     //Waits for a certain time -Used for GunDelay

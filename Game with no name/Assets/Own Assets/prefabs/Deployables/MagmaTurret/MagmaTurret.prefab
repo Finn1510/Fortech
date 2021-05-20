@@ -226,7 +226,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TurretHead: {fileID: 4461564209980619816}
   TurretPole: {fileID: 4461564209181644775}
-  BulletPrefab: {fileID: 3321200366037418833, guid: b2e10ebaae0e97f4da9111cd761bfae5,
+  BulletPrefab: {fileID: 3321200366037418833, guid: 4c90edd8ee5e88e4b9571e6d7096ea31,
     type: 3}
   GunfireVFX: {fileID: 2013205511087582211, guid: e3e503a411ceccb448a09f8bbe220a17,
     type: 3}
@@ -235,6 +235,7 @@ MonoBehaviour:
   HeadRotationspeed: 200
   SpawnFireDelay: 1
   RaycastLengh: 20
+  RangeRadius: 50
   shootDelay: 1
   BulletForce: 1500
   GunKnockbackForce: 300
@@ -679,7 +680,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.00000011920929, y: 0.4446466}
+  m_Offset: {x: 0.034726977, y: 0.3863661}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: -0}
@@ -690,7 +691,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.97218156, y: 0.8892932}
+  m_Size: {x: 0.56642616, y: 0.7727322}
   m_EdgeRadius: 0
 --- !u!233 &4461564211005491632
 HingeJoint2D:
