@@ -166,36 +166,42 @@ public class GroundEnemyAI : MonoBehaviour
         Head.transform.parent = null;
         Head.GetComponent<CircleCollider2D>().enabled = true;
         Head.tag = "Dead";
+        Head.layer = 17;
         Head.GetComponent<Rigidbody2D>().AddForce(new Vector2(Random.Range(-100, 100), Random.Range(-100, 10)));
 
         Torso.AddComponent<Rigidbody2D>();
         Torso.transform.parent = null;
         Torso.GetComponent<CapsuleCollider2D>().enabled = true;
         Torso.tag = "Dead";
+        Torso.layer = 17;
         Torso.GetComponent<Rigidbody2D>().AddForce(new Vector2(Random.Range(-100, 100), Random.Range(-100, 10)));
 
         rightArm.AddComponent<Rigidbody2D>();
         rightArm.transform.parent = null;
         rightArm.GetComponent<CapsuleCollider2D>().enabled = true;
         rightArm.tag = "Dead";
+        rightArm.layer = 17;
         rightArm.GetComponent<Rigidbody2D>().AddForce(new Vector2(Random.Range(-100, 100), Random.Range(-100, 10)));
 
         leftArm.AddComponent<Rigidbody2D>();
         leftArm.transform.parent = null;
         leftArm.GetComponent<CapsuleCollider2D>().enabled = true;
-        leftArm.tag = "Dead"; 
+        leftArm.tag = "Dead";
+        leftArm.layer = 17;
         leftArm.GetComponent<Rigidbody2D>().AddForce(new Vector2(Random.Range(-100, 100), Random.Range(-100, 10)));
 
         rightLeg.AddComponent<Rigidbody2D>();
         rightLeg.transform.parent = null;
         rightLeg.GetComponent<CapsuleCollider2D>().enabled = true;
         rightLeg.tag = "Dead";
+        rightLeg.layer = 17;
         rightLeg.GetComponent<Rigidbody2D>().AddForce(new Vector2(Random.Range(-100, 100), Random.Range(-100, 10)));
 
         leftLeg.AddComponent<Rigidbody2D>();
         leftLeg.transform.parent = null;
         leftLeg.GetComponent<CapsuleCollider2D>().enabled = true;
         leftLeg.tag = "Dead";
+        leftLeg.layer = 17;
         leftLeg.GetComponent<Rigidbody2D>().AddForce(new Vector2(Random.Range(-100, 100), Random.Range(-100, 10)));
 
         Destroy(this.gameObject);

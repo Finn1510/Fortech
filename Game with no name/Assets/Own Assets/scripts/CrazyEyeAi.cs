@@ -167,18 +167,21 @@ public class CrazyEyeAi : MonoBehaviour
         LeftWing.transform.parent = null;
         LeftWing.GetComponent<PolygonCollider2D>().enabled = true;
         LeftWing.tag = "Dead";
-        
+        LeftWing.layer = 17;
+
 
         RightWing.AddComponent<Rigidbody2D>();
         RightWing.transform.parent = null;
         RightWing.GetComponent<PolygonCollider2D>().enabled = true;
         RightWing.tag = "Dead";
+        RightWing.layer = 17;
 
 
         Eye.GetComponent<Rigidbody2D>().gravityScale = 1;
         Eye.GetComponent<Animator>().enabled = false;
         Eye.GetComponent<CircleCollider2D>().enabled = true;
         Eye.tag = "Dead";
+        Eye.layer = 17;
         Eye.GetComponent<Rigidbody2D>().AddForce(new Vector2(Random.Range(-100, 100), Random.Range(-100, 100)));
 
         Destroy(GetComponent<SimpleSmoothModifier>());
