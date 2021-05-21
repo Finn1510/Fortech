@@ -158,35 +158,42 @@ public class CrazyEyeAi : MonoBehaviour
   
     void Die()
     {
-        PlayerStats.CrazyEyesKilled = PlayerStats.CrazyEyesKilled + 1;
+        if(DeadStarted == false)
+        {
+            DeadStarted = true;
 
-        DeadStarted = true;
-        anim.SetTrigger("Die");
+            Debug.Log("We're dying here");
+            PlayerStats.CrazyEyesKilled = PlayerStats.CrazyEyesKilled + 1;
 
-        LeftWing.AddComponent<Rigidbody2D>();
-        LeftWing.transform.parent = null;
-        LeftWing.GetComponent<PolygonCollider2D>().enabled = true;
-        LeftWing.tag = "Dead";
-        LeftWing.layer = 17;
+            anim.SetTrigger("Die");
 
-
-        RightWing.AddComponent<Rigidbody2D>();
-        RightWing.transform.parent = null;
-        RightWing.GetComponent<PolygonCollider2D>().enabled = true;
-        RightWing.tag = "Dead";
-        RightWing.layer = 17;
+            LeftWing.AddComponent<Rigidbody2D>();
+            LeftWing.transform.parent = null;
+            LeftWing.GetComponent<PolygonCollider2D>().enabled = true;
+            LeftWing.tag = "Dead";
+            LeftWing.layer = 17;
+            LeftWing.SendMessage("Die");
 
 
-        Eye.GetComponent<Rigidbody2D>().gravityScale = 1;
-        Eye.GetComponent<Animator>().enabled = false;
-        Eye.GetComponent<CircleCollider2D>().enabled = true;
-        Eye.tag = "Dead";
-        Eye.layer = 17;
-        Eye.GetComponent<Rigidbody2D>().AddForce(new Vector2(Random.Range(-100, 100), Random.Range(-100, 100)));
+            RightWing.AddComponent<Rigidbody2D>();
+            RightWing.transform.parent = null;
+            RightWing.GetComponent<PolygonCollider2D>().enabled = true;
+            RightWing.tag = "Dead";
+            RightWing.layer = 17;
+            RightWing.SendMessage("Die");
 
-        Destroy(GetComponent<SimpleSmoothModifier>());
-        Destroy(GetComponent<Seeker>());
 
+            Eye.GetComponent<Rigidbody2D>().gravityScale = 1;
+            Eye.GetComponent<Animator>().enabled = false;
+            Eye.GetComponent<CircleCollider2D>().enabled = true;
+            Eye.tag = "Dead";
+            Eye.layer = 17;
+            Eye.GetComponent<Rigidbody2D>().AddForce(new Vector2(Random.Range(-100, 100), Random.Range(-100, 100)));
+            Eye.SendMessage("Die");
+
+            Destroy(GetComponent<SimpleSmoothModifier>());
+            Destroy(GetComponent<Seeker>());
+        }
     } 
 
     void AttackFoe()

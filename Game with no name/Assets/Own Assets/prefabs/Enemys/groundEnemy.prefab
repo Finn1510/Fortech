@@ -248,6 +248,7 @@ GameObject:
   - component: {fileID: 7611209670243584665}
   - component: {fileID: 7611209670243584664}
   - component: {fileID: 5925618427547475639}
+  - component: {fileID: 3899383355263904398}
   m_Layer: 10
   m_Name: right_leg-1.png
   m_TagString: Enemy
@@ -336,6 +337,18 @@ CapsuleCollider2D:
   m_Offset: {x: 0.18119366, y: 0.043766428}
   m_Size: {x: 0.7126692, y: 1.2450929}
   m_Direction: 0
+--- !u!114 &3899383355263904398
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7611209670243584662}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68e7526b863054e4eab9c4318b321970, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7611209670793759590
 GameObject:
   m_ObjectHideFlags: 0
@@ -347,6 +360,7 @@ GameObject:
   - component: {fileID: 7611209670793759593}
   - component: {fileID: 7611209670793759592}
   - component: {fileID: 2320745188414090042}
+  - component: {fileID: 5533698395227294594}
   m_Layer: 10
   m_Name: right_arm-1.png
   m_TagString: Enemy
@@ -435,6 +449,18 @@ CapsuleCollider2D:
   m_Offset: {x: 0.30904764, y: 0.04673278}
   m_Size: {x: 0.5156064, y: 1.2565354}
   m_Direction: 0
+--- !u!114 &5533698395227294594
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7611209670793759590}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68e7526b863054e4eab9c4318b321970, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7611209670812113633
 GameObject:
   m_ObjectHideFlags: 0
@@ -446,6 +472,7 @@ GameObject:
   - component: {fileID: 7611209670812113632}
   - component: {fileID: 7611209670812113635}
   - component: {fileID: 7337966784642927568}
+  - component: {fileID: 2760265195250094722}
   m_Layer: 10
   m_Name: left_leg-1.png
   m_TagString: Enemy
@@ -534,6 +561,18 @@ CapsuleCollider2D:
   m_Offset: {x: -0.22559732, y: -0.048143197}
   m_Size: {x: 0.68639356, y: 1.0962869}
   m_Direction: 0
+--- !u!114 &2760265195250094722
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7611209670812113633}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68e7526b863054e4eab9c4318b321970, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7611209671109584229
 GameObject:
   m_ObjectHideFlags: 0
@@ -575,6 +614,7 @@ GameObject:
   - component: {fileID: 7611209671110132397}
   - component: {fileID: 7611209671110132396}
   - component: {fileID: 5360016163955701929}
+  - component: {fileID: 3716683688596326679}
   m_Layer: 10
   m_Name: left_arm-1.png
   m_TagString: Enemy
@@ -663,6 +703,18 @@ CapsuleCollider2D:
   m_Offset: {x: -0.28692967, y: -0.022575742}
   m_Size: {x: 0.45049167, y: 1.0881052}
   m_Direction: 0
+--- !u!114 &3716683688596326679
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7611209671110132394}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68e7526b863054e4eab9c4318b321970, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7611209671253561213
 GameObject:
   m_ObjectHideFlags: 0
@@ -674,6 +726,7 @@ GameObject:
   - component: {fileID: 7611209671253561212}
   - component: {fileID: 7611209671253561215}
   - component: {fileID: 5257693036307544603}
+  - component: {fileID: 5307453718263584333}
   m_Layer: 10
   m_Name: Torso
   m_TagString: Enemy
@@ -762,6 +815,18 @@ CapsuleCollider2D:
   m_Offset: {x: -0.013130185, y: 0.017506894}
   m_Size: {x: 0.96131873, y: 1.0488518}
   m_Direction: 0
+--- !u!114 &5307453718263584333
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7611209671253561213}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68e7526b863054e4eab9c4318b321970, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7611209672008239795
 GameObject:
   m_ObjectHideFlags: 0
@@ -773,6 +838,7 @@ GameObject:
   - component: {fileID: 7611209672008239794}
   - component: {fileID: 7611209672008239797}
   - component: {fileID: 4545677004390408269}
+  - component: {fileID: 2995441827702240616}
   m_Layer: 10
   m_Name: Head
   m_TagString: Enemy
@@ -861,6 +927,18 @@ CircleCollider2D:
   m_Offset: {x: -0.04376601, y: 0.00000047683704}
   serializedVersion: 2
   m_Radius: 0.5437964
+--- !u!114 &2995441827702240616
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7611209672008239795}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68e7526b863054e4eab9c4318b321970, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7611209672351492420
 GameObject:
   m_ObjectHideFlags: 0

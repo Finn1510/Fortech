@@ -41,6 +41,7 @@ GameObject:
   - component: {fileID: 6994437525373568791}
   - component: {fileID: 6994437525373568790}
   - component: {fileID: 6994437525373568785}
+  - component: {fileID: 3922990129869593548}
   m_Layer: 10
   m_Name: Eye_Mob_wings-1.png1 (1)
   m_TagString: Enemy
@@ -159,6 +160,18 @@ PolygonCollider2D:
       - {x: 1.1445472, y: 0.20955548}
       - {x: 1.1122825, y: 0.33026776}
       - {x: 0.911702, y: 0.6134404}
+--- !u!114 &3922990129869593548
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6994437525373568788}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68e7526b863054e4eab9c4318b321970, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6994437525581230987
 GameObject:
   m_ObjectHideFlags: 0
@@ -175,6 +188,7 @@ GameObject:
   - component: {fileID: 6994437525581231005}
   - component: {fileID: 5449690913969930726}
   - component: {fileID: 7958490219452018259}
+  - component: {fileID: 3534286964524967137}
   m_Layer: 10
   m_Name: Mob.Crazyeye
   m_TagString: Enemy
@@ -382,6 +396,19 @@ MonoBehaviour:
   Damage: 3
   Knockbackstrengh: 200
   DamageDelay: 0.5
+  Dead: 0
+--- !u!114 &3534286964524967137
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6994437525581230987}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68e7526b863054e4eab9c4318b321970, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6994437527058546729
 GameObject:
   m_ObjectHideFlags: 0
@@ -393,6 +420,7 @@ GameObject:
   - component: {fileID: 6994437527058546728}
   - component: {fileID: 6994437527058546731}
   - component: {fileID: 6994437527058546730}
+  - component: {fileID: 7355927020353636247}
   m_Layer: 10
   m_Name: Eye_Mob_wings-1.png1
   m_TagString: Enemy
@@ -511,3 +539,15 @@ PolygonCollider2D:
       - {x: 1.1445472, y: 0.20955548}
       - {x: 1.1122825, y: 0.33026776}
       - {x: 0.911702, y: 0.6134404}
+--- !u!114 &7355927020353636247
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6994437527058546729}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68e7526b863054e4eab9c4318b321970, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

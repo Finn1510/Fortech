@@ -168,6 +168,7 @@ public class GroundEnemyAI : MonoBehaviour
         Head.tag = "Dead";
         Head.layer = 17;
         Head.GetComponent<Rigidbody2D>().AddForce(new Vector2(Random.Range(-100, 100), Random.Range(-100, 10)));
+        Head.SendMessage("Die");
 
         Torso.AddComponent<Rigidbody2D>();
         Torso.transform.parent = null;
@@ -175,6 +176,7 @@ public class GroundEnemyAI : MonoBehaviour
         Torso.tag = "Dead";
         Torso.layer = 17;
         Torso.GetComponent<Rigidbody2D>().AddForce(new Vector2(Random.Range(-100, 100), Random.Range(-100, 10)));
+        Torso.SendMessage("Die");
 
         rightArm.AddComponent<Rigidbody2D>();
         rightArm.transform.parent = null;
@@ -182,6 +184,7 @@ public class GroundEnemyAI : MonoBehaviour
         rightArm.tag = "Dead";
         rightArm.layer = 17;
         rightArm.GetComponent<Rigidbody2D>().AddForce(new Vector2(Random.Range(-100, 100), Random.Range(-100, 10)));
+        rightArm.SendMessage("Die");
 
         leftArm.AddComponent<Rigidbody2D>();
         leftArm.transform.parent = null;
@@ -189,6 +192,7 @@ public class GroundEnemyAI : MonoBehaviour
         leftArm.tag = "Dead";
         leftArm.layer = 17;
         leftArm.GetComponent<Rigidbody2D>().AddForce(new Vector2(Random.Range(-100, 100), Random.Range(-100, 10)));
+        leftArm.SendMessage("Die");
 
         rightLeg.AddComponent<Rigidbody2D>();
         rightLeg.transform.parent = null;
@@ -196,6 +200,7 @@ public class GroundEnemyAI : MonoBehaviour
         rightLeg.tag = "Dead";
         rightLeg.layer = 17;
         rightLeg.GetComponent<Rigidbody2D>().AddForce(new Vector2(Random.Range(-100, 100), Random.Range(-100, 10)));
+        rightLeg.SendMessage("Die");
 
         leftLeg.AddComponent<Rigidbody2D>();
         leftLeg.transform.parent = null;
@@ -203,6 +208,7 @@ public class GroundEnemyAI : MonoBehaviour
         leftLeg.tag = "Dead";
         leftLeg.layer = 17;
         leftLeg.GetComponent<Rigidbody2D>().AddForce(new Vector2(Random.Range(-100, 100), Random.Range(-100, 10)));
+        leftLeg.SendMessage("Die");
 
         Destroy(this.gameObject);
 
