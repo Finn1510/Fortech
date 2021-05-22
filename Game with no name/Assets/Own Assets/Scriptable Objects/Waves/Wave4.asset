@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f5a24ce71ee64e4391b2b76413ad4f5, type: 3}
   m_Name: Wave4
   m_EditorClassIdentifier: 
-  CrazyEyeCount: 0
-  ZombieCount: 0
+  CrazyEyeCount: 6
+  ZombieCount: 6

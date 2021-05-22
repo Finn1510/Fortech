@@ -53,7 +53,7 @@ public class player_movement : MonoBehaviour
     Item givenItem;
 
 
-    private Inventory inventory;
+    public Inventory inventory;
     
     //Post process vars
     ColorAdjustments ColorAdjust = null;
@@ -372,6 +372,11 @@ public class player_movement : MonoBehaviour
 
         }
     } 
+
+    public void AddItem(Item item)
+    {
+        inventory.AddItem(item);
+    }
 
     public void removeItem(Item item)
     {

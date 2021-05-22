@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4461564209149345381}
   - component: {fileID: 4461564209149345382}
-  m_Layer: 2
+  m_Layer: 0
   m_Name: Sprite Light 2D
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -84,7 +84,7 @@ GameObject:
   - component: {fileID: 4461564209181644773}
   - component: {fileID: 4461564209181644774}
   - component: {fileID: 4461564209181644771}
-  m_Layer: 2
+  m_Layer: 0
   m_Name: Turret_Pole-1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -189,7 +189,7 @@ GameObject:
   - component: {fileID: 4461564209686079618}
   - component: {fileID: 4461564209686079617}
   - component: {fileID: 4461564209686079616}
-  m_Layer: 2
+  m_Layer: 0
   m_Name: MagmaTurret
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -234,6 +234,7 @@ MonoBehaviour:
   TurretAudio: {fileID: 4461564209686079616}
   HeadRotationspeed: 200
   SpawnFireDelay: 1
+  NewPickDelayWhenEnemyIsObscured: 1
   RaycastLengh: 20
   RangeRadius: 50
   shootDelay: 1
@@ -349,7 +350,7 @@ GameObject:
   - component: {fileID: 4461564209980619814}
   - component: {fileID: 4461564209980619815}
   - component: {fileID: 4461564209980619808}
-  m_Layer: 2
+  m_Layer: 0
   m_Name: Turret_Head
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -497,7 +498,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4461564210678217728}
   - component: {fileID: 4461564210678217729}
-  m_Layer: 2
+  m_Layer: 0
   m_Name: Sprite Light 2D
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -573,7 +574,7 @@ GameObject:
   - component: {fileID: 4461564211005491634}
   - component: {fileID: 4461564211005491633}
   - component: {fileID: 4461564211005491632}
-  m_Layer: 2
+  m_Layer: 0
   m_Name: Turret_bASE
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -676,7 +677,7 @@ BoxCollider2D:
   m_GameObject: {fileID: 4461564211005491637}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 3626fe8e008014f6bbd19bb72937b311, type: 2}
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
@@ -726,7 +727,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4461564211180603791}
-  m_Layer: 2
+  m_Layer: 0
   m_Name: FirePoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
