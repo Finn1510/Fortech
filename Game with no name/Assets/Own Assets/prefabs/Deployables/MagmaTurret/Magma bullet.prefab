@@ -307,6 +307,8 @@ MonoBehaviour:
   hitsound: {fileID: 4352443838503712169, guid: 5bebcbd1e61407f4ea6b72a39bb757ab,
     type: 3}
   BulletDamage: 5
+  EnableScreenshake: 0
+  ShowHitLight: 1
 --- !u!114 &4359063027988171330
 MonoBehaviour:
   m_ObjectHideFlags: 0

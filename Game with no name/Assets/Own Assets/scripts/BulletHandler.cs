@@ -14,6 +14,8 @@ public class BulletHandler : MonoBehaviour
 
     [Header("Parameters")]
     [SerializeField] private float BulletDamage = 10f;
+    [SerializeField] private bool EnableScreenshake = true;
+    [SerializeField] private bool ShowHitLight = true;
 
     
 
@@ -33,10 +35,24 @@ public class BulletHandler : MonoBehaviour
        
         if (collision.gameObject.tag == "Enemy")
         {
+            //instanciate Hinsound
             Instantiate(hitsound, transform.position, Quaternion.identity);
-            ImpulseCOM.GenerateImpulse(new Vector3(2, 2, 0));
+            
+            if(EnableScreenshake == true)
+            {
+                //do some Screenshake
+                ImpulseCOM.GenerateImpulse(new Vector3(2, 2, 0));
+            }
+            //Instanciate Impactparticle
             Instantiate(ImpactParticle, transform.position, transform.rotation);
-            Instantiate(RedLight, transform.position, transform.rotation);
+            
+            if(ShowHitLight == true)
+            {
+                //Instanciate red Hitlight
+                Instantiate(RedLight, transform.position, transform.rotation);
+            }
+            
+            //send damage to collided Object
             collision.gameObject.SendMessage("EnemyDamage", BulletDamage, SendMessageOptions.DontRequireReceiver);
 
             //Update PlayerStats 
